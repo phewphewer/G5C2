@@ -1,7 +1,7 @@
 const User = require("../models/userModel");
 const mongoose = require("mongoose");
 
-// Get a single p
+// Get a single
 const getUser = async (req, res) => {
     const { id } = req.params;
 

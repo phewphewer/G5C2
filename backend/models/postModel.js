@@ -2,22 +2,27 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema(
+const postSchema = new Schema(
     {
-        username: {
+        title: {
             type: String,
             required: true,
         },
-        password: {
+        body: {
             type: String,
             required: true,
         },
-        email: {
+        author: {
             type: String,
             required: true,
         },
+
+        // On process of Thinking out loudddd, ask chatgpt for additional info
+
+        // likes: [],
+        // comments: [],
     },
     { timestamps: true }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Post", postSchema);
