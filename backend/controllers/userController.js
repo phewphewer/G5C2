@@ -6,12 +6,12 @@ const getUser = async (req, res) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: "No such Book" });
+        return res.status(404).json({ error: "No such User" });
     }
     const user = await User.findById(id);
 
     if (!user) {
-        return res.status(404).json({ error: "No such Book" });
+        return res.status(404).json({ error: "No such User" });
     }
 
     res.status(200).json(user);
@@ -35,13 +35,13 @@ const deleteUser = async (req, res) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: "No such Book" });
+        return res.status(404).json({ error: "No such User" });
     }
 
     const user = await User.findOneAndDelete({ _id: id });
 
     if (!user) {
-        return res.status(404).json({ error: "No such Book" });
+        return res.status(404).json({ error: "No such User" });
     }
 
     res.status(200).json(user);
@@ -52,7 +52,7 @@ const updateUser = async (req, res) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: "No such Book" });
+        return res.status(404).json({ error: "No such User" });
     }
 
     const user = await User.findByIdAndUpdate(
@@ -62,7 +62,7 @@ const updateUser = async (req, res) => {
         }
     );
     if (!user) {
-        return res.status(404).json({ error: "No such Book" });
+        return res.status(404).json({ error: "No such User" });
     }
     res.status(200).json(user);
 };
