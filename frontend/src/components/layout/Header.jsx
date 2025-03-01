@@ -7,7 +7,7 @@ export default function Header() {
   // Toggle the menu open/close
   const toggleMenu = () => {
     setIsOpen(!isOpen);
-  };
+  };  
 
   return (
     <>
@@ -19,7 +19,7 @@ export default function Header() {
             type="text"
             value="    🔍 Search droplet"
           />
-          <div>
+          <div> 
             <button className="text-[1rem] text-gray-100 rounded-full bg-blue-500 py-3 px-4 mr-2">
               Log In
             </button>
