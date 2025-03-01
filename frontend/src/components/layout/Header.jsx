@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
-export default function Home() {
+
+export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   // Toggle the menu open/close
@@ -10,8 +11,8 @@ export default function Home() {
 
   return (
     <>
-      <header className="w-[100%] h-[10vh] border-b-1 border-indigo-800">
-        <div className="flex justify-between my-3 mx-5">
+      <div className="w-[100%] h-[10vh] border-b-1 border-indigo-800">
+        <div className="flex justify-between my-3 mx-5 ">
           <p className="text-3xl text-gray-100 font-extrabold">droplet</p>
           <input
             className="bg-gray-600 text-gray-400 py-3 pr-100 rounded-full"
@@ -30,15 +31,7 @@ export default function Home() {
             </button>
           </div>
         </div>
-      </header>
-      <nav className="w-[20%] h-[90vh]  border-r-1 border-indigo-800 flex items-center justify-center flex-col">
-        {/* Still on progress, (I'm still working on it.) */}
-
-        {/* <button className="py-2 px-20 bg-gray-600 rounded-md flex justify-start items-center">
-          Home
-        </button>
-        <button className="py-2 px-20 bg-gray-600 rounded-md">Popular</button> */}
-      </nav>
+      </div>
     </>
   );
 }

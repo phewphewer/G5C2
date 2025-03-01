@@ -1,5 +1,6 @@
 import "./App.css";
-import Home from "./components/Home";
+import Header from "./components/layout/Header";
+import Sidebar from "./components/layout/Sidebar";
 function App() {
   return (
     <>
@@ -11,7 +12,8 @@ function App() {
           </div>
         </div>
       </div> */}
-      <Home />
+      <Header />
+      <Sidebar />
     </>
   );
 }
