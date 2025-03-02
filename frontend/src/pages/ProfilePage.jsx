@@ -1,9 +1,14 @@
 import React from 'react'
 
-export default function ProfilePage () {
-  return (
-    <div>
+console.log("You've reached the profile dashboard")
 
+export default function ProfilePage () {
+  return ( 
+
+    <div>
+      <div>
+
+      </div>
     </div>
   )
 }
