@@ -1,6 +1,8 @@
-import "./App.css";
-import Header from "./components/layout/Header";
-import Sidebar from "./components/layout/Sidebar";
+import './App.css';
+import Header from './components/layout/Header';
+import Mainpage from './components/layout/Mainpage';
+import Sidebar from './components/layout/Sidebar';
+
 function App() {
   return (
     <>
@@ -13,8 +15,15 @@ function App() {
         </div>
       </div> */}
       <div>
-      <Header />
-      <Sidebar />
+        <div className='z-10'>
+          <Header />
+        </div>
+        <div className='z-9'>
+          <Sidebar />
+        </div>
+        <div>
+          <Mainpage />
+        </div>
       </div>
     </>
   );

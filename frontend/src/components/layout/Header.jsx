@@ -10,7 +10,7 @@ export default function Header() {
   };  
 
   return (
-    <>
+    <><div className="flex fixed top-0 right-0">
       <div className="w-[100%] h-[10vh] border-b-1 border-indigo-800">
         <div className="flex justify-between my-3 mx-5 ">
           <p className="text-3xl text-gray-100 font-extrabold">droplet</p>
@@ -31,6 +31,7 @@ export default function Header() {
             </button>
           </div>
         </div>
+      </div>
       </div>
     </>
   );
