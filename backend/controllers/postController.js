@@ -1,4 +1,4 @@
-const Post = require("../models/userModel");
+const Post = require("../models/postModel");
 const mongoose = require("mongoose");
 
 // Get a single post
@@ -19,11 +19,11 @@ const getPost = async (req, res) => {
 
 // Create new post
 const createPost = async (req, res) => {
-    const { username, email, password } = req.body;
+    const { title, body, author } = req.body;
 
     //  add doc to db
     try {
-        const posts = await User.create({ username, email, password });
+        const posts = await Post.create({ title, body, author });
         res.status(200).json(posts);
     } catch (error) {
         res.status(400).json({ error: error.message });
