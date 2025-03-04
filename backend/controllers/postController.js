@@ -1,7 +1,7 @@
 const Post = require("../models/userModel");
 const mongoose = require("mongoose");
 
-// Get a single
+// Get a single post
 const getPost = async (req, res) => {
     const { id } = req.params;
 

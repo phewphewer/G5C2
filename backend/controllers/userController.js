@@ -17,7 +17,7 @@ const getUser = async (req, res) => {
     res.status(200).json(user);
 };
 
-// Create new book
+// Create new user
 const createUser = async (req, res) => {
     const { username, email, password } = req.body;
 
@@ -30,7 +30,7 @@ const createUser = async (req, res) => {
     }
 };
 
-// Delete a book
+// Delete a user
 const deleteUser = async (req, res) => {
     const { id } = req.params;
 
@@ -47,7 +47,7 @@ const deleteUser = async (req, res) => {
     res.status(200).json(user);
 };
 
-// Update a Book
+// Update a User
 const updateUser = async (req, res) => {
     const { id } = req.params;
 
