@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/user");
+const postRoutes = require("./routes/post");
 
 // express app
 const app = express();
@@ -17,6 +18,7 @@ app.use((req, res, next) => {
 
 // routes
 app.use("/api/user", userRoutes);
+app.use("/api/post", postRoutes);
 
 // Connect to DB
 mongoose
@@ -25,7 +27,7 @@ mongoose
         // listen for request
         app.listen(process.env.PORT, () => {
             console.log(
-                "connected to db & listening on port",
+                "connected to DATABASE & listening on port",
                 process.env.PORT
             );
         });

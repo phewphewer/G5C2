@@ -1,7 +1,14 @@
 const User = require("../models/userModel");
 const mongoose = require("mongoose");
 
-// Get a single
+// Get all users
+const getUsers = async (req, res) => {
+    const users = await User.find({}).sort({ createdAt: -1 });
+
+    res.status(200).json(users);
+};
+
+// Get a single user
 const getUser = async (req, res) => {
     const { id } = req.params;
 
@@ -17,7 +24,7 @@ const getUser = async (req, res) => {
     res.status(200).json(user);
 };
 
-// Create new book
+// Create new user
 const createUser = async (req, res) => {
     const { username, email, password } = req.body;
 
@@ -30,7 +37,7 @@ const createUser = async (req, res) => {
     }
 };
 
-// Delete a book
+// Delete a user
 const deleteUser = async (req, res) => {
     const { id } = req.params;
 
@@ -47,7 +54,7 @@ const deleteUser = async (req, res) => {
     res.status(200).json(user);
 };
 
-// Update a Book
+// Update a User
 const updateUser = async (req, res) => {
     const { id } = req.params;
 
@@ -69,6 +76,7 @@ const updateUser = async (req, res) => {
 
 module.exports = {
     createUser,
+    getUsers,
     getUser,
     deleteUser,
     updateUser,
