@@ -1,0 +1,57 @@
+/* Default Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 50px;
+  width: 100%;
+  height: 60px;
+  background: #283D55;
+  color: #f4ded1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  transition: all 0.1s ease-in-out;
+}
+
+/* When Sidebar is Open */
+.sidebar.open ~ .main-content .header {
+  width: calc(100% - 200px); /* Adjust width when sidebar is open */
+  margin-left: 200px; /* Move the header when sidebar is open */
+}
+.auth-buttons{
+  margin-right: 60px;
+
+  
+}
+.login {
+  border-radius: 5px;
+  border: solid 1px #0c172e;
+  margin-right: 5px;
+  padding:4px 9px;
+  color: #feffff;
+  
+}
+
+.login:hover{
+  background-color: #0c172e;
+}
+
+.register:hover{
+  border: solid 1px #0c172e;
+  background-color: #283D55;
+  padding:4px 9px;
+}
+
+.register{
+  border-radius: 5px;
+  margin-right: 5px;
+  padding:5px 10px;
+  color: #feffff;
+  background-color: #0c172e;
+  
+}
+.droplet-text {
+
+  margin-left: 50px;
+}

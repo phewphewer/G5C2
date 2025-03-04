@@ -1,9 +1,15 @@
-import './App.css';
-import Header from './components/layout/Header';
-import Mainpage from './components/layout/Mainpage';
-import Sidebar from './components/layout/Sidebar';
+import "./App.css";
+import Header from "./components/layout/header/header";
+import Mainpage from "./components/layout/Mainpage";
+import Sidebar from "./components/layout/sidebar/sidebar";
+import { useState } from "react";
 
 function App() {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
   return (
     <>
       {/* <div>
@@ -14,15 +20,10 @@ function App() {
           </div>
         </div>
       </div> */}
-      <div>
-        <div className='z-10'>
-          <Header />
-        </div>
-        <div className='z-9'>
-          <Sidebar />
-        </div>
-        <div>
-          <Mainpage />
+      <div className="container">
+        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+        <div className={`main-content ${isSidebarOpen ? "shifted" : ""}`}>
+          <Header isOpen={isSidebarOpen} />
         </div>
       </div>
     </>
