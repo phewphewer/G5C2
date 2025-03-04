@@ -27,7 +27,7 @@ mongoose
         // listen for request
         app.listen(process.env.PORT, () => {
             console.log(
-                "connected to db & listening on port",
+                "connected to DATABASE & listening on port",
                 process.env.PORT
             );
         });

@@ -8,16 +8,16 @@ const {
 const Post = require("../models/postModel");
 const router = express.Router();
 
-// Get a single user
+// Get a single post
 router.get("/post/:id", getPost);
 
-// Post a new user
+// Post a new post
 router.post("/create_post", createPost);
 
-// Delete a user
+// Delete a post
 router.delete("/delete_post/:id", deletePost);
 
-// Update a user
+// Update a post
 router.patch("/update_post/:id", updatePost);
 
 module.exports = router;
