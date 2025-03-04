@@ -8,7 +8,7 @@ const getUsers = async (req, res) => {
     res.status(200).json(users);
 };
 
-// Get a single
+// Get a single user
 const getUser = async (req, res) => {
     const { id } = req.params;
 
