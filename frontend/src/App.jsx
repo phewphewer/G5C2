@@ -1,6 +1,6 @@
 import "./App.css";
 import Header from "./components/layout/header/header";
-import Mainpage from "./components/layout/Mainpage";
+import MainDisplay from "./components/layout/MainDisplay";
 import Sidebar from "./components/layout/sidebar/sidebar";
 import { useState } from "react";
 
