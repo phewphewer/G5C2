@@ -4,23 +4,13 @@ const Schema = mongoose.Schema;
 
 const postSchema = new Schema(
     {
-        title: {
-            type: String,
+        title: { type: String, required: true },
+        body: { type: String, required: true },
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
             required: true,
         },
-        body: {
-            type: String,
-            required: true,
-        },
-        author: {
-            type: String,
-            required: true,
-        },
-
-        // On process of Thinking out loudddd, ask chatgpt for additional info
-
-        // likes: [],
-        // comments: [],
     },
     { timestamps: true }
 );
