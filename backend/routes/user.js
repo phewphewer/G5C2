@@ -24,4 +24,6 @@ router.delete("/delete_account/:id", deleteUser);
 // Update a user
 router.patch("/:id", updateUser);
 
+// Test
+
 module.exports = router;
