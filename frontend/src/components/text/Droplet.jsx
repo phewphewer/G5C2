@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import WaterIcon from '../../assets/images/water_icon.png';
+import React from "react";
+import { Link } from "react-router-dom";
+import WaterIcon from "../../assets/images/water_icon.png";
 
 export default function Droplet() {
   return (
@@ -12,7 +12,7 @@ export default function Droplet() {
             <img
               src={WaterIcon}
               alt="water drop icon"
-              className="w-[0.90em] mt-[0.20em] mx-0.5"
+              className="w-[2rem] h-[2.25rem] my-1 mx-0.5"
             />
             PLET
           </button>
