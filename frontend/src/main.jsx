@@ -5,7 +5,7 @@ import App from './App.jsx';
 import Home from './pages/HomePage.jsx';
 import Login from './components/features/auth/LoginForm.jsx';
 import SignUp from './components/features/auth/SignupForm.jsx';
-import Dashboard from './pages/ProfilePage.jsx';
+import Dashboard from './components/layout/ProfileLayout.jsx';
 import PageNotFound from './pages/PageNotFound.jsx';
 import { Link, createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -48,7 +48,8 @@ const router = createBrowserRouter([
     errorElement: <PageNotFound />,
   },
   {
-    path: '/profile_dashboard',
+    // path: `/Dashboard/${UserID}`
+    path: '/Dashboard',
     element: <Dashboard />,
     errorElement: <PageNotFound />,
   },
