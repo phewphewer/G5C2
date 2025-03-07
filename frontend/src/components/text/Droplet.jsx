@@ -5,7 +5,7 @@ import WaterIcon from "../../assets/images/water_icon.png";
 export default function Droplet() {
   return (
     <>
-      <div className="inline-flex ml-5 rounded-[5px] items-center px-[10px]">
+      <div className="inline-flex ml-2 rounded-[5px] items-center px-[10px]">
         <Link to="../../">
           <button className="font-extrabold flex text-[2em] hover:cursor-pointer bg-gradient-to-b from-[#feffff] via-[#28AAE1] to-[#2887C3] bg-[length:100%_200%] bg-top bg-clip-text hover:text-transparent transition-all duration-500 ease-in-out hover:bg-bottom">
             DR

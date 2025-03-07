@@ -24,9 +24,10 @@
 }
 .login {
   border-radius: 5px;
-  border: solid 1px #0c172e;
+  border: solid 2px #0c172e;
   margin-right: 5px;
   padding: 4px 9px;
+  font-weight: bold;
   color: #feffff;
 }
 
@@ -35,7 +36,7 @@
 }
 
 .register:hover {
-  border: solid 1px #0c172e;
+  border: solid 2px #0c172e;
   background-color: #283d55;
   padding: 4px 9px;
 }
@@ -44,6 +45,7 @@
   border-radius: 5px;
   margin-right: 5px;
   padding: 5px 10px;
+  font-weight: bold;
   color: #feffff;
   background-color: #0c172e;
 }
