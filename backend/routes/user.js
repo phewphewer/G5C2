@@ -2,11 +2,12 @@ const express = require("express");
 const {
     createUser,
     getUsers,
-    getUser,
     deleteUser,
     updateUser,
 } = require("../controllers/userController");
-const User = require("../models/userModel");
+
+const { getUser } = require("../controllers/loginController");
+
 const router = express.Router();
 
 // Get all user
@@ -23,7 +24,5 @@ router.delete("/delete_account/:id", deleteUser);
 
 // Update a user
 router.patch("/:id", updateUser);
-
-// Test test
 
 module.exports = router;

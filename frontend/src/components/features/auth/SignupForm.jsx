@@ -9,8 +9,8 @@ export default function SignupForm() {
         {/* SING UP FORM start */}
         <div className="w-[40%] h-[70%] rounded-[5px] ">
           <div className="h-[100%]">
-            <div className=" w-full h-[9vh] flex bg-[#d28033] rounded-t-[5px] items-center border-b-8 border-b-[#feffff]">
-              <h1 className="text-[2em] font-extrabold ml-5">Sign Up</h1>
+            <div className="w-full h-[9vh] flex bg-[#d28033] rounded-t-[5px] items-center border-b-8 border-b-[#feffff]">
+              <h1 className="text-[2em] font-extrabold ml-5">SIGN UP</h1>
             </div>
             {/* SIGN UP FORM start */}
             <form
@@ -66,12 +66,12 @@ export default function SignupForm() {
                 </div>
               </div>
               {/* SIGNUP BUTTON start */}
-              <div className="absolute flex justify-center items-center right-10 bottom-7   ">
+              <div className="absolute flex justify-center items-center right-5 bottom-5   ">
                 <button
                   type="submit"
-                  className="text-[1.5em] py-[4px] px-[9px] font-bold border-2 bg-[#283D55] rounded-[5px] transition duration-150 ease-in-out hover:cursor-pointer hover:bg-[#0c172e]"
+                  className="text-[1.5em] py-[4px] px-[9px] font-bold border-1 bg-[#283D55] rounded-[5px] transition duration-150 ease-in-out hover:cursor-pointer hover:bg-[#0c172e]"
                 >
-                  Sign Up
+                  sign up
                 </button>
               </div>
               {/* SIGNUP BUTTON end */}
