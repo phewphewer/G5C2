@@ -1,15 +1,15 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import PostCard from "../../components/features/posting/PostCard";
-import RightSidebar from "../../pages/ProfileDashboard/RightSidebar";
+import React from 'react';
+import { useEffect, useState } from 'react';
+import PostCard from '../../components/features/posting/PostCard';
+import RightSidebar from '../../pages/ProfileDashboard/RightSidebar';
 
 const ProfileLayout = () => {
-  // const [user, setUser] = useState(null);
+  // const [user, setUser] = useState([]);
   // useEffect(() => {
   //   const fetchUser = async () => {
-  //     const response = await fetch("http://localhost:5173//log_in/:id");
+  //     const response = await fetch('http://localhost:4000/log_in/:id');
   //     const json = await response.json();
-
+  //     console.log(json);
   //     if (response.ok) {
   //     }
   //   };
@@ -29,7 +29,7 @@ const ProfileLayout = () => {
               className="w-24 h-24 bg-gray-300 rounded-full"
             />
             {/* Personal details placeholder */}
-            <div style={{ lineHeight: "1rem" }}>
+            <div style={{ lineHeight: '1rem' }}>
               <strong className="text-2xl block text-[#D09966]">
                 John Doe
               </strong>
@@ -86,7 +86,7 @@ const ProfileLayout = () => {
                 </div>
               </div>
 
-              <div className="border border-1 border-[#283D55] mt-5"></div>
+              <div className="border-1 border-[#283D55] mt-5"></div>
 
               <button className="mt-5 px-4 py-2 bg-[#6D513E] text-[#E4D8BE] rounded-lg w-full hover:bg-[#D09966]">
                 <i className="fas fa-edit mr-5"></i>
