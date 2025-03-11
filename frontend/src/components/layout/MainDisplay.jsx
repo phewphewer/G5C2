@@ -16,7 +16,7 @@ export default function MainDisplay({ isOpen }) {
     <div className={`main-content ${isOpen ? "shifted" : ""}`}>
       <div className="w-full bg-black text-white flex justify-center p-4 pt-10">
         <div className="w-full max-w-2xl space-y-4">
-          {/* Accordion/ dropdown */}
+          {/* Accordion/ drop down */}
           <div className="bg-transparent p-2 rounded-lg flex justify-between items-center">
             <div>
               <button

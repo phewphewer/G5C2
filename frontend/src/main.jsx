@@ -22,24 +22,7 @@ const router = createBrowserRouter([
     path: '/home',
     element: <Home />,
     errorElement: <PageNotFound />,
-    // children: [
-    //   {
-    //     path: '/home/recent_posts',
-    //     element: <Recents />,
-    //     errorElement: <PageNotFound />,
-    //   },
-    //   {
-    //     path: '/home/popular_posts',
-    //     element: <Popular />,
-    //     errorElement: <PageNotFound />,
-    //   },
-    //   {
-    //     path: '/home/trending_posts',
-    //     element: <Trending />,
-    //     errorElement: <PageNotFound />,
-    //   },
-    // ],
-  },
+        },
   {
     path: '/auth/login',
     element: <Login />,
@@ -48,7 +31,7 @@ const router = createBrowserRouter([
   {
     path: '/auth/sign_up',
     element: <SignUp />,
-    errorElement: <PageNotFound />,
+    errorElement: <PageNotFound /> ,
   },
   {
     // path: `/Dashboard/${userName}`,
