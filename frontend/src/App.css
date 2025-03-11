@@ -20,6 +20,7 @@ body {
 }
 
 .main-content {
+  width: 100vw;
   flex-grow: 1;
   transition: transform 0.3s ease-in-out; /* Smooth movement */
   padding: 20px;
