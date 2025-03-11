@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PseudoHeader from "./PseudoHeader";
+import PseudoHeader from "../../layout/PseudoHeader";
 
 export default function SignupForm() {
   return (

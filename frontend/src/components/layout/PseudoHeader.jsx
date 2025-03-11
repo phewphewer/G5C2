@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Droplet from '../../text/Droplet';
+import Droplet from '../text/Droplet';
 
 export default function PseudoHeader() {
   return (
