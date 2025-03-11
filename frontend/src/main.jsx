@@ -9,6 +9,9 @@ import Dashboard from './components/layout/ProfileLayout.jsx';
 import PageNotFound from './pages/PageNotFound.jsx';
 import { Link, createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+// const userName = Object.entries.map((key, value) => {
+  
+// })
 const router = createBrowserRouter([
   {
     path: '/',
@@ -48,7 +51,7 @@ const router = createBrowserRouter([
     errorElement: <PageNotFound />,
   },
   {
-    // path: `/Dashboard/${UserID}`
+    // path: `/Dashboard/${userName}`,
     path: '/Dashboard',
     element: <Dashboard />,
     errorElement: <PageNotFound />,
