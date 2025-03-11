@@ -24,7 +24,8 @@ function App() {
         <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
         <div className={`main-content ${isSidebarOpen ? "shifted" : ""}`}>
           <Header isOpen={isSidebarOpen} />
-        </div>  
+          <MainDisplay />
+        </div>
       </div>
     </>
   );
