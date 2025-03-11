@@ -40,7 +40,7 @@ export default function LoginForm() {
                 </div>
                 {/*  LOGIN BUTTON start */}
                 <div className="absolute flex justify-center items-center right-5 bottom-5   ">
-                  <button type="submit" className='text-[1.5em] py-[4px] px-[9px] font-bold border-1 bg-[#283D55] rounded-[5px] transition duration-150 ease-in-out hover:cursor-pointer hover:bg-[#0c172e]'>
+                  <button type="submit" className='text-[1.5em] py-[4px] px-[9px] font-bold border-2 bg-[#283D55] rounded-[10px] transition duration-150 ease-in-out hover:cursor-pointer hover:bg-[#0c172e]'>
                     Log in
                   </button>
                 </div>
