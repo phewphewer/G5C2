@@ -1,34 +1,32 @@
-import "./App.css";
-import Header from "./components/layout/header/header";
-import MainDisplay from "./components/layout/MainDisplay";
-import Sidebar from "./components/layout/sidebar/sidebar";
-import { useState } from "react";
+"use client"
+
+import { useState } from "react"
+import Sidebar from "./components/layout/sidebar/sidebar"
+import Header from "./components/layout/header/header"
+import MainDisplay from "./components/layout/MainDisplay"
+import { BrowserRouter as Router } from "react-router-dom"
 
 function App() {
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  // Manage sidebar state at the parent level
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
   return (
-    <>
-      {/* <div>
-        <div className="flex justify-around py-5">
-          <div>
-            <h1 className="text-5xl text-white">Capstone 2</h1>
-            <h3 className="text-white text-center">G-5 Presents</h3>
-          </div>
-        </div>
-      </div> */}
-      <div className="container">
-        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-        <div className={`main-content ${isSidebarOpen ? "shifted" : ""}`}>
+      <div className="app-container relative">
+        {/* Pass state and setter to Sidebar */}
+        <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+
+        {/* Pass sidebar state to Header */}
+        <div
+          className={`main-content transition-all duration-100 ease-in-out ${isSidebarOpen ? "ml-[250px]" : "ml-[50px]"}`}
+        >
           <Header isOpen={isSidebarOpen} />
-          <MainDisplay />
+          <MainDisplay/>
+          {/* Your main content goes here */}
+          <div className="content mt-[60px] p-5">{/* Your routes and content */}</div>
         </div>
       </div>
-    </>
-  );
+  )
 }
 
-export default App;
+export default App
+

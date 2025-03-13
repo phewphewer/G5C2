@@ -1,46 +1,38 @@
-import React, { useState } from 'react';
-// import { FaBars } from "react-icons/fa"; // Import an icon
-import './sidebar.css';
-import { Link } from 'react-router-dom';
+"use client"
+import { Link } from "react-router-dom"
 
-export default function sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function Sidebar({ isOpen, setIsOpen }) {
   return (
     <>
       {/* Sidebar */}
-      <div className={`sidebar ${isOpen ? 'open' : ''}`}>
-        <ul>
-          <li>
+      <div
+        className={`fixed top-0 left-0 w-[250px] h-screen bg-[#0C172E] text-[#feffff] p-5 
+                   transition-transform duration-100 ease-in-out z-[1000]
+                   ${isOpen ? "translate-x-0" : "-translate-x-[200px]"}`}
+      >
+        <ul className="list-none p-0 mt-[50px]">
+          <li className="py-[15px] px-[20px] text-[18px] cursor-pointer hover:bg-white/10 hover:rounded-md">
             <Link to="/home/recent_posts">
-              <button className="w-full h-full hover:cursor-pointer">
-                Home
-              </button>
+              <button className="w-full h-full hover:cursor-pointer">Home</button>
             </Link>
           </li>
-          <li>
+          <li className="py-[15px] px-[20px] text-[18px] cursor-pointer hover:bg-white/10 hover:rounded-md">
             <Link to="/dashboard">
-              <button className="w-full h-full hover:cursor-pointer">
-                Profile
-              </button>
+              <button className="w-full h-full hover:cursor-pointer">Profile</button>
             </Link>
           </li>
         </ul>
-        {/* <button>
-          <a
-            href="https://ko-fi.com"
-            target="_blank"
-            className="fixed bottom-10 right-0 font-extrabold text-[1em] text-[#575757] 
-              w-auto max-w-[200px] z-50 animate-pulse scale-200"
-          > 
-            BUY ME A COFFEE
-          </a>
-        </button> */}
       </div>
 
       {/* Toggle Button */}
-      <button className="menu-icon" onClick={() => setIsOpen(!isOpen)}>
+      <button
+        className={`fixed bg-transparent border-none text-[#feffff] text-[20px] cursor-pointer z-[1001] 
+                   transition-all duration-100 ease-in-out focus:outline-none focus:shadow-none focus:border-none
+                   -translate-x-[7px] ${isOpen ? "left-[220px]" : "left-[20px] top-[15px]"}`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
         ☰
       </button>
     </>
-  );
+  )
 }
