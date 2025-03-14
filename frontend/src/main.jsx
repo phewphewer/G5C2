@@ -10,7 +10,7 @@ import SignUp from "./components/features/auth/SignupForm.jsx";
 import { Link, createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // beta test - linking backend => frontend !DO NOT MODIFY!
-import { AuthContextProvider } from "./betaTest/context/authContext.js";
+// import { AuthContextProvider } from "./betaTest/context/authContext.js";
 // beta test - linking backend => frontend !DO NOT MODIFY!
 
 // const userName = Object.entries.map((key, value) => {
