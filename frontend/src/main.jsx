@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     errorElement: <PageNotFound />,
   },
   {
-    path: '/auth/sign_up',
+    path: '/auth/sign-up',
     element: <SignUp />,
     errorElement: <PageNotFound />,
   },
