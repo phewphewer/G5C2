@@ -7,21 +7,21 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <>
-<div className="w-full min-h-screen flex flex-wrap justify-center items-center bg-[#0c172e] p-4">
+<div className="w-full min-h-screen text-[#F7FAFC] flex flex-wrap justify-center items-center bg-[#050E1A] p-4">
       <PseudoHeader />
       {/* LOGIN FORM start */}
-      <div className="w-full max-w-md rounded-[5px]">
-        <div className="w-full py-4 flex bg-[#d28033] rounded-t-[5px] items-center border-b-8 border-b-[#feffff]">
+      <div className="w-full max-w-md rounded-[5px] border-[#172A42] border-5">
+        <div className="w-full py-4 flex bg-[#172A42] items-center border-b-2 border-b-[#F7FAFC]">
           <h1 className="text-2xl md:text-3xl font-extrabold ml-5">Login</h1>
         </div>
-        <form className="flex flex-col w-full bg-[#283D55] rounded-b-[5px] p-6 relative">
+        <form className="flex flex-col w-full bg-[#0A1A2F] rounded-b-[5px] p-6 relative">
           <div className="w-full mb-8">
             {/* EMAIL ADDRESS start */}
-            <div className="w-full mb-4">
+            <div className="w-full mb-4 mt-4">
               <p className="font-bold text-sm md:text-base">Enter email address:</p>
               <input
                 type="email"
-                className="placeholder:italic bg-[#0c172e] rounded-[5px] w-full py-2 px-3 mt-1"
+                className="placeholder:italic bg-[#050E1A] rounded-[5px] w-full py-2 px-3 mt-1"
                 placeholder="example@email.com"
               />
             </div>
@@ -33,7 +33,7 @@ export default function LoginForm() {
               <div className="relative w-full flex mt-1">
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="placeholder:italic bg-[#0c172e] rounded-[5px] w-full py-2 px-3 pr-10"
+                  className="placeholder:italic bg-[#050E1A] rounded-[5px] w-full py-2 px-3 pr-10"
                   placeholder="password"
                 />
                 <button
@@ -56,7 +56,7 @@ export default function LoginForm() {
           <div className="flex justify-end mt-4">
             <button
               type="submit"
-              className="text-base md:text-xl py-1 px-4 text-[#feffff] font-bold border-2 bg-[#283D55] rounded-[5px] transition duration-150 ease-in-out hover:cursor-pointer hover:bg-[#0c172e]"
+              className="text-base md:text-xl py-1 px-4 font-bold border-2 border-[#374151] bg-[#050E1A] rounded-[5px] transition duration-150 ease-in-out text-[#CBD5E1] hover:cursor-pointer hover:bg-[#2D5F8A] hover:text-[#F7FAFC] hover:border-[#F7FAFC]"
             >
               Log in
             </button>
