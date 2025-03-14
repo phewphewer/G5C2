@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import WaterIcon from '../../assets/images/water_icon.png';
+import React from "react";
+import { Link } from "react-router-dom";
+import WaterIcon from "../../assets/images/water_icon.png";
 
 export default function Droplet() {
   return (

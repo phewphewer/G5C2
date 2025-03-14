@@ -1,81 +1,76 @@
 import React, { useState } from "react";
 
-export default function MainDisplay({ isOpen }) {
+export default function PostPage() {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
   const [sortBy, setSortBy] = useState("Sort by");
 
-  const toggleAccordion = () => {
-    setIsAccordionOpen(!isAccordionOpen);
-  };
-
-  const handleSortChange = (e) => {
-    setSortBy(e.target.value);
-  };
-
   return (
-    <div
-      className={`main-content ${
-        isOpen ? "shifted" : ""
-      } bg-[#283D55] min-h-screen p-6`}
-    >
-      <div className="w-full text-white flex justify-center p-4 pt-10">
-        <div className="w-full max-w-2xl space-y-4">
-          {/* Accordion/Dropdown */}
-          <div className="bg-[#1F2D50] p-2 rounded-lg flex justify-between items-center shadow-md">
-            <div>
-              <button
-                className="w-auto h-auto text-left text-white p-2 rounded-md hover:bg-[#A97C50] transition"
-                onClick={toggleAccordion}
-                aria-label="Toggle accordion"
-              >
-                Pindutin mo to
-              </button>
-              {isAccordionOpen && (
-                <div className="flex flex-col space-y-2 mt-2 bg-[#4F3A2D] p-2 rounded-md shadow-md">
-                  {["Featured", "Popular", "Recent"].map((section) => (
-                    <button
-                      key={section}
-                      className="w-full text-center text-white p-2 rounded-md hover:bg-[#D3C3A3] transition"
-                    >
-                      {section}
-                    </button>
-                  ))}
-                </div>
-              )}
+    <div className="min-h-screen bg-[#0D162F] text-white p-6 pt-17 flex flex-col">
+      {/* accordion and sort by */}
+      <div className="flex justify-start gap-120 items-center  p-3 rounded-t-md border-b border-[#D3C3A3] space-x-4">
+        <div>
+          <button
+            className="p-2 bg-[#4F3A2D] rounded hover:bg-[#D3C3A3]"
+            onClick={() => setIsAccordionOpen(!isAccordionOpen)}
+          >
+            Accordion
+          </button>
+          {isAccordionOpen && (
+            <div className="absolute bg-[#4F3A2D] mt-2 p-2 rounded-md">
+              {["Featured", "Recent", "Popular"].map((item) => (
+                <button
+                  key={item}
+                  className="block w-full text-left p-2 hover:bg-[#D3C3A3]"
+                >
+                  {item}
+                </button>
+              ))}
             </div>
+          )}
+        </div>
+        <select
+          className="p-2 bg-[#4F3A2D] rounded border border-[#D3C3A3]"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+        >
+          <option value="Sort by" disabled>
+            Sort by
+          </option>
+          <option value="Week">Sort by Week</option>
+          <option value="Month">Sort by Month</option>
+          <option value="Year">Sort by Year</option>
+        </select>
+      </div>
 
-            <div className="ml-4">
-              <select
-                className="text-white p-2 rounded-md w-22 bg-[#4F3A2D] shadow-md border border-[#D3C3A3]"
-                value={sortBy}
-                onChange={handleSortChange}
-                aria-label="Sort by"
-              >
-                <option value="Sort by" disabled>
-                  Sort by
-                </option>
-                <option value="Week">Sort by Week</option>
-                <option value="Month">Sort by Month</option>
-                <option value="Year">Sort by Year</option>
-              </select>
+      <div className="flex flex-1 overflow-hidden">
+        {/* Left - Posts */}
+        <div className="w-3/4 p-4 space-y-4">
+          {[...Array(5)].map((_, index) => (
+            <div
+              key={index}
+              className="bg-[#1F2D50] p-4 rounded-lg border border-[#D3C3A3]"
+            >
+              <p className="text-lg font-bold">Username</p>
+              <div className="w-full h-24 bg-[#A97C50] rounded-md mt-2"></div>
             </div>
-          </div>
+          ))}
+        </div>
 
-          {/* Post */}
-          <div className="space-y-6 mt-6">
-            {[...Array(6)].map((_, index) => (
-              <div
-                key={index}
-                className="bg-[#1F2D50] p-4 rounded-lg shadow-md border border-[#D3C3A3] transition hover:shadow-lg"
-              >
-                {/* Profile */}
-                <div className="flex items-center space-x-3 mb-3">
-                  <div className="w-10 h-10 bg-[#4F3A2D] rounded-full border border-[#D3C3A3]"></div>
+        {/* Right - Featured Users */}
+        <div className="w-1/4 p-4">
+          <div className="bg-[#4F3A2D] p-4 rounded-lg border border-[#D3C3A3]">
+            <h2 className="text-center font-bold">Featured</h2>
+            <div className="mt-4 space-y-2">
+              {[...Array(3)].map((_, index) => (
+                <div
+                  key={index}
+                  className="bg-[#1F2D50] p-4 rounded-lg border border-[#D3C3A3]"
+                >
+                  <p className="text-lg font-bold">Username</p>
+                  <div className="w-full h-24 bg-[#A97C50] rounded-md mt-2"></div>
                 </div>
-                {/* Placeholder */}
-                <div className="w-full h-24 bg-[#A97C50] rounded-md border border-[#D3C3A3]"></div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
