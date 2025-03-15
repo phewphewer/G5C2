@@ -7,6 +7,24 @@ export default function SignupForm() {
   // show/hide password
   const [showPassword, setShowPassword] = useState(false);
 
+  // functionality for email & password
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(email, password, repeatPassword);
+
+    // Example validation (if passwords don't match):
+    if (password !== repeatPassword) {
+      console.log("Passwords do not match", password, " ", repeatPassword);
+      return;
+    }
+
+    console.log("Form submitted!");
+  };
+
   return (
     <>
       <div className="w-full min-h-screen flex flex-col justify-center items-center bg-[#0c172e] p-4">
@@ -19,7 +37,10 @@ export default function SignupForm() {
             </h1>
           </div>
           {/* SIGN UP FORM start */}
-          <form className="flex flex-col w-full bg-[#283D55] rounded-b-[5px] p-6">
+          <form
+            className="flex flex-col w-full bg-[#283D55] rounded-b-[5px] p-6"
+            onSubmit={handleSubmit}
+          >
             <div className="w-full space-y-4">
               {/* USERNAME */}
               <div className="w-full">
@@ -40,6 +61,8 @@ export default function SignupForm() {
                 </p>
                 <input
                   type="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
                   className="placeholder:italic bg-[#0c172e] rounded-[5px] w-full py-2 px-3 mt-1"
                   placeholder="example@email.com"
                 />
@@ -53,6 +76,8 @@ export default function SignupForm() {
                 <div className="relative w-full mt-1">
                   <input
                     type={showPassword ? "text" : "password"}
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
                     className="placeholder:italic bg-[#0c172e] rounded-[5px] w-full py-2 px-3 pr-10"
                     placeholder="password"
                   />
@@ -85,6 +110,8 @@ export default function SignupForm() {
                 </p>
                 <input
                   type="password"
+                  onChange={(e) => setRepeatPassword(e.target.value)}
+                  value={repeatPassword}
                   className="placeholder:italic bg-[#0c172e] rounded-[5px] w-full py-2 px-3 mt-1"
                   placeholder="very secret password (again)"
                 />
