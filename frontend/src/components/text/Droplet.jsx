@@ -12,7 +12,7 @@ export default function Droplet() {
             <img
               src={WaterIcon}
               alt="water drop icon"
-              className="w-[0.90em] mt-[0.20em] mx-0.5"
+              className="w-[33px] h-[38px] mt-[2%] mx-0.5"
             />
             PLET
           </button>
