@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PseudoHeader from "../../layout/PseudoHeader";
 import Show from "../../../assets/images/show.png";
 import Hide from "../../../assets/images/hide.png";
-
+import { Link } from "react-router-dom"
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -82,7 +82,7 @@ export default function LoginForm() {
             </div>
 
             {/*  LOGIN BUTTON start */}
-            <div className="flex justify-end mt-4">
+            <div className="flex justify-end">
               <button
                 type="submit"
                 className="text-base md:text-xl py-1 px-4 font-bold border-2 border-[#374151] bg-[#050E1A] rounded-[5px] transition duration-150 ease-in-out text-[#CBD5E1] hover:cursor-pointer hover:bg-[#2D5F8A] hover:text-[#F7FAFC] hover:border-[#F7FAFC]"
@@ -91,6 +91,18 @@ export default function LoginForm() {
               </button>
             </div>
             {/*  LOGIN BUTTON end */}
+            {/* GO TO LOGIN PAGE start*/}
+            <div className="border-t-1 mt-4 pt-2 flex justify-around border-gray-600">
+              <span className="text-[#94A3B8] mt-2">
+                Don't have an account?
+              </span>
+              <Link to="/auth/sign-up">
+                <button className="text-blue-400 hover:text-blue-300 mt-2">
+                  Register
+                </button>
+              </Link>
+            </div>
+            {/* GO TO LOGIN PAGE end*/}
           </form>
         </div>
         {/* LOGIN FORM end */}
