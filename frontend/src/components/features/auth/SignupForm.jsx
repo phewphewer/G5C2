@@ -3,6 +3,9 @@ import PseudoHeader from "../../layout/PseudoHeader";
 import Show from "../../../assets/images/show.png";
 import Hide from "../../../assets/images/hide.png";
 import { Link } from "react-router-dom";
+
+// import { useSignup } from "../../../hooks/useSignUp";
+
 export default function SignupForm() {
   // show/hide password
   const [showPassword, setShowPassword] = useState(false);
@@ -133,12 +136,14 @@ export default function SignupForm() {
             {/* SIGNUP BUTTON end */}
             {/* GO TO LOGIN PAGE start*/}
             <div className="border-t-1 mt-4 pt-2 flex justify-around border-gray-600">
-              <span className="text-[#94A3B8] mt-2">Already have an account?</span>
+              <span className="text-[#94A3B8] mt-2">
+                Already have an account?
+              </span>
               <Link to="/auth/login">
                 <button className="text-blue-400 hover:text-blue-300 mt-2">
-                  Log-in  
+                  Log-in
                 </button>
-              </Link>   
+              </Link>
             </div>
             {/* GO TO LOGIN PAGE end*/}
           </form>
