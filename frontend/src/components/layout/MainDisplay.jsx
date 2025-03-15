@@ -1,36 +1,38 @@
-import React, { useState } from 'react';
+import PostCard from "../features/posting/PostCard";
+import React, { useState } from "react";
 
 export default function PostPage() {
-  const [isAccordionOpen, setIsAccordionOpen] = useState(false);
-  const [sortBy, setSortBy] = useState('Sort by');
+  const [sortBy, setSortBy] = useState("Sort by");
+
+  const handleSort = (sortType) => {};
 
   return (
-    <div className="min-h-screen bg-[#0D162F] text-white p-6 pt-17 flex flex-col">
-      {/* accordion and sort by */}
-      <div className="">
-        <div className="flex justify-between items-center  p-3 rounded-t-md border-b border-[#D3C3A3] space-x-4">
-          <div>
+    <div className="min-h-screen bg-[#050E1A] text-white pt-17 flex">
+      {/* Sorting and filter options */}
+      <div className=" ">
+        <div className=" flex justify-between items-center p-3 rounded-t-md  space-x-4">
+          <div className="flex space-x-5">
             <button
-              className="p-2 bg-[#4F3A2D] rounded hover:bg-[#D3C3A3] border-2 border-[#D3C3A3] hover:text-[]"
-              onClick={() => setIsAccordionOpen(!isAccordionOpen)}
+              className="p-2 bg-[#1E3A57] hover:bg-[#172A42] rounded-full border-1 border-[#2D5F8A] hover:text-[]"
+              onClick={() => handleSort("Recent")}
             >
-              Accordion
+              Recent
             </button>
-            {isAccordionOpen && (
-              <div className="absolute bg-[#4F3A2D] mt-2 p-2 rounded-md">
-                {['Featured', 'Recent', 'Popular'].map((item) => (
-                  <button
-                    key={item}
-                    className="block w-full text-left p-2 hover:bg-[#D3C3A3]"
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-            )}
+            <button
+              className="p-2 bg-[#1E3A57] rounded-full hover:bg-[#172A42] border-1 border-[#2D5F8A] hover:text-[]"
+              onClick={() => handleSort("Featured")}
+            >
+              Featured
+            </button>
+            <button
+              className="p-2 bg-[#1E3A57] rounded-full hover:bg-[#172A42] border-1 border-[#2D5F8A] hover:text-[]"
+              onClick={() => handleSort("Popular")}
+            >
+              Popular
+            </button>
           </div>
           <select
-            className="p-2 bg-[#4F3A2D] rounded border border-[#D3C3A3]"
+            className="p-2  bg-[#1E3A57] rounded border-1 border-[#2D5F8A]"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
           >
@@ -42,35 +44,27 @@ export default function PostPage() {
             <option value="Year">Sort by Year</option>
           </select>
         </div>
+        <div></div>
+        <div className="flex">
+          <PostCard></PostCard>
 
-        <div className="flex flex-1 overflow-hidden">
-          {/* Left - Posts */}
-          <div className="w-3/4 p-4 space-y-4">
-            {[...Array(5)].map((_, index) => (
-              <div
-                key={index}
-                className="bg-[#1F2D50] p-4 rounded-lg border border-[#D3C3A3]"
-              >
-                <p className="text-lg font-bold">Username</p>
-                <div className="w-full h-24 bg-[#A97C50] rounded-md mt-2"></div>
+          {/* Right - Featured Users */}
+          <div className="w-1/4 p-4">
+            <div className="bg-[#0A1A2F] p-4 rounded-lg border border-[#F7FAFC]">
+              <h2 className="text-center font-bold">Featured</h2>
+              <div className="mt-4 space-y-2">
+                {[...Array(3)].map((_, index) => (
+                  <div
+                    key={index}
+                    className="bg-[#1F2D50] p-4 rounded-lg border border-[#F7FAFC]"
+                  >
+                    <p className="text-lg font-bold">Username</p>
+                    <div className="w-full h-24 rounded-md mt-2">
+                      Lorem, ipsum dolor sit amet consectetur.
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-        {/* Right - Featured Users */}
-        <div className="w-1/4 p-4">
-          <div className="bg-[#4F3A2D] p-4 rounded-lg border border-[#D3C3A3]">
-            <h2 className="text-center font-bold">Featured</h2>
-            <div className="mt-4 space-y-2">
-              {[...Array(3)].map((_, index) => (
-                <div
-                  key={index}
-                  className="bg-[#1F2D50] p-4 rounded-lg border border-[#D3C3A3]"
-                >
-                  <p className="text-lg font-bold">Username</p>
-                  <div className="w-full h-24 bg-[#A97C50] rounded-md mt-2"></div>
-                </div>
-              ))}
             </div>
           </div>
         </div>

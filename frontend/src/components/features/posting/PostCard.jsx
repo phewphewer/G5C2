@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const PostCard = () => {
   const [likeCount, setLikeCount] = useState(42);
   const [isLiked, setIsLiked] = useState(false);
-  const [commentText, setCommentText] = useState('');
+  const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([
     {
       id: 1,
-      user: 'Jane Doe',
+      user: "Jane Doe",
       avatar:
-        'https://static.vecteezy.com/system/resources/previews/005/419/157/non_2x/female-user-profile-avatar-is-a-woman-a-character-for-a-screen-saver-with-emotions-illustration-on-a-white-isolated-background-vector.jpg',
-      text: 'Great post! Really enjoyed reading this.',
-      time: '15m ago',
+        "https://static.vecteezy.com/system/resources/previews/005/419/157/non_2x/female-user-profile-avatar-is-a-woman-a-character-for-a-screen-saver-with-emotions-illustration-on-a-white-isolated-background-vector.jpg",
+      text: "Great post! Really enjoyed reading this.",
+      time: "15m ago",
     },
     {
       id: 2,
-      user: 'John Smith',
+      user: "John Smith",
       avatar:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLDIqra6CgB1b6S8-6Dmx1upVbXAPo6zAfFg&s',
-      text: 'Thanks for sharing this!',
-      time: '32m ago',
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLDIqra6CgB1b6S8-6Dmx1upVbXAPo6zAfFg&s",
+      text: "Thanks for sharing this!",
+      time: "32m ago",
     },
   ]);
 
@@ -37,23 +37,23 @@ const PostCard = () => {
     if (commentText.trim()) {
       const newComment = {
         id: comments.length + 1,
-        user: 'You',
+        user: "You",
         avatar:
-          'https://static.vecteezy.com/system/resources/thumbnails/002/002/403/small/man-with-beard-avatar-character-isolated-icon-free-vector.jpg',
+          "https://static.vecteezy.com/system/resources/thumbnails/002/002/403/small/man-with-beard-avatar-character-isolated-icon-free-vector.jpg",
         text: commentText,
-        time: 'Just now',
+        time: "Just now",
       };
       setComments([newComment, ...comments]);
-      setCommentText('');
+      setCommentText("");
     }
   };
 
   const handleShare = () => {
-    alert('Post shared successfully!');
+    alert("Post shared successfully!");
   };
 
   return (
-    <div className="w-full bg-[#0C172E] p-6 shadow-md rounded-lg">
+    <div className="w-full bg-[#0A1A2F] p-6 shadow-md rounded-lg">
       <div className="space-y-4">
         {/* User Profile Section */}
         <div className="flex items-center space-x-3">
@@ -104,7 +104,7 @@ const PostCard = () => {
         <div className="flex justify-between border-t border-[#283D55] border-b py-2">
           <button
             className={`flex items-center space-x-2 px-4 py-1 rounded-md ${
-              isLiked ? 'text-[#D09966]' : 'text-[#6D513E] hover:bg-[#E4D8BE]'
+              isLiked ? "text-[#D09966]" : "text-[#6D513E] hover:bg-[#E4D8BE]"
             }`}
             onClick={handleLike}
           >

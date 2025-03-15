@@ -6,7 +6,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
     <>
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 w-[250px] h-screen bg-[#0C172E] text-[#feffff]
+        className={`fixed top-0 left-0 w-[230px] h-screen bg-[#0A1A2F] border-r-[1px] border-[#172A42] text-[#feffff]
                    transition-transform duration-100 ease-in-out z-[1000]
                    ${isOpen ? "translate-x-0" : "-translate-x-[200px]"}`}
       >
@@ -30,12 +30,14 @@ export default function Sidebar({ isOpen, setIsOpen }) {
 
       {/* Toggle Button */}
       <button
-        className={`h-full  top-0 left-0 w-[56px] fixed border-none text-[#feffff] text-[20px] cursor-pointer z-[1001] transition-all duration-100 ease-in-out focus:outline-none focus:shadow-none focus:border-none -translate-x-[7px] ${
-          isOpen ? "left-[220px] top-[15px" : "left-[0px] top-0 "
+        className={`h-full top-0 left-0 w-[30px] fixed border-none text-[#feffff] text-[30px] cursor-pointer z-[1001] transition-all duration-100 ease-in-out focus:outline-none focus:shadow-none focus:border-none -translate-x-[7px] rounded-full ${
+          isOpen ? "left-[210px] top-[15px]" : "left-[5px] top-0 bg-transparent"
         }`}
         onClick={() => setIsOpen(!isOpen)}
       >
-        ☰
+        <label className=" bg-[#050E1A] rounded-full pl-[8px] pr-[8px] ml-3 border-[1px] border-[#172A42] ">
+          {isOpen ? "<" : ">"}
+        </label>
       </button>
     </>
   );
