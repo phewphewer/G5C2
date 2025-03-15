@@ -9,10 +9,6 @@ import Login from "./components/features/auth/LoginForm.jsx";
 import SignUp from "./components/features/auth/SignupForm.jsx";
 import { Link, createBrowserRouter, RouterProvider } from "react-router-dom";
 
-// beta test - linking backend => frontend !DO NOT MODIFY!
-// import { AuthContextProvider } from "./betaTest/context/authContext.js";
-// beta test - linking backend => frontend !DO NOT MODIFY!
-
 // const userName = Object.entries.map((key, value) => {
 
 // })
@@ -47,9 +43,6 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    {/* beta test - linking backend => frontend !DO NOT MODIFY! */}
-    {/* <AuthContextProvider></AuthContextProvider> */}
-    {/* beta test - linking backend => frontend !DO NOT MODIFY! */}
     <RouterProvider router={router} />
   </StrictMode>
 );
