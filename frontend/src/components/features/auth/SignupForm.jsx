@@ -7,14 +7,15 @@ export default function SignupForm() {
   // show/hide password
   const [showPassword, setShowPassword] = useState(false);
 
-  // functionality for email & password
+  // functionality for username, email, password & repeat password
+  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email, password, repeatPassword);
+    console.log(userName, email, password, repeatPassword);
 
     // Example validation (if passwords don't match):
     if (password !== repeatPassword) {
@@ -49,6 +50,8 @@ export default function SignupForm() {
                 </p>
                 <input
                   type="text"
+                  onChange={(e) => setUserName(e.target.value)}
+                  value={userName}
                   className="placeholder:italic bg-[#0c172e] rounded-[5px] w-full py-2 px-3 mt-1"
                   placeholder="Aws0meName123"
                 />
