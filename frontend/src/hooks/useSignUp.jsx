@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useAuthContext } from "../context/AuthContext";
-
+// this tookmore than half day . . .
+// import { useAuthContext } from "../context/AuthContext";
+import { useAuthContext } from "./useAuthContext";
 export const useSignup = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
@@ -12,7 +13,7 @@ export const useSignup = () => {
 
     const response = await fetch("/api/user/create_account", {
       method: "POST",
-      headers: { "Context-Type": "application/json" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userName, email, password }),
     });
     const json = await response.json();
@@ -27,7 +28,7 @@ export const useSignup = () => {
       localStorage.setItem("user", JSON.stringify(json));
 
       // update the auth json
-      dispatch({ type: "LOGIN", PAYLOAD: json });
+      dispatch({ type: "LOGIN", payload: json });
 
       setIsLoading(false);
     }

@@ -4,7 +4,7 @@ import Show from "../../../assets/images/show.png";
 import Hide from "../../../assets/images/hide.png";
 import { Link } from "react-router-dom";
 
-// import { useSignup } from "../../../hooks/useSignUp";
+import { useSignup } from "../../../hooks/useSignUp";
 
 export default function SignupForm() {
   // show/hide password
