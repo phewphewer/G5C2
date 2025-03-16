@@ -94,14 +94,14 @@ export default function SignupForm() {
                   >
                     {showPassword ? (
                       <img
-                        src={Hide || "/placeholder.svg"}
-                        alt="hide"
+                        src={Show || "/placeholder.svg"}
+                        alt="show"
                         className="w-auto h-6 md:h-8"
                       />
                     ) : (
                       <img
-                        src={Show || "/placeholder.svg"}
-                        alt="show"
+                        src={Hide || "/placeholder.svg"}
+                        alt="hide"
                         className="w-auto h-6 md:h-8"
                       />
                     )}

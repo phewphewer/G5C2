@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PseudoHeader from "../../layout/PseudoHeader";
 import Show from "../../../assets/images/show.png";
 import Hide from "../../../assets/images/hide.png";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -64,14 +64,14 @@ export default function LoginForm() {
                   >
                     {showPassword ? (
                       <img
-                        src={Hide || "/placeholder.svg"}
-                        alt="hide"
+                        src={Show || "/placeholder.svg"}
+                        alt="show"
                         className="w-auto h-6 md:h-8"
                       />
                     ) : (
                       <img
-                        src={Show || "/placeholder.svg"}
-                        alt="show"
+                        src={Hide || "/placeholder.svg"}
+                        alt="hide"
                         className="w-auto h-6 md:h-8"
                       />
                     )}
