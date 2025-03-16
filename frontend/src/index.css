@@ -3,3 +3,26 @@
 * {
     font-family: helvetica;
 }
+/* styles/globals.css */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #1E3A57;
+    border-radius: 4px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #2D5F8A;
+    border-radius: 4px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #3B7AA6;
+  }
+  
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #2D5F8A #1E3A57;
+  }

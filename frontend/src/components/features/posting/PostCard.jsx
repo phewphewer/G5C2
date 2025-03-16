@@ -53,7 +53,7 @@ const PostCard = () => {
   };
 
   return (
-    <div className="w-full bg-[#0A1A2F] p-6 shadow-md rounded-lg">
+    <div className="w-full bg-[#0A1A2F] p-6 shadow-md rounded-lg mb-5">
       <div className="space-y-4">
         {/* User Profile Section */}
         <div className="flex items-center space-x-3">
