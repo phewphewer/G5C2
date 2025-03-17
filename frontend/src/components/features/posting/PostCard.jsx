@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client";
+
+import { useState } from "react";
 
 const PostCard = () => {
   const [likeCount, setLikeCount] = useState(42);
@@ -12,6 +14,8 @@ const PostCard = () => {
       create_date: "15m ago",
     },
   ]);
+  const [showComments, setShowComments] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleLike = () => {
     if (isLiked) {
@@ -33,66 +37,78 @@ const PostCard = () => {
       };
       setComments([newComment, ...comments]);
       setCommentText("");
+      setShowComments(true); // Automatically open the comments accordion
     }
   };
 
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
   return (
-    <div className="w-full bg-[#0A1A2F] p-6 shadow-md rounded-lg mb-5 hover:border-[#374151] border-[#1F2937] border-1 ">
+    <div className="w-full bg-[#0A1A2F] p-6 shadow-md rounded-lg mb-5 hover:border-[#2D5F8A] border-[#1F2937] border-1">
       <div className="space-y-4">
-        {/* User Profile Section */}
-        <div className="flex items-center space-x-3">
-          <div>
-            {/* {users.map((key, value) => {
-              <h3 key="user.id" className="font-semibold text-[#28AAE1]">
-                `${users.username}`
-              </h3>;
-              <p className="text-xs text-[#CBD5E1]">Posted 2 hours ago</p>
-            })} */}
+        {/* Header with user info and options */}
+        <div className="flex justify-between">
+          <div className="flex flex-col">
             <h3 className="font-bold text-[120%] text-[#30bffc]">
               Alex Johnson
             </h3>
             <p className="text-xs text-[#CBD5E1]">Posted 2 hours ago</p>
           </div>
-          <div className="ml-auto">
-            {/* OPTIONS BUTTON */}
-            <button className="text-[#CBD5E1] hover:text-[#F7FAFC]">
+          <div className="relative">
+            <button
+              className="text-white p-1 rounded-full hover:bg-[#1E2A3B]"
+              onClick={toggleDropdown}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                />
               </svg>
             </button>
-            {/* OPTIONS BUTTON */}
+            {showDropdown && (
+              <div className="absolute right-0 mt-2 w-32 bg-[#1E2A3B] rounded-md shadow-lg z-10 border border-[#283D55]">
+                <ul className="py-1">
+                  <li className="px-4 py-2 text-m text-[#F7FAFC] hover:bg-[#283D55] cursor-pointer">
+                    Edit
+                  </li>
+                  <li className="px-4 py-2 text-m text-[#F7FAFC] hover:bg-[#283D55] cursor-pointer">
+                    Delete
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Post Content */}
-        {/* {post.map(() => {
-          <p key="post.id" className="text-[#F7FAFC] text-[0.95rem]">
-            Just finished working on an amazing project with the team! Really
-            proud of what we've accomplished over the last few weeks. Looking
-            forward to sharing more details soon. <b>#teamwork #productivity</b>
-          </p>})} */}
-        <p key="post.id" className="text-[#F7FAFC] text-[0.95rem]">
+        {/* Post content */}
+        <p className="text-[#F7FAFC] text-[0.95rem]">
           Just finished working on an amazing project with the team! Really
-          proud of what we've accomplished over the last few weeks. Looking
-          forward to sharing more details soon. <b>#teamwork #productivity</b>
+          proud of what we've accomplished over the last few weeks.
+          <b>#teamwork #productivity</b>
         </p>
 
-        {/* Engagement Stats */}
+        {/* Engagement stats */}
         <div className="flex justify-between text-sm text-[#CBD5E1] pt-2 border-t border-[#283D55]">
           <span>{likeCount} likes</span>
           <span>{comments.length} comments</span>
         </div>
 
-        {/* Action Buttons */}
+        {/* Action buttons */}
         <div className="flex justify-between border-t border-[#283D55] border-b py-2">
           <button
             className={`flex items-center space-x-2 px-4 py-1 rounded-md ${
-              isLiked ? "text-[#94A3B8]" : "text-[#48c5f7] hover:bg-[#2D5F8A]"
+              isLiked ? "text-[#48c5f7]" : "text-[#94A3B8] hover:bg-[#2D5F8A]"
             }`}
             onClick={handleLike}
           >
@@ -106,7 +122,10 @@ const PostCard = () => {
             </svg>
             <span>Like</span>
           </button>
-          <button className="flex items-center space-x-2 px-4 py-1 rounded-md text-[#CBD5E1] hover:bg-[#2D5F8A]">
+          <button
+            className="flex items-center space-x-2 px-4 py-1 rounded-md text-[#CBD5E1] hover:bg-[#2D5F8A]"
+            onClick={() => setShowComments(!showComments)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -123,42 +142,29 @@ const PostCard = () => {
           </button>
         </div>
 
-        {/* Comment Section */}
-        <div className="space-y-4">
-          {/* Comment Input */}
-
-          <form
-            onSubmit={handleComment}
-            className="flex items-center space-x-2"
+        {/* Comment Input Field (Always Visible) */}
+        <form onSubmit={handleComment} className="flex items-center space-x-2">
+          <input
+            type="text"
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
+            placeholder="Write a comment..."
+            className="flex-1 border rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#D09966]"
+          />
+          <button
+            type="submit"
+            className="text-[#CBD5E1] font-medium text-sm"
+            disabled={!commentText.trim()}
           >
-            {/* {users.map((key, value) => {
-              <
-            })} */}
-            <input
-              type="text"
-              value={commentText}
-              onChange={(e) => setCommentText(e.target.value)}
-              placeholder="Write a comment..."
-              className="flex-1 border rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#D09966]"
-            />
-            <button
-              type="submit"
-              className="text-[#CBD5E1] font-medium text-sm"
-              disabled={!commentText.trim()}
-            >
-              Post
-            </button>
-          </form>
+            Post
+          </button>
+        </form>
 
-          {/* Comments List */}
-          <div className="space-y-3 max-h-64 overflow-y-auto">
+        {/* Comment Section (Accordion) */}
+        {showComments && (
+          <div className="space-y-3 mt-2 border-t border-[#283D55] pt-2 max-h-64 overflow-y-auto">
             {comments.map((comment) => (
-              <div key={comment.id} className="flex space-x-2">
-                <img
-                  src={comment.avatar}
-                  alt={`${comment.user}'s avatar`}
-                  className="rounded-full h-8 w-8 mt-1"
-                />
+              <div key={comment.postId} className="flex space-x-2">
                 <div className="bg-[#283D55] rounded-lg px-3 py-2 flex-1">
                   <div className="flex justify-between items-center">
                     <h4 className="font-medium text-sm text-[#F7FAFC]">
@@ -173,7 +179,7 @@ const PostCard = () => {
               </div>
             ))}
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
