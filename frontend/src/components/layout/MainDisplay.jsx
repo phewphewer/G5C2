@@ -14,7 +14,7 @@ export default function PostPage() {
             isFeatured: true,
         },
         {
-            id: 2,GI
+            id: 2,
             content: "Post 2",
             timestamp: "2025-02-21",
             likes: 20,
