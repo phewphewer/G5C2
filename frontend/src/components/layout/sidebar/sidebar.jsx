@@ -12,10 +12,12 @@ export default function Sidebar({ isOpen, setIsOpen }) {
       >
         <ul className="list-none p-0 mt-[50px]">
           <li className="py-[15px] px-[20px] text-[18px] cursor-pointer hover:bg-white/10 hover:rounded-md">
-            <Link to="/home/recent_posts">
-              <button className="w-full h-full hover:cursor-pointer">
+            <Link to="/home">
+            <form>
+              <button type="submit" className="w-full h-full hover:cursor-pointer">
                 Home
               </button>
+              </form>
             </Link>
           </li>
           <li className="py-[15px] px-[20px] text-[18px] cursor-pointer hover:bg-white/10 hover:rounded-md">

@@ -23,11 +23,6 @@ const ProfileLayout = () => {
         <div>
           <div className="flex items-center justify-start">
             {/* Placeholder profile */}
-            <img
-              src="https://static.vecteezy.com/system/resources/thumbnails/002/002/403/small/man-with-beard-avatar-character-isolated-icon-free-vector.jpg"
-              alt="Profile Avatar"
-              className="w-24 h-24 bg-gray-300 rounded-full"
-            />
             {/* Personal details placeholder */}
             <div style={{ lineHeight: '1rem' }}>
               <strong className="text-2xl block text-[#D09966]">
@@ -48,41 +43,6 @@ const ProfileLayout = () => {
                 <div className="flex items-center text-[#E4D8BE]">
                   <i className="fas fa-user mr-2"></i>
                   <strong className="font-semibold">John Doe</strong>
-                </div>
-              </div>
-              <div className="mt-1 border-t border-[#283D55]">
-                <small className="text-[#D09966]">Birthdate</small>
-                <div className="flex items-center text-[#E4D8BE]">
-                  <i className="fas fa-birthday-cake mr-2"></i>
-                  <strong className="font-semibold">January 1, 1990</strong>
-                </div>
-              </div>
-              <div className="mt-1 border-t border-[#283D55]">
-                <small className="text-[#D09966]">Location</small>
-                <div className="flex items-center text-[#E4D8BE]">
-                  <i className="fas fa-map-marker-alt mr-2"></i>
-                  <strong className="font-semibold">New York, USA</strong>
-                </div>
-              </div>
-              <div className="mt-1 border-t border-[#283D55]">
-                <small className="text-[#D09966]">Occupation</small>
-                <div className="flex items-center text-[#E4D8BE]">
-                  <i className="fas fa-briefcase mr-2"></i>
-                  <strong className="font-semibold">Software Engineer</strong>
-                </div>
-              </div>
-              <div className="mt-1 border-t border-[#283D55]">
-                <small className="text-[#D09966]">Education</small>
-                <div className="flex items-center text-[#E4D8BE]">
-                  <i className="fas fa-graduation-cap mr-2"></i>
-                  <strong className="font-semibold">MIT</strong>
-                </div>
-              </div>
-              <div className="mt-1 border-t border-[#283D55]">
-                <small className="text-[#D09966]">Hobbies</small>
-                <div className="flex items-center text-[#E4D8BE]">
-                  <i className="fas fa-football-ball mr-2"></i>
-                  <strong className="font-semibold">Football, Reading</strong>
                 </div>
               </div>
 

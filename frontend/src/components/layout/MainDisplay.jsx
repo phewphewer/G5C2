@@ -4,14 +4,21 @@ import React, { useState, useEffect } from "react";
 
 export default function PostPage() {
   const [sortBy, setSortBy] = useState("Sort by");
+  const [isFeatured, setIsFeatured] = useState(false)
+  // const handleFeatured = useState(() => {
+  //   if (isFeatured = True) {
+
+  //   }
+  // })
   const [posts, setPosts] = useState([
-    { id: 1, content: "Post 1", timestamp: "2023-10-01", likes: 10 },
-    { id: 2, content: "Post 2", timestamp: "2023-10-02", likes: 20 },
-    { id: 3, content: "Post 3", timestamp: "2023-10-03", likes: 15 },
-    { id: 4, content: "Post 4", timestamp: "2023-10-04", likes: 25 },
-    { id: 5, content: "Post 5", timestamp: "2023-10-05", likes: 30 },
+    { id: 1, content: "Post 1", timestamp: "2023-10-01", likes: 10, isFeatured: true},
+    { id: 2, content: "Post 2", timestamp: "2023-10-02", likes: 20, isFeatured: false},
+    { id: 3, content: "Post 3", timestamp: "2023-10-03", likes: 15, isFeatured: false},
+    { id: 4, content: "Post 4", timestamp: "2023-10-04", likes: 25, isFeatured: false},
+    { id: 5, content: "Post 5", timestamp: "2023-10-05", likes: 30, isFeatured: false},
   ]);
   const [sortedPosts, setSortedPosts] = useState(posts);
+
 
   const handleSort = (sortType) => {
     console.log(`Sort by ${sortType}`);
@@ -22,7 +29,7 @@ export default function PostPage() {
         sorted.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
         break;
       case "Featured":
-        sorted = sorted.filter((post) => post.featured); // Assuming a `featured` field exists
+        sorted = sorted.filter((post) => post.isFeatured); // Assuming a `featured` field exists
         break;
       case "Popular":
         sorted.sort((a, b) => b.likes - a.likes);
@@ -34,6 +41,7 @@ export default function PostPage() {
 
     setSortedPosts(sorted);
   };
+  
 
   // Set "Recent" as the default sorting option on component mount
   useEffect(() => {

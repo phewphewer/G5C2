@@ -8,7 +8,6 @@ import PageNotFound from "./pages/PageNotFound.jsx";
 import Login from "./components/features/auth/LoginForm.jsx";
 import SignUp from "./components/features/auth/SignupForm.jsx";
 import { Link, createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import { AuthContextProvider } from "./context/AuthContext.jsx";
 
 // const userName = Object.entries.map((key, value) => {
