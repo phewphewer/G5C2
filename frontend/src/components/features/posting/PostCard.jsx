@@ -6,20 +6,10 @@ const PostCard = () => {
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([
     {
-      id: 1,
+      postId: 1,
       user: "Jane Doe",
-      avatar:
-        "https://static.vecteezy.com/system/resources/previews/005/419/157/non_2x/female-user-profile-avatar-is-a-woman-a-character-for-a-screen-saver-with-emotions-illustration-on-a-white-isolated-background-vector.jpg",
       text: "Great post! Really enjoyed reading this.",
-      time: "15m ago",
-    },
-    {
-      id: 2,
-      user: "John Smith",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLDIqra6CgB1b6S8-6Dmx1upVbXAPo6zAfFg&s",
-      text: "Thanks for sharing this!",
-      time: "32m ago",
+      create_date: "15m ago",
     },
   ]);
 
@@ -36,38 +26,36 @@ const PostCard = () => {
     e.preventDefault();
     if (commentText.trim()) {
       const newComment = {
-        id: comments.length + 1,
+        postId: comments.length + 1,
         user: "You",
-        avatar:
-          "https://static.vecteezy.com/system/resources/thumbnails/002/002/403/small/man-with-beard-avatar-character-isolated-icon-free-vector.jpg",
         text: commentText,
-        time: "Just now",
+        create_date: "Just now",
       };
       setComments([newComment, ...comments]);
       setCommentText("");
     }
   };
 
-  const handleShare = () => {
-    alert("Post shared successfully!");
-  };
-
   return (
-    <div className="w-full bg-[#0A1A2F] p-6 shadow-md rounded-lg mb-5">
+    <div className="w-full bg-[#0A1A2F] p-6 shadow-md rounded-lg mb-5 ">
       <div className="space-y-4">
         {/* User Profile Section */}
         <div className="flex items-center space-x-3">
-          <img
-            src="https://png.pngtree.com/png-clipart/20200224/original/pngtree-cartoon-color-simple-male-avatar-png-image_5230557.jpg"
-            alt="User Avatar"
-            className="rounded-full h-10 w-10"
-          />
           <div>
-            <h3 className="font-semibold text-[#E4D8BE]">Alex Johnson</h3>
-            <p className="text-xs text-[#D09966]">Posted 2 hours ago</p>
+            {/* {users.map((key, value) => {
+              <h3 key="user.id" className="font-semibold text-[#28AAE1]">
+                `${users.username}`
+              </h3>;
+              <p className="text-xs text-[#CBD5E1]">Posted 2 hours ago</p>
+            })} */}
+            <h3 className="font-bold text-[120%] text-[#30bffc]">
+              Alex Johnson
+            </h3>
+            <p className="text-xs text-[#CBD5E1]">Posted 2 hours ago</p>
           </div>
           <div className="ml-auto">
-            <button className="text-[#D09966] hover:text-[#E4D8BE]">
+            {/* OPTIONS BUTTON */}
+            <button className="text-[#CBD5E1] hover:text-[#F7FAFC]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -77,25 +65,25 @@ const PostCard = () => {
                 <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
               </svg>
             </button>
+            {/* OPTIONS BUTTON */}
           </div>
         </div>
 
         {/* Post Content */}
-        <div className="post-content">
-          <p className="text-[#E4D8BE]">
+        {/* {post.map(() => {
+          <p key="post.id" className="text-[#F7FAFC] text-[0.95rem]">
             Just finished working on an amazing project with the team! Really
             proud of what we've accomplished over the last few weeks. Looking
             forward to sharing more details soon. <b>#teamwork #productivity</b>
-          </p>
-          <img
-            src="https://www.psychologs.com/wp-content/uploads/2023/07/The-Benefits-of-Happy-Family-for-Your-Mental-Health.jpg"
-            alt="Post Image"
-            className="mt-3 rounded-lg w-full object-cover"
-          />
-        </div>
+          </p>})} */}
+        <p key="post.id" className="text-[#F7FAFC] text-[0.95rem]">
+          Just finished working on an amazing project with the team! Really
+          proud of what we've accomplished over the last few weeks. Looking
+          forward to sharing more details soon. <b>#teamwork #productivity</b>
+        </p>
 
         {/* Engagement Stats */}
-        <div className="flex justify-between text-sm text-[#D09966] pt-2 border-t border-[#283D55]">
+        <div className="flex justify-between text-sm text-[#CBD5E1] pt-2 border-t border-[#283D55]">
           <span>{likeCount} likes</span>
           <span>{comments.length} comments</span>
         </div>
@@ -104,7 +92,7 @@ const PostCard = () => {
         <div className="flex justify-between border-t border-[#283D55] border-b py-2">
           <button
             className={`flex items-center space-x-2 px-4 py-1 rounded-md ${
-              isLiked ? "text-[#D09966]" : "text-[#6D513E] hover:bg-[#E4D8BE]"
+              isLiked ? "text-[#94A3B8]" : "text-[#48c5f7] hover:bg-[#2D5F8A]"
             }`}
             onClick={handleLike}
           >
@@ -118,7 +106,7 @@ const PostCard = () => {
             </svg>
             <span>Like</span>
           </button>
-          <button className="flex items-center space-x-2 px-4 py-1 rounded-md text-[#D09966] hover:bg-[#E4D8BE]">
+          <button className="flex items-center space-x-2 px-4 py-1 rounded-md text-[#CBD5E1] hover:bg-[#2D5F8A]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -133,34 +121,20 @@ const PostCard = () => {
             </svg>
             <span>Comment</span>
           </button>
-          <button
-            className="flex items-center space-x-2 px-4 py-1 rounded-md text-[#D09966] hover:bg-[#E4D8BE]"
-            onClick={handleShare}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
-            </svg>
-            <span>Share</span>
-          </button>
         </div>
 
         {/* Comment Section */}
         <div className="space-y-4">
           {/* Comment Input */}
+
+          {/* {isUserLoggedIn ? : } */}
           <form
             onSubmit={handleComment}
             className="flex items-center space-x-2"
           >
-            <img
-              src="https://static.vecteezy.com/system/resources/thumbnails/002/002/403/small/man-with-beard-avatar-character-isolated-icon-free-vector.jpg"
-              alt="Your Avatar"
-              className="rounded-full h-8 w-8"
-            />
+            {/* {users.map((key, value) => {
+              <
+            })} */}
             <input
               type="text"
               value={commentText}
@@ -170,7 +144,7 @@ const PostCard = () => {
             />
             <button
               type="submit"
-              className="text-[#D09966] font-medium text-sm"
+              className="text-[#CBD5E1] font-medium text-sm"
               disabled={!commentText.trim()}
             >
               Post
@@ -188,14 +162,14 @@ const PostCard = () => {
                 />
                 <div className="bg-[#283D55] rounded-lg px-3 py-2 flex-1">
                   <div className="flex justify-between items-center">
-                    <h4 className="font-medium text-sm text-[#E4D8BE]">
+                    <h4 className="font-medium text-sm text-[#F7FAFC]">
                       {comment.user}
                     </h4>
-                    <span className="text-xs text-[#D09966]">
-                      {comment.time}
+                    <span className="text-xs text-[#CBD5E1]">
+                      {comment.create_date}
                     </span>
                   </div>
-                  <p className="text-sm text-[#E4D8BE]">{comment.text}</p>
+                  <p className="text-sm text-[#F7FAFC]">{comment.text}</p>
                 </div>
               </div>
             ))}
