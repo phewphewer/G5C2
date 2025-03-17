@@ -37,7 +37,7 @@ const PostCard = () => {
       };
       setComments([newComment, ...comments]);
       setCommentText("");
-      setShowComments(true); // Automatically open the comments accordion
+      setShowComments(true); // false mo to pag ayaw mo nakikita write comment
     }
   };
 
@@ -142,7 +142,7 @@ const PostCard = () => {
           </button>
         </div>
 
-        {/* Comment Input Field (Always Visible) */}
+        {/* Write a comment section */}
         <form onSubmit={handleComment} className="flex items-center space-x-2">
           <input
             type="text"
@@ -160,7 +160,7 @@ const PostCard = () => {
           </button>
         </form>
 
-        {/* Comment Section (Accordion) */}
+        {/* Comment Accordion */}
         {showComments && (
           <div className="space-y-3 mt-2 border-t border-[#283D55] pt-2 max-h-64 overflow-y-auto">
             {comments.map((comment) => (
