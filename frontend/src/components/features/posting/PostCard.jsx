@@ -37,7 +37,7 @@ const PostCard = () => {
   };
 
   return (
-    <div className="w-full bg-[#0A1A2F] p-6 shadow-md rounded-lg mb-5 ">
+    <div className="w-full bg-[#0A1A2F] p-6 shadow-md rounded-lg mb-5 hover:border-[#374151] border-[#1F2937] border-1 ">
       <div className="space-y-4">
         {/* User Profile Section */}
         <div className="flex items-center space-x-3">
@@ -127,7 +127,6 @@ const PostCard = () => {
         <div className="space-y-4">
           {/* Comment Input */}
 
-          {/* {isUserLoggedIn ? : } */}
           <form
             onSubmit={handleComment}
             className="flex items-center space-x-2"
