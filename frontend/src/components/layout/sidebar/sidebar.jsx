@@ -1,14 +1,17 @@
-'use client';
-import { Link } from 'react-router-dom';
+"use client";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Sidebar({ isOpen, setIsOpen }) {
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+
   return (
     <>
       {/* Sidebar */}
       <div
         className={`fixed top-0 left-0 w-[230px] h-screen bg-[#0A1A2F] border-r-[1px] border-[#172A42] text-[#F7FAFC]
                    transition-transform duration-100 ease-in-out z-[1000]
-                   ${isOpen ? 'translate-x-0' : '-translate-x-[200px]'}`}
+                   ${isOpen ? "translate-x-0" : "-translate-x-[200px]"}`}
       >
         <ul className="list-none p-0 mt-[50px]">
           <li className="py-[15px] px-[20px] text-[18px] cursor-pointer text-[#CBD5E1] hover:bg-white/10 hover:rounded-md hover:text-[#F7FAFC]">
@@ -25,17 +28,26 @@ export default function Sidebar({ isOpen, setIsOpen }) {
               </button>
             </Link>
           </li>
-          <li className="py-[15px] px-[20px] text-[18px] cursor-pointer text-[#CBD5E1] hover:bg-white/10 hover:rounded-md hover:text-[#F7FAFC]">
+          <li className=" py-[15px] px-[20px] text-[18px] cursor-pointer text-[#CBD5E1] hover:bg-white/10 hover:rounded-md hover:text-[#F7FAFC]">
             <button
-              className="w-full h-full hover:cursor-pointer"
+              className="w-full h-full hover:cursor-pointer "
+              onClick={() => setIsAboutOpen(!isAboutOpen)}
             >
               About
             </button>
+            {isAboutOpen && (
+              <div className="mt-2 p-4 bg-[#1A2B44] rounded-md text-[#F7FAFC] overflow-y-auto max-h-[100px] custom-scrollbar">
+                <p className=" text-sm">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
+                  quas deleniti rerum reprehenderit voluptate doloremque totam
+                  ab, maxime minus, esse ex eum iste consectetur? Ullam placeat
+                  error ipsa animi voluptatem.
+                </p>
+              </div>
+            )}
           </li>
           <li className="py-[15px] px-[20px] text-[18px] cursor-pointer text-[#CBD5E1] hover:bg-white/10 hover:rounded-md hover:text-[#F7FAFC]">
-            <button
-              className="w-full h-full hover:cursor-pointer"
-            >
+            <button className="w-full h-full hover:cursor-pointer">
               Contact Us
             </button>
           </li>
@@ -55,7 +67,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
               target="_blank"
               className="font-extrabold"
             >
-              BUY ME A{' '}
+              BUY ME A{" "}
               <span className="text-amber-800 hover:text-amber-700">
                 COFFEE
               </span>
@@ -65,7 +77,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
             <Link to="../feedback_form">
               <button>
                 <span>
-                  give us your feedback{' '}
+                  give us your feedback{" "}
                   <span className="text-blue-500 hover:text-blue-400">
                     here
                   </span>
@@ -79,17 +91,18 @@ export default function Sidebar({ isOpen, setIsOpen }) {
             </span>
           </div>
         </div>
+        b
       </div>
 
       {/* Toggle Button */}
       <button
         className={`h-full top-0 left-0 w-[30px] fixed border-none text-[#feffff] text-[30px] cursor-pointer z-[1001] transition-all duration-100 ease-in-out focus:outline-none focus:shadow-none focus:border-none -translate-x-[7px] rounded-full ${
-          isOpen ? 'left-[210px] top-[15px]' : 'left-[5px] top-0 bg-transparent'
+          isOpen ? "left-[210px] top-[15px]" : "left-[5px] top-0 bg-transparent"
         }`}
         onClick={() => setIsOpen(!isOpen)}
       >
         <label className=" bg-[#050E1A] rounded-full pl-[8px] pr-[8px] ml-3 border-[1px] border-[#172A42] ">
-          {isOpen ? '<' : '>'}
+          {isOpen ? "<" : ">"}
         </label>
       </button>
     </>
