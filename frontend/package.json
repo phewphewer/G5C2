@@ -1,5 +1,4 @@
 {
-    "proxy": "http://localhost:4000",
     "name": "group-5-c2",
     "private": true,
     "version": "0.0.0",

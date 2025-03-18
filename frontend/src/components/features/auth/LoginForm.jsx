@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PseudoHeader from "../../layout/PseudoHeader";
 import Show from "../../../assets/images/show.png";
 import Hide from "../../../assets/images/hide.png";
@@ -18,6 +18,12 @@ export default function LoginForm() {
         e.preventDefault();
         console.log(email, password);
         await login(email, password);
+
+        // Clear the form fields after successful login
+        if (!error) {
+            setEmail("");
+            setPassword("");
+        }
     };
 
     return (
@@ -42,6 +48,7 @@ export default function LoginForm() {
                                     Enter email address:
                                 </p>
                                 <input
+                                    required
                                     type="email"
                                     onChange={(e) => setEmail(e.target.value)}
                                     value={email}
@@ -58,6 +65,7 @@ export default function LoginForm() {
                                 </p>
                                 <div className="relative w-full flex mt-1">
                                     <input
+                                        required
                                         type={
                                             showPassword ? "text" : "password"
                                         }
@@ -94,17 +102,24 @@ export default function LoginForm() {
                             {/* PASSWORD INPUT end */}
                         </div>
 
-                        {/*  LOGIN BUTTON start */}
-                        <div className="flex justify-end">
+                        {/* LOGIN BUTTON start */}
+                        <div className="flex justify-center mt-8">
                             <button
                                 type="submit"
                                 className="text-base md:text-xl py-1 px-4 font-bold border-2 border-[#374151] bg-[#050E1A] rounded-[5px] transition duration-150 ease-in-out text-[#CBD5E1] hover:cursor-pointer hover:bg-[#2D5F8A] hover:text-[#F7FAFC] hover:border-[#F7FAFC]"
+                                disabled={isLoading}
                             >
                                 Log in
                             </button>
                         </div>
-                        {/*  LOGIN BUTTON end */}
-                        {/* GO TO LOGIN PAGE start*/}
+                        <div className="flex justify-center mt-2">
+                            {error && (
+                                <div className="text-red-500">{error}</div>
+                            )}
+                        </div>
+                        {/* LOGIN BUTTON end */}
+
+                        {/* GO TO LOGIN PAGE start */}
                         <div className="border-t-1 mt-4 pt-2 flex justify-around border-gray-600">
                             <span className="text-[#94A3B8] mt-2">
                                 Don't have an account?
@@ -115,7 +130,7 @@ export default function LoginForm() {
                                 </button>
                             </Link>
                         </div>
-                        {/* GO TO LOGIN PAGE end*/}
+                        {/* GO TO LOGIN PAGE end */}
                     </form>
                 </div>
                 {/* LOGIN FORM end */}

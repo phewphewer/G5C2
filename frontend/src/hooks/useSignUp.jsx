@@ -11,14 +11,11 @@ export const useSignup = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch(
-            "http://localhost:4000/api/user/create_account",
-            {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, email, password }),
-            }
-        );
+        const response = await fetch("/api/user/create_account", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, email, password }),
+        });
         const json = await response.json();
 
         if (!response.ok) {
