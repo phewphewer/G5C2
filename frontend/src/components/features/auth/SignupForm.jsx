@@ -165,7 +165,7 @@ export default function SignupForm() {
                                 Already have an account?
                             </span>
                             <Link to="/auth/login">
-                                <button className="text-blue-400 hover:text-blue-300 mt-2">
+                                <button className="text-blue-400 hover:text-blue-300 mt-2 cursor-pointer">
                                     Log-in
                                 </button>
                             </Link>
