@@ -1,43 +1,47 @@
-import FeaturedCard from "../features/posting/FeaturedCard";
-import PostCard from "../features/posting/PostCard";
-import React, { useState, useEffect } from "react";
+import FeaturedCard from '../features/posting/FeaturedCard';
+import PostForm from "../features/posting/PostForm"
+import PostCard from '../features/posting/PostCard';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+
 
 export default function PostPage() {
-  const [sortBy, setSortBy] = useState("Sort by");
+  const { user } = useContext(AuthContext);
+  const [sortBy, setSortBy] = useState('Sort by');
   const [isFeatured, setIsFeatured] = useState(false);
   const [posts, setPosts] = useState([
     {
       id: 1,
-      content: "Post 1",
-      timestamp: "2025-03-12",
+      content: 'Post 1',
+      timestamp: '2025-03-12',
       likes: 10,
       isFeatured: true,
     },
     {
       id: 2,
-      content: "Post 2",
-      timestamp: "2025-02-21",
+      content: 'Post 2',
+      timestamp: '2025-02-21',
       likes: 20,
       isFeatured: false,
     },
     {
       id: 3,
-      content: "Post 3",
-      timestamp: "2025-10-03",
+      content: 'Post 3',
+      timestamp: '2025-10-03',
       likes: 15,
       isFeatured: false,
     },
     {
       id: 4,
-      content: "Post 4",
-      timestamp: "2023-10-04",
+      content: 'Post 4',
+      timestamp: '2023-10-04',
       likes: 25,
       isFeatured: false,
     },
     {
       id: 5,
-      content: "Post 5",
-      timestamp: "2023-10-05",
+      content: 'Post 5',
+      timestamp: '2023-10-05',
       likes: 30,
       isFeatured: false,
     },
@@ -51,16 +55,16 @@ export default function PostPage() {
     const now = new Date();
 
     switch (sortType) {
-      case "Recent":
+      case 'Recent':
         sorted.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
         break;
-      case "Featured":
+      case 'Featured':
         sorted = sorted.filter((post) => post.isFeatured);
         break;
-      case "Popular":
+      case 'Popular':
         sorted.sort((a, b) => b.likes - a.likes);
         break;
-      case "Week":
+      case 'Week':
         sorted = sorted.filter((post) => {
           const postDate = new Date(post.timestamp);
           const diffTime = Math.abs(now - postDate);
@@ -68,7 +72,7 @@ export default function PostPage() {
           return diffDays <= 7;
         });
         break;
-      case "Month":
+      case 'Month':
         sorted = sorted.filter((post) => {
           const postDate = new Date(post.timestamp);
           const diffTime = Math.abs(now - postDate);
@@ -76,7 +80,7 @@ export default function PostPage() {
           return diffDays <= 30;
         });
         break;
-      case "Year":
+      case 'Year':
         sorted = sorted.filter((post) => {
           const postDate = new Date(post.timestamp);
           const diffTime = Math.abs(now - postDate);
@@ -94,7 +98,7 @@ export default function PostPage() {
 
   // Set "Recent" as the default sorting option on component mount
   useEffect(() => {
-    handleSort("Recent");
+    handleSort('Recent');
   }, []);
 
   return (
@@ -105,19 +109,19 @@ export default function PostPage() {
           <div className="flex space-x-5">
             <button
               className="p-2 bg-[#1E3A57] hover:bg-[#172A42] rounded-full border-1 border-[#2D5F8A] hover:text-[]"
-              onClick={() => handleSort("Recent")}
+              onClick={() => handleSort('Recent')}
             >
               Recent
             </button>
             <button
               className="p-2 bg-[#1E3A57] rounded-full hover:bg-[#172A42] border-1 border-[#2D5F8A] hover:text-[]"
-              onClick={() => handleSort("Featured")}
+              onClick={() => handleSort('Featured')}
             >
               Featured
             </button>
             <button
               className="p-2 bg-[#1E3A57] rounded-full hover:bg-[#172A42] border-1 border-[#2D5F8A] hover:text-[]"
-              onClick={() => handleSort("Popular")}
+              onClick={() => handleSort('Popular')}
             >
               Popular
             </button>
@@ -137,13 +141,22 @@ export default function PostPage() {
         </div>
 
         {/* Post Cards and Featured Section */}
+        {/* Left - Post Cards */}
         <div className="flex">
-          {/* Left - Post Cards */}
-          <div className="flex-1 p-3">
-            {sortedPosts.map((post) => (
-              <PostCard key={post.id} content={post.content} />
-            ))}
-          </div>
+          {user && (
+            <>
+              <div className="flex-1 p-3 w-full">
+                <PostForm/>
+              </div>
+            </>
+          )}
+          {!user && (
+            <div className="flex-1 p-3">
+              {sortedPosts.map((post) => (
+                <PostCard key={post.id} content={post.content} />
+              ))}
+            </div>
+          )}
 
           {/* Right - Featured Section (Sticky) */}
           <div className="w-1/4 p-4">
