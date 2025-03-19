@@ -1,16 +1,19 @@
 const express = require("express");
 const {
-  createPostId,
+  // createPostId,
   getPostsId,
   createPost,
   getPost,
   deletePost,
   updatePost,
 } = require("../controllers/postController");
+
+const requireAuth = require("../middleware/requireAuth");
 const router = express.Router();
 
+router.use(requireAuth);
 // Create a single post with Id
-router.post("/create", createPostId);
+// router.post("/create", createPostId);
 
 // Get all posts of a user
 router.get("/user/:userId", getPostsId);

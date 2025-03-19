@@ -1,5 +1,5 @@
 const Post = require("../models/postModel");
-const User = require("../models/userModel");
+const user = require("../models/userModel");
 const mongoose = require("mongoose");
 
 // Get All posts of user
@@ -31,27 +31,24 @@ const getPostsId = async (req, res) => {
 };
 
 // Create post that's tied to the userid
-const createPostId = async (req, res) => {
-  try {
-    const { title, body, userId } = req.body;
-
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    const newPost = new Post({
-      title,
-      body,
-      user: userId,
-    });
-
-    const savedPost = await newPost.save();
-    res.status(201).json(savedPost);
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error });
-  }
-};
+// const createPostId = async (req, res) => {
+// try {
+//   const { title, body, userId } = req.body;
+//   const user = await User.findById(userId);
+//   if (!user) {
+//     return res.status(404).json({ message: "User not found" });
+//   }
+//   const newPost = new Post({
+//     title,
+//     body,
+//     user: userId,
+//   });
+//   const savedPost = await newPost.save();
+//   res.status(201).json(savedPost);
+// } catch (error) {
+//   res.status(500).json({ message: "Server error", error });
+// }
+// };
 
 // Get a single post
 const getPost = async (req, res) => {
@@ -71,11 +68,11 @@ const getPost = async (req, res) => {
 
 // Create new post
 const createPost = async (req, res) => {
-  const { title, body, author } = req.body;
+  const { title, body } = req.body;
 
   //  add doc to db
   try {
-    const posts = await Post.create({ title, body, author });
+    const posts = await Post.create({ title, body });
     res.status(200).json(posts);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -125,5 +122,5 @@ module.exports = {
   deletePost,
   updatePost,
   getPostsId,
-  createPostId,
+  // createPostId,
 };
