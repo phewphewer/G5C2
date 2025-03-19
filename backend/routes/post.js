@@ -1,11 +1,11 @@
 const express = require("express");
 const {
-  // createPostId,
-  getPostsId,
-  createPost,
-  getPost,
-  deletePost,
-  updatePost,
+    // createPostId,
+    getPostsId,
+    createPost,
+    getPost,
+    deletePost,
+    updatePost,
 } = require("../controllers/postController");
 
 const requireAuth = require("../middleware/requireAuth");
@@ -22,7 +22,7 @@ router.get("/user/:userId", getPostsId);
 router.get("/post/:id", getPost);
 
 // Post a new post
-router.post("/create_post/", createPost);
+router.post("/create_post/", requireAuth, createPost);
 
 // Delete a post
 router.delete("/delete_post/:id", deletePost);
