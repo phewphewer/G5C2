@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import PseudoHeader from '../../layout/PseudoHeader';
-import Show from '../../../assets/images/show.png';
-import Hide from '../../../assets/images/hide.png';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import PseudoHeader from "../../layout/PseudoHeader";
+import Show from "../../../assets/images/show.png";
+import Hide from "../../../assets/images/hide.png";
+import { Link } from "react-router-dom";
 
-import { useSignup } from '../../../hooks/useSignup';
+import { useSignup } from "../../../hooks/useSignUp";
 
 export default function SignupForm() {
   // show/hide password
   const [showPassword, setShowPassword] = useState(false);
 
   // functionality for username, email, password & repeat password
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
   const { signup, error, isLoading } = useSignup();
 
   const handleSubmit = async (e) => {
@@ -23,11 +23,11 @@ export default function SignupForm() {
     await signup(userName, email, password);
     // Example validation (if passwords don't match):
     if (password !== repeatPassword) {
-      console.log('Passwords do not match', password, ' ', repeatPassword);
+      console.log("Passwords do not match", password, " ", repeatPassword);
       return;
     }
 
-    console.log('Form submitted!');
+    console.log("Form submitted!");
   };
 
   return (
@@ -92,7 +92,7 @@ export default function SignupForm() {
                 <div className="relative w-full mt-1">
                   <input
                     required
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                     className="placeholder:italic bg-[#050E1A] rounded-[5px] w-full py-2 px-3 mt-1"
@@ -105,13 +105,13 @@ export default function SignupForm() {
                   >
                     {showPassword ? (
                       <img
-                        src={Show || '/placeholder.svg'}
+                        src={Show || "/placeholder.svg"}
                         alt="show"
                         className="w-auto h-6 md:h-8"
                       />
                     ) : (
                       <img
-                        src={Hide || '/placeholder.svg'}
+                        src={Hide || "/placeholder.svg"}
                         alt="hide"
                         className="w-auto h-6 md:h-8"
                       />
