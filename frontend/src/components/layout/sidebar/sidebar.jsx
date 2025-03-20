@@ -91,7 +91,6 @@ export default function Sidebar({ isOpen, setIsOpen }) {
             </span>
           </div>
         </div>
-        b
       </div>
 
       {/* Toggle Button */}
