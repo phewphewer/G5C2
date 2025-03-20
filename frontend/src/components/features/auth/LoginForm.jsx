@@ -1,25 +1,25 @@
-import React, { useContext, useState, useEffect } from 'react';
-import PseudoHeader from '../../layout/PseudoHeader';
-import Show from '../../../assets/images/show.png';
-import Hide from '../../../assets/images/hide.png';
-import { Link, useNavigate} from 'react-router-dom'
-import { useLogin } from '../../../hooks/useLogin';
-import { AuthContext } from '../../../context/AuthContext';
+import React, { useContext, useState, useEffect } from "react";
+import PseudoHeader from "../../layout/PseudoHeader";
+import Show from "../../../assets/images/show.png";
+import Hide from "../../../assets/images/hide.png";
+import { Link, useNavigate } from "react-router-dom";
+import { useLogin } from "../../../hooks/useLogin";
+import { AuthContext } from "../../../context/AuthContext";
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   // Functionality for Log In Form
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { login, error, isLoading } = useLogin();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { login, error, isLoading, response } = useLogin();
 
-// Setting user to "LOGGED IN"
-  const { user, dispatch } = useContext(AuthContext)
+  // Setting user to "LOGGED IN"
+  const { user, dispatch } = useContext(AuthContext);
 
-// Sending logged in users back to homepage
-  useEffect(() => { 
+  // Sending logged in users back to homepage
+  useEffect(() => {
     if (user) {
       navigate("/home");
     }
@@ -28,14 +28,14 @@ export default function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(email, password);
-    const response = await login(email, password);
+    await login(email, password);
 
     // Clear the form fields after successful login
     if (response) {
-      setEmail('');
-      setPassword('');
-      dispatch({type: "LOGIN"})
-      navigate("/home")
+      setEmail("");
+      setPassword("");
+      dispatch({ type: "LOGIN" });
+      navigate("/home");
     }
   };
 
@@ -52,7 +52,7 @@ export default function LoginForm() {
             className="flex flex-col w-full bg-[#0A1A2F] rounded-b-[5px] p-6 relative"
             onSubmit={handleSubmit}
           >
-          <p className="text-[85%] text-[#94A3B8] justify-evenly mb-2">
+            <p className="text-[85%] text-[#94A3B8] justify-evenly mb-2">
               Enter login information
             </p>
             <div className="w-full mb-8">
@@ -80,7 +80,7 @@ export default function LoginForm() {
                 <div className="relative w-full flex mt-1">
                   <input
                     required
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                     className="placeholder:italic bg-[#050E1A] rounded-[5px] w-full py-2 px-3 pr-10"
@@ -93,13 +93,13 @@ export default function LoginForm() {
                   >
                     {showPassword ? (
                       <img
-                        src={Show || '/placeholder.svg'}
+                        src={Show || "/placeholder.svg"}
                         alt="show"
                         className="w-auto h-6 md:h-8"
                       />
                     ) : (
                       <img
-                        src={Hide || '/placeholder.svg'}
+                        src={Hide || "/placeholder.svg"}
                         alt="hide"
                         className="w-auto h-6 md:h-8"
                       />
@@ -120,7 +120,11 @@ export default function LoginForm() {
                 Log in
               </button>
             </div>
-              {error && <div className="flex justify-around w-full h-5 mt-3 text-red-600 text-sm font-bold">{error}</div>}
+            {error && (
+              <div className="flex justify-around w-full h-5 mt-3 text-red-600 text-sm font-bold">
+                {error}
+              </div>
+            )}
             {/* LOGIN BUTTON end */}
 
             {/* GO TO LOGIN PAGE start */}

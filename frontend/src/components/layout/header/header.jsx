@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Droplet from "../../text/Droplet.jsx";
 import { useLogout } from "../../../hooks/useLogout.jsx";
 import { useAuthContext } from "../../../hooks/useAuthContext.jsx";
+import { AuthContext } from "../../../context/AuthContext.jsx";
 
 export default function Header({ isOpen }) {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ export default function Header({ isOpen }) {
   const handleClick = () => {
     logout();
   };
-  
+
   return (
     <header
       className={`fixed  ${
@@ -26,15 +27,14 @@ export default function Header({ isOpen }) {
       {/* Create a log out button here, hiding the login and register button (if logged in) */}
 
       {user && (
-
         <div className="mr-[60px] flex gap-3 font-semibold">
-                  <button
+          <button
             onClick={handleClick}
             className="rounded-md border border-[#0c172e] px-[10px] py-[5px] text-[#F7FAFC] hover:bg-[#172A42] bg-[#050E1A] hover:border-[#F7FAFC] hover:cursor-pointer"
           >
             Log out
           </button>
-          </div>
+        </div>
       )}
 
       {!user && (

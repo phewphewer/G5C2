@@ -1,8 +1,10 @@
 "use client";
-
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useAuthContext } from "../../../hooks/useAuthContext";
 
 const PostCard = () => {
+  // Setting user to "LOGGED IN"
+  const { user } = useAuthContext();
   const [likeCount, setLikeCount] = useState(42);
   const [isLiked, setIsLiked] = useState(false);
   const [commentText, setCommentText] = useState("");
@@ -14,6 +16,7 @@ const PostCard = () => {
       create_date: "15m ago",
     },
   ]);
+
   const [showComments, setShowComments] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -143,22 +146,27 @@ const PostCard = () => {
         </div>
 
         {/* Write a comment section */}
-        <form onSubmit={handleComment} className="flex items-center space-x-2">
-          <input
-            type="text"
-            value={commentText}
-            onChange={(e) => setCommentText(e.target.value)}
-            placeholder="Write a comment..."
-            className="flex-1 border rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#D09966]"
-          />
-          <button
-            type="submit"
-            className="text-[#CBD5E1] font-medium text-sm"
-            disabled={!commentText.trim()}
+        {user && (
+          <form
+            onSubmit={handleComment}
+            className="flex items-center space-x-2"
           >
-            Post
-          </button>
-        </form>
+            <input
+              type="text"
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+              placeholder="Write a comment..."
+              className="flex-1 border rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#D09966]"
+            />
+            <button
+              type="submit"
+              className="text-[#CBD5E1] font-medium text-sm"
+              disabled={!commentText.trim()}
+            >
+              Post
+            </button>
+          </form>
+        )}
 
         {/* Comment Accordion */}
         {showComments && (
