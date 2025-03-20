@@ -82,7 +82,7 @@ const getPost = async (req, res) => {
         const post = await Post.findById(id).populate("user", "username email");
 
         if (!post) {
-            return res.status(404).json({ error: "No such Post" });
+            return res.status(404).json({ error: "No such user Post" });
         }
 
         const likeCount = await Like.countDocuments({ post: post._id });
@@ -121,13 +121,26 @@ const deletePost = async (req, res) => {
         return res.status(404).json({ error: "No such Post" });
     }
 
-    const post = await Post.findOneAndDelete({ _id: id });
+    try {
+        const post = await Post.findOneAndDelete({ _id: id });
 
-    if (!post) {
-        return res.status(404).json({ error: "No such Post" });
+        if (!post) {
+            return res.status(404).json({ error: "No such user Post" });
+        }
+
+        // Delete all comments from DB
+        await Comment.deleteMany({ post: id });
+
+        // Delete all likes from DB
+        await Like.deleteMany({ post: id });
+
+        res.status(200).json({
+            message: "Post and associated comments deleted successfully",
+        });
+    } catch (error) {
+        console.error("Error deleting post:", error);
+        res.status(500).json({ error: "Server error" });
     }
-
-    res.status(200).json(post);
 };
 
 // Update a Post
@@ -145,7 +158,7 @@ const updatePost = async (req, res) => {
         }
     );
     if (!post) {
-        return res.status(404).json({ error: "No such Post" });
+        return res.status(404).json({ error: "No such user Post" });
     }
     res.status(200).json(post);
 };

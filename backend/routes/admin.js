@@ -1,6 +1,7 @@
 const express = require("express");
 const {
     getUsers,
+    getUser,
     deleteUser,
     deletePost,
     banUser,
@@ -9,6 +10,9 @@ const router = express.Router();
 
 // Get all users
 router.get("/users", getUsers);
+
+// Get a user
+router.get("/user/:id", getUser);
 
 // Delete a user
 router.delete("/delete_account/:id", deleteUser);
