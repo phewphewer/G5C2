@@ -1,13 +1,15 @@
 const Admin = require("../models/adminModel");
 const User = require("../models/userModel");
 const Post = require("../models/postModel");
+const Like = require("../models/likeModel");
+const Comment = require("../models/commentsModel");
 const mongoose = require("mongoose");
 
 // Get all users
 const getUsers = async (req, res) => {
     try {
         const users = await User.find({})
-            //.select("-password")
+            // .select("-password")
             .sort({ createdAt: -1 });
         const totalUsers = await User.countDocuments({});
 
@@ -15,6 +17,35 @@ const getUsers = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: "Server error" });
     }
+};
+
+// Get a user
+const getUser = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "No such User" });
+    }
+    const user = await User.findById(id)
+        .select("-password")
+        .select("-email")
+        .select("-createdAt")
+        .select("-updatedAt");
+
+    if (!user) {
+        return res.status(404).json({ error: "No such User" });
+    }
+
+    const likeCount = await Like.countDocuments({ user: user._id });
+    const commentCount = await Comment.countDocuments({ user: user._id });
+    const postCount = await Post.countDocuments({ user: user._id });
+
+    res.status(200).json({
+        ...user.toObject(),
+        likeCount,
+        commentCount,
+        postCount,
+    });
 };
 
 // Delete a registered user
@@ -74,6 +105,7 @@ const banUser = async (req, res) => {
 
 module.exports = {
     getUsers,
+    getUser,
     deleteUser,
     deletePost,
     banUser,
