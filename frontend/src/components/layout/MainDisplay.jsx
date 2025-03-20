@@ -145,10 +145,10 @@ export default function PostPage() {
           {user && (
             <>
               <div>
-                <div className="flex-1 p-3 w-full">
+                <div className="flex-1 p-4 w-full">
                   <PostForm />
                 </div>
-                <div className="flex-1 p-3">
+                <div className="flex-1 p-4">
                   {sortedPosts.map((post) => (
                     <PostCard key={post.id} content={post.content} />
                   ))}
@@ -157,7 +157,7 @@ export default function PostPage() {
             </>
           )}
           {!user && (
-            <div className="flex-1 p-3">
+            <div className="flex-1 p-4">
               {sortedPosts.map((post) => (
                 <PostCard key={post.id} content={post.content} />
               ))}

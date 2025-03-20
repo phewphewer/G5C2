@@ -11,6 +11,22 @@ export default function Header({ isOpen }) {
   const handleClick = () => {
     logout();
   };
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       const response = await fetch("/api/user/username", {
+  //         credentials: "include",
+  //       });
+  //       if (!response.ok) throw new Error("Failed to fetch user");
+  //       const data = await response.json();
+  //       setUser(data);
+  //     } catch (error) {
+  //       console.error("Error fetching user:", error);
+  //     }
+  //   };
+
+  //   fetchUser();
+  // }, []);
 
   return (
     <header
@@ -30,9 +46,9 @@ export default function Header({ isOpen }) {
         <div className="mr-[60px] flex gap-3 font-semibold">
           <button
             onClick={handleClick}
-            className="rounded-md border border-[#0c172e] px-[10px] py-[5px] text-[#F7FAFC] hover:bg-[#172A42] bg-[#050E1A] hover:border-[#F7FAFC] hover:cursor-pointer"
+            className="rounded-md border border-[#0c172e] px-[10px] py-[10px] text-[#F7FAFC] hover:bg-[#172A42] bg-[#050E1A] hover:border-[#F7FAFC] hover:cursor-pointer"
           >
-            Log out
+            {/* {user.username} */}
           </button>
         </div>
       )}
