@@ -1,43 +1,41 @@
-import React, { useState, useEffect, useContext } from 'react';
-import PseudoHeader from '../../layout/PseudoHeader';
-import Show from '../../../assets/images/show.png';
-import Hide from '../../../assets/images/hide.png';
-import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../context/AuthContext';
-import { useSignup } from '../../../hooks/useSignUp';
-import { useAuthContext } from '../../../hooks/useAuthContext';
+import React, { useState, useEffect, useContext } from "react";
+import PseudoHeader from "../../layout/PseudoHeader";
+import Show from "../../../assets/images/show.png";
+import Hide from "../../../assets/images/hide.png";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthContext";
+import { useSignup } from "../../../hooks/useSignUp";
+import { useAuthContext } from "../../../hooks/useAuthContext";
 
 export default function SignupForm() {
   // show/hide password
   const [showPassword, setShowPassword] = useState(false);
 
   // functionality for username, email, password & repeat password
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
   const { signup, error, isLoading } = useSignup();
   const navigate = useNavigate();
-  const {user, dispatch} = useContext(AuthContext)
+  const { user, dispatch } = useContext(AuthContext);
 
   // Sending logged in users back to homepage
-  useEffect(() => { 
+  useEffect(() => {
     if (user) {
       navigate("/home");
     }
   }, [user, navigate]);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await signup(userName, email, password);
     if (response) {
-      console.log('Form submitted!')
-      console.log(userName, email, password, repeatPassword)
-      dispatch({type: "LOGIN"})
-      console.log(user.id)
+      console.log("Form submitted!");
+      console.log(userName, email, password, repeatPassword);
+      dispatch({ type: "LOGIN" });
+      console.log(user.id);
     }
-    ;
   };
 
   return (
@@ -62,9 +60,7 @@ export default function SignupForm() {
             <div className="w-full space-y-4">
               {/* USERNAME */}
               <div className="w-full">
-                <p className="font-bold text-sm md:text-base">
-                  Username:
-                </p>
+                <p className="font-bold text-sm md:text-base">Username:</p>
                 <input
                   required
                   type="text"
@@ -92,9 +88,7 @@ export default function SignupForm() {
 
               {/* PASSWORD */}
               <div className="w-full">
-                <p className="text-sm md:text-base font-semibold">
-                  Password:
-                </p>
+                <p className="text-sm md:text-base font-semibold">Password:</p>
                 <p className="text-[75%] text-[#94A3B8] justify-evenly">
                   password must contain a minimum of 8 letters with 1 symbol, 1
                   number, 1 uppercase and 1 lowercase letter
@@ -102,7 +96,7 @@ export default function SignupForm() {
                 <div className="relative w-full mt-1">
                   <input
                     required
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                     className="placeholder:italic bg-[#050E1A] rounded-[5px] w-full py-2 px-3 mt-1"
@@ -115,13 +109,13 @@ export default function SignupForm() {
                   >
                     {showPassword ? (
                       <img
-                        src={Show || '/placeholder.svg'}
+                        src={Show || "/placeholder.svg"}
                         alt="show"
                         className="w-auto h-6 md:h-8"
                       />
                     ) : (
                       <img
-                        src={Hide || '/placeholder.svg'}
+                        src={Hide || "/placeholder.svg"}
                         alt="hide"
                         className="w-auto h-6 md:h-8"
                       />
@@ -157,16 +151,17 @@ export default function SignupForm() {
                   Sign up
                 </button>
               </div>
-              {(password !== repeatPassword) ? 
-              <div className="flex justify-around w-full h-5 mt-3 text-red-600 text-sm font-bold">
-              Passwords do not match
-            </div> 
-            : 
-            error && (
+              {password !== repeatPassword && repeatPassword ? (
                 <div className="flex justify-around w-full h-5 mt-3 text-red-600 text-sm font-bold">
-                  {error}
+                  Passwords do not match
                 </div>
-              )} 
+              ) : (
+                error && (
+                  <div className="flex justify-around w-full h-5 mt-3 text-red-600 text-sm font-bold">
+                    {error}
+                  </div>
+                )
+              )}
             </div>
             {/* SIGNUP BUTTON end */}
             {/* GO TO LOGIN PAGE start*/}
