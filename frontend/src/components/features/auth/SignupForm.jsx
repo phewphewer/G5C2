@@ -79,7 +79,7 @@ export default function SignupForm() {
                 <input
                   required
                   type="email"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value.toLowerCase())}
                   value={email}
                   className="placeholder:italic bg-[#050E1A] rounded-[5px] w-full py-2 px-3 mt-1"
                   placeholder="example@email.com"
