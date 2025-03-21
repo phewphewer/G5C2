@@ -19,6 +19,18 @@ const getUsers = async (req, res) => {
     }
 };
 
+// Get all posts
+const getPosts = async (req, res) => {
+    try {
+        const posts = await Post.find({}).sort({ createdAt: -1 });
+        const totalPosts = await Post.countDocuments({});
+
+        res.status(200).json({ totalPosts, posts });
+    } catch (error) {
+        res.status(500).json({ error: "Server error" });
+    }
+};
+
 // Get a user
 const getUser = async (req, res) => {
     const { id } = req.params;
@@ -27,10 +39,9 @@ const getUser = async (req, res) => {
         return res.status(404).json({ error: "No such User" });
     }
     const user = await User.findById(id)
-        .select("-password")
-        .select("-email")
-        .select("-createdAt")
-        .select("-updatedAt");
+        .select("likeCount")
+        .select("commentCount")
+        .select("postCount");
 
     if (!user) {
         return res.status(404).json({ error: "No such User" });
@@ -105,6 +116,7 @@ const banUser = async (req, res) => {
 
 module.exports = {
     getUsers,
+    getPosts,
     getUser,
     deleteUser,
     deletePost,
