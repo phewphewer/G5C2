@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import PseudoHeader from "../../layout/PseudoHeader";
-import Show from "../../../assets/images/show.png";
-import Hide from "../../../assets/images/hide.png";
+import PseudoHeader from "../../components/layout/PseudoHeader";
+import Show from "../../assets/images/show.png";
+import Hide from "../../assets/images/hide.png";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../../context/AuthContext";
-import { useSignup } from "../../../hooks/useSignUp";
-import { useAuthContext } from "../../../hooks/useAuthContext";
+import { AuthContext } from "../../context/AuthContext";
+import { useSignup } from "../../hooks/useSignUp";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 export default function SignupForm() {
   // show/hide password
@@ -79,7 +79,7 @@ export default function SignupForm() {
                 <input
                   required
                   type="email"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value.toLowerCase())}
                   value={email}
                   className="placeholder:italic bg-[#050E1A] rounded-[5px] w-full py-2 px-3 mt-1"
                   placeholder="example@email.com"

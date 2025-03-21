@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import PostCard from '../components/features/posting/PostCard';
-import RightSidebar from '../components/layout/ProfileDashboard/RightSidebar';
+import PostCard from '../../components/posting/PostCard';
+import RightSidebar from './components/RightSidebar';
 
 const ProfileLayout = () => {
   // const [user, setUser] = useState([]);

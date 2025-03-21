@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar from "../components/layout/sidebar/sidebar";
-import Header from "../components/layout/header/header";
-import MainDisplay from "../components/layout/MainDisplay";
+import Sidebar from "./Components/sidebar";
+import Header from "./Components/header";
+import MainDisplay from "./Components/MainDisplay";
 import { BrowserRouter as Router } from "react-router-dom";
 
 export default function HomePage() {

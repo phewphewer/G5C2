@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useRef, useEffect } from "react";
-import Droplet from "../../text/Droplet.jsx";
+import Droplet from "../../../components/text/Droplet.jsx";
 import { useLogout } from "../../../hooks/useLogout.jsx";
 import { useAuthContext } from "../../../hooks/useAuthContext.jsx";
 import { AuthContext } from "../../../context/AuthContext.jsx";

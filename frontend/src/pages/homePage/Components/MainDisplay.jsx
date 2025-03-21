@@ -1,8 +1,8 @@
-import FeaturedCard from "../features/posting/FeaturedCard";
-import PostForm from "../features/posting/PostForm";
-import PostCard from "../features/posting/PostCard";
+import FeaturedCard from "./FeaturedCards.jsx";
+import PostForm from "./PostForm.jsx";
+import PostCard from "../../../components/posting/PostCard";
 import React, { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../../context/AuthContext.jsx";
 
 export default function PostPage() {
   const { user } = useContext(AuthContext);
