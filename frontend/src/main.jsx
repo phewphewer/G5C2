@@ -2,11 +2,11 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
-import Home from "./pages/HomePage.jsx";
-import Dashboard from "./pages/ProfilePage.jsx";
-import PageNotFound from "./pages/PageNotFound.jsx";
-import Login from "./components/features/auth/LoginForm.jsx";
-import SignUp from "./components/features/auth/SignupForm.jsx";
+import Home from "./pages/HomePage/HomePage.jsx";
+import Dashboard from "./pages/profilePage/ProfilePage.jsx";
+import PageNotFound from "./pages/pageNotFound/PageNotFound.jsx";
+import Login from "./pages/login/LoginForm.jsx";
+import SignUp from "./pages/signUp/SignupForm.jsx";
 import { Link, createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext.jsx";
 

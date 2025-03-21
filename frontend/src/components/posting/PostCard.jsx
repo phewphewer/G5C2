@@ -1,6 +1,6 @@
 "use client";
 import { useState, useContext } from "react";
-import { useAuthContext } from "../../../hooks/useAuthContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const PostCard = () => {
   // Setting user to "LOGGED IN"

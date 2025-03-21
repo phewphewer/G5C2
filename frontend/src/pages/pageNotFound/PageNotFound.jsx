@@ -1,5 +1,5 @@
 import React from "react";
-import PseudoHeader from "../components/layout/PseudoHeader";
+import PseudoHeader from "../../components/layout/PseudoHeader";
 
 export default function PageNotFound() {
   return (
