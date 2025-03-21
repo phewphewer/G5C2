@@ -1,12 +1,15 @@
 const Like = require("../models/likeModel");
 const mongoose = require("mongoose");
 
+// For checking Id validity
+const isValidObjectId = (id) => mongoose.Types.ObjectId.isValid(id);
+
 // Add a like to a post
 const addLike = async (req, res) => {
     const { postId } = req.params;
     const userId = req.user._id;
 
-    if (!mongoose.Types.ObjectId.isValid(postId)) {
+    if (!isValidObjectId(postId)) {
         return res.status(400).json({ error: "Invalid post ID" });
     }
 
@@ -21,15 +24,17 @@ const addLike = async (req, res) => {
         const like = await Like.create({ user: userId, post: postId });
         res.status(201).json(like);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error("Error adding like:", error);
+        res.status(500).json({ error: "Server error", details: error.message });
     }
 };
+
 // Remove a like from a post
 const removeLike = async (req, res) => {
     const { postId } = req.params;
     const userId = req.user._id;
 
-    if (!mongoose.Types.ObjectId.isValid(postId)) {
+    if (!isValidObjectId(postId)) {
         return res.status(400).json({ error: "Invalid post ID" });
     }
 
@@ -42,9 +47,10 @@ const removeLike = async (req, res) => {
             return res.status(404).json({ error: "Like not found" });
         }
 
-        res.status(200).json({ message: "Like removed" });
+        res.status(200).json({ message: "Like removed successfully" });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error("Error removing like:", error);
+        res.status(500).json({ error: "Server error", details: error.message });
     }
 };
 
