@@ -1,6 +1,7 @@
 const express = require("express");
 const {
     getUsers,
+    getPosts,
     getUser,
     deleteUser,
     deletePost,
@@ -10,6 +11,9 @@ const router = express.Router();
 
 // Get all users
 router.get("/users", getUsers);
+
+// Get all posts
+router.get("/posts", getPosts);
 
 // Get a user
 router.get("/user/:id", getUser);
