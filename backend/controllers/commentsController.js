@@ -1,6 +1,9 @@
 const Comment = require("../models/commentsModel");
 const mongoose = require("mongoose");
 
+// For checking Id validity
+const isValidObjectId = (id) => mongoose.Types.ObjectId.isValid(id);
+
 // Add a comment
 const addComment = async (req, res) => {
     const { text, postId } = req.body;
@@ -8,7 +11,7 @@ const addComment = async (req, res) => {
 
     console.log("Received postId:", postId);
 
-    if (!mongoose.Types.ObjectId.isValid(postId)) {
+    if (!isValidObjectId(postId)) {
         return res.status(400).json({ error: "Invalid post ID" });
     }
 
@@ -28,7 +31,7 @@ const addComment = async (req, res) => {
 const deleteComment = async (req, res) => {
     const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!isValidObjectId(id)) {
         return res.status(400).json({ error: "Invalid comment ID" });
     }
 
@@ -50,7 +53,7 @@ const editComment = async (req, res) => {
     const { text } = req.body;
     const userId = req.user._id;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!isValidObjectId(id)) {
         return res.status(400).json({ error: "Invalid comment ID" });
     }
 

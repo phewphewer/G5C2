@@ -5,12 +5,13 @@ const Like = require("../models/likeModel");
 const Comment = require("../models/commentsModel");
 const mongoose = require("mongoose");
 
+// For checking Id validity
+const isValidObjectId = (id) => mongoose.Types.ObjectId.isValid(id);
+
 // Get all users
 const getUsers = async (req, res) => {
     try {
-        const users = await User.find({})
-            // .select("-password")
-            .sort({ createdAt: -1 });
+        const users = await User.find({}).sort({ createdAt: -1 });
         const totalUsers = await User.countDocuments({});
 
         res.status(200).json({ totalUsers, users });
@@ -35,7 +36,7 @@ const getPosts = async (req, res) => {
 const getUser = async (req, res) => {
     const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!isValidObjectId(id)) {
         return res.status(404).json({ error: "No such User" });
     }
     const user = await User.findById(id)
@@ -63,7 +64,7 @@ const getUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!isValidObjectId(id)) {
         return res.status(404).json({ error: "No such User" });
     }
 
@@ -80,7 +81,7 @@ const deleteUser = async (req, res) => {
 const deletePost = async (req, res) => {
     const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!isValidObjectId(id)) {
         return res.status(404).json({ error: "No such Post" });
     }
 
@@ -97,7 +98,7 @@ const deletePost = async (req, res) => {
 const banUser = async (req, res) => {
     const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!isValidObjectId(id)) {
         return res.status(404).json({ error: "No such User" });
     }
 
