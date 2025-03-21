@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from "react";
 import Droplet from "../../../components/text/Droplet.jsx";
 import { useLogout } from "../../../hooks/useLogout.jsx";
 import { useAuthContext } from "../../../hooks/useAuthContext.jsx";
-import { AuthContext } from "../../../context/AuthContext.jsx";
 
 export default function Header({ isOpen }) {
   const navigate = useNavigate();
@@ -11,6 +10,7 @@ export default function Header({ isOpen }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const { logout } = useLogout();
+  
   const handleClick = () => {
     logout();
   };
@@ -31,6 +31,7 @@ export default function Header({ isOpen }) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
     localStorage.removeItem("user");
@@ -72,7 +73,7 @@ export default function Header({ isOpen }) {
                 Profile
               </button>
               <button
-                onClick={handleLogout}
+                onClick={handleClick}
                 className="w-full px-5 py-3 text-m text-[#F7FAFC] hover:bg-[#283D55] cursor-pointer"
               >
                 Logout
