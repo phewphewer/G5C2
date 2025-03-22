@@ -16,9 +16,17 @@ const getCounts = async (postId) => {
 // Get Posts - Home page
 const getPosts = async (req, res) => {
   try {
-    const getPosts = await Post.find({}).sort({ createdAt: -1 });
-    const totalPosts = await Post.countDocuments({});
-    res.status(200).json({ totalPosts, getPosts });
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+    const getPosts = await Post.find({})
+      .skip(skip)
+      .limit(limit)
+      .sort({ createdAt: -1 })
+      .populate("user", "username");
+
+    // const totalPosts = await Post.countDocuments({});
+    res.status(200).json({ getPosts });
   } catch (error) {
     console.error("Error in getPosts:", error.message);
     res.status(500).json({ error: "Server error" });
