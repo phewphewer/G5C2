@@ -43,7 +43,7 @@ export default function SignupForm() {
       <div className="w-full min-h-screen text-[#F7FAFC] flex flex-wrap justify-center items-center bg-[#050E1A] p-4">
         <PseudoHeader />
         {/* SIGN UP FORM start */}
-        <div className="w-full max-w-md rounded-[5px] border-[#172A42] border-5">
+        <div className="w-full max-w-md mt-20 rounded-[5px] border-[#172A42] border-5">
           <div className="w-full py-4 flex bg-[#172A42] items-center border-b-2 border-b-[#F7FAFC]">
             <h1 className="text-2xl md:text-3xl font-extrabold ml-5">
               SIGN UP
