@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
-import PseudoHeader from "../../components/layout/PseudoHeader";
+import PseudoHeader from "../components/layout/PseudoHeader";
 import Show from "../../assets/images/show.png";
 import Hide from "../../assets/images/hide.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useLogin } from "../../hooks/useLogin";
-import { AuthContext } from "../../context/AuthContext";
+import { useLogin } from "../hooks/useLogin";
+import { AuthContext } from "../context/AuthContext";
 
 export default function LoginForm() {
   const navigate = useNavigate();
