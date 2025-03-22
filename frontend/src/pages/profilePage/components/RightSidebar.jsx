@@ -10,6 +10,16 @@ const RightSidebar = () => {
   );
 };
 
+export const LeftSidebar = () => {
+  return (
+      <div className="space-y-4 mt-5">
+        <StatCard title="NO OF POSTS" count={120} />
+        <StatCard title="NO OF LIKED POSTS" count={85} />
+        <StatCard title="NO OF COMMENTS" count={230} />
+      </div>
+  );
+};
+
 const StatCard = ({ title, count }) => {
   return (
     <div className="p-4 bg-[#283D55] rounded-lg text-center shadow-md">

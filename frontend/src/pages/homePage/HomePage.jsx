@@ -7,17 +7,18 @@ import MainDisplay from './Components/MainDisplay';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 export default function HomePage() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const dropdownRef = useRef(null)
+  // Manage sidebar state at the parent level
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
   return (
-    <div className="app-container relative bg-[#050E1A]" ref={dropdownRef}>
+    <div className="app-container relative bg-[#050E1A]  custom-scrollbar">
       {/* Pass state and setter to Sidebar */}
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
 
       {/* Pass sidebar state to Header */}
       <div
         className={`main-content transition-all duration-100 ease-in-out ${
-          isSidebarOpen ? 'ml-[250px]' : 'ml-[50px]'
+          isSidebarOpen ? "ml-[250px]" : "ml-[50px]"
         }`}
       >
         <Header isOpen={isSidebarOpen} />
