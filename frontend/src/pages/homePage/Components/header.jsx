@@ -41,31 +41,39 @@ export default function Header({ isOpen }) {
         isOpen ? "left-[230px]" : "left-[30px]"
       } top-0 h-[60px] bg-[#0A1A2F]  
     text-[#F7FAFC] flex items-center justify-between  
-    transition-all duration-300 ease-in-out w-full`}
+    transition-all duration-300 ease-in-out w-full border-b-1 z-15 border-[#172A42]`}
     >
       <div>
         <Droplet />
       </div>
 
-      {/* username(logout)/ profiel */}
+      {/* username(logout)/ profi*/}
       {user && (
         <div
-          className="right-0 items-center justify-end flex font-semibold relative"
+          className="right-4 items-center justify-center flex font-semibold relative z-[200] overflow-visible"
           ref={dropdownRef}
         >
-          <button
-            onClick={toggleDropdown}
-            className="w-55 h-[60px] bg-[#26b1f1] text-[#F7FAFC] hover:text-[#01BAEF] hover:cursor-pointer"
+          <div
+            className="pl-5 bg-[#1f6c90]
+"
             style={{
-              clipPath: "polygon(50% 0%, 100% 0%, 100% 100%, 20% 100%)",
+              clipPath: "polygon(37% 0%, 100% 0%, 100% 100%, 20% 100%)",
             }}
           >
-            {user.username}
-          </button>
+            <button
+              onClick={toggleDropdown}
+              className="pl-18 pr-9 px-5 py-5 h-[60px] bg-[#26b1f1] text-[#F7FAFC] hover:text-[#22373c] hover:cursor-pointer   whitespace-nowrap"
+              style={{
+                clipPath: "polygon(37% 0%, 100% 0%, 100% 100%, 20% 100%)",
+              }}
+            >
+              {user.username}
+            </button>
+          </div>
 
           {/* Dropdown menu */}
           {isDropdownOpen && (
-            <div className="absolute top-12 right-10 w-30 bg-[#1E2A3B] rounded-md shadow-lg">
+            <div className="absolute top-12 right-10 w-30 bg-[#1E2A3B] rounded-md shadow-lg z-50 ">
               <button
                 onClick={() => navigate("/dashboard")}
                 className="w-full px-5 py-3 text-m text-[#F7FAFC] hover:bg-[#283D55] cursor-pointer"

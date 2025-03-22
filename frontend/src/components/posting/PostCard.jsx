@@ -116,7 +116,7 @@ const PostCard = () => {
                 </svg>
               </button>
               {showDropdown && (
-                <div className="absolute right-0 mt-2 w-32 bg-[#1E2A3B] rounded-md shadow-lg z-10 border border-[#283D55]">
+                <div className="absolute right-0 mt-2 w-32 bg-[#1E2A3B] rounded-md shadow-lg border border-[#283D55]">
                   <ul className="py-1">
                     <li className="px-4 py-2 text-m text-[#F7FAFC] hover:bg-[#283D55] cursor-pointer">
                       Edit

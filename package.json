@@ -4,5 +4,29 @@
   },
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\""
+  },
+  "name": "g5c2",
+  "version": "1.0.0",
+  "description": "MERN stack, tailwindcss, vite",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phewphewer/G5C2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phewphewer/G5C2/issues"
+  },
+  "homepage": "https://github.com/phewphewer/G5C2#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.12.2",
+    "validator": "^13.12.0"
   }
 }

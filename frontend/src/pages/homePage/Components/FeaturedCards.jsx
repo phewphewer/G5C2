@@ -21,29 +21,28 @@ export default function FeaturedPost({
 
   return (
     <>
-    <div className="bg-[#0A1A2F] text-white z-[0] rounded-lg p-5 shadow-lg mb-5 hover:border-[#374151] border-[#1F2937] border-1">
-      {/* FEATURE HEADER PO */}
-      <div className="flex items-center space-x-3">
-        <div>
-          <p className="font-bold">{name}</p>
-          <p className="text-sm text-gray-400">{time}</p>
+      <div className="bg-[#0A1A2F] text-white z-[0] rounded-lg p-5 shadow-lg mb-5 hover:border-[#374151] border-[#1F2937] border-1 ">
+        {/* FEATURE HEADER PO */}
+        <div className="flex items-center space-x-3">
+          <div>
+            <p className="font-bold">{name}</p>
+            <p className="text-sm text-gray-400">{time}</p>
+          </div>
         </div>
+
+        {/* Post Content pag hindi naka see more*/}
+        <p className="mt-3 text-xs">{truncatedContent}</p>
+
+        {/* see more section mga boss */}
+        {content.length > maxLength && (
+          <button
+            onClick={toggleExpand}
+            className="mt-2 text-[#CBD5E1] hover:text-[#F7FAFC] text-xs cursor-pointer"
+          >
+            {isExpanded ? "See Less" : "See More"} {/* button ng see more */}
+          </button>
+        )}
       </div>
-
-      {/* Post Content pag hindi naka see more*/}
-      <p className="mt-3 text-xs">{truncatedContent}</p>
-
-      {/* see more section mga boss */}
-      {content.length > maxLength && (
-        <button
-          onClick={toggleExpand}
-          className="mt-2 text-[#CBD5E1] hover:text-[#F7FAFC] text-xs cursor-pointer"
-        >
-          {isExpanded ? "See Less" : "See More"} {/* button ng see more */}
-        </button>
-      )}
-    </div>
     </>
-    
   );
 }
