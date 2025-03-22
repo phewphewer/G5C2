@@ -44,13 +44,13 @@ export default function Header({ isOpen }) {
         isOpen ? "left-[230px]" : "left-[30px]"
       } top-0 h-[60px] bg-[#0A1A2F]  
     text-[#F7FAFC] flex items-center justify-between  
-    transition-all duration-300 ease-in-out w-full`}
+    transition-all duration-300 ease-in-out w-full border-b-2 border-white rounded-b-[5px]`}
     >
       <div>
         <Droplet />
       </div>
 
-      {/* username(logout)/ profiel */}
+      {/* username(logout)/ profile */}
       {user && (
         <div
           className="mr-[60px] flex gap-3 font-semibold relative"
