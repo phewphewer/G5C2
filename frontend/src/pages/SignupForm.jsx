@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import PseudoHeader from "../components/layout/PseudoHeader";
-import Show from "../../assets/images/show.png";
-import Hide from "../../assets/images/hide.png";
+import Show from "../assets/images/show.png";
+import Hide from "../assets/images/hide.png";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { useSignup } from "../hooks/useSignUp";

@@ -10,7 +10,7 @@ export default function Header({ isOpen }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const { logout } = useLogout();
-  
+
   const handleClick = () => {
     logout();
   };
@@ -31,7 +31,7 @@ export default function Header({ isOpen }) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  
+
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
     localStorage.removeItem("user");
@@ -58,14 +58,14 @@ export default function Header({ isOpen }) {
         >
           <button
             onClick={toggleDropdown}
-            className="rounded-md border border-[#0c172e] px-[10px] py-[10px] text-[#F7FAFC] hover:bg-[#172A42] bg-[#050E1A] hover:border-[#F7FAFC] hover:cursor-pointer"
+            className="px-[10px] py-[10px] text-2xl text-[#F7FAFC] hover:text-blue-600 hover:cursor-pointer"
           >
             {user.username}
           </button>
 
           {/* Dropdown menu */}
           {isDropdownOpen && (
-            <div className="absolute top-12 right-[-10px] bg-[#1E2A3B] rounded-md shadow-lg">
+            <div className="z-[10] absolute top-12 right-[-10px] bg-[#1E2A3B] rounded-md shadow-lg">
               <button
                 onClick={() => navigate("/dashboard")}
                 className="w-full px-5 py-3 text-m text-[#F7FAFC] hover:bg-[#283D55] cursor-pointer"

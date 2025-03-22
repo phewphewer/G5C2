@@ -4,9 +4,9 @@ import "./index.css";
 import App from "./App.jsx";
 import Home from "./pages/homePage/HomePage.jsx";
 import Dashboard from "./pages/profilePage/ProfilePage.jsx";
-import PageNotFound from "./pages/pageNotFound/PageNotFound.jsx";
-import Login from "./pages/login/LoginForm.jsx";
-import SignUp from "./pages/signUp/SignupForm.jsx";
+import PageNotFound from "./pages/PageNotFound.jsx";
+import Login from "./pages/LoginForm.jsx";
+import SignUp from "./pages/SignupForm.jsx";
 import { Link, createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext.jsx";
 

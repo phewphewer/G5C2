@@ -1,7 +1,7 @@
 import FeaturedCard from "./FeaturedCards.jsx";
 import PostForm from "./PostForm.jsx";
 import PostCard from "../../../components/posting/PostCard";
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react"; // removed React , after import
 import { AuthContext } from "../../../context/AuthContext.jsx";
 
 export default function PostPage() {

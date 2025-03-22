@@ -21,13 +21,6 @@ export default function Sidebar({ isOpen, setIsOpen }) {
               </button>
             </Link>
           </li>
-          <li className="py-[15px] px-[20px] text-[18px] cursor-pointer text-[#CBD5E1] hover:bg-white/10 hover:rounded-md hover:text-[#F7FAFC]">
-            <Link to="/dashboard">
-              <button className="w-full h-full hover:cursor-pointer">
-                Profile
-              </button>
-            </Link>
-          </li>
           <li className=" py-[15px] px-[20px] text-[18px] cursor-pointer text-[#CBD5E1] hover:bg-white/10 hover:rounded-md hover:text-[#F7FAFC]">
             <button
               className="w-full h-full hover:cursor-pointer "

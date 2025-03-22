@@ -20,7 +20,7 @@ export default function FeaturedPost({
       : content;
 
   return (
-    <div className="bg-[#0A1A2F] text-white rounded-lg p-5 shadow-lg mb-5 hover:border-[#374151] border-[#1F2937] border-1">
+    <div className="bg-[#0A1A2F] text-white z-[0] rounded-lg p-5 shadow-lg mb-5 hover:border-[#374151] border-[#1F2937] border-1">
       {/* FEATURE HEADER PO */}
       <div className="flex items-center space-x-3">
         <div>
