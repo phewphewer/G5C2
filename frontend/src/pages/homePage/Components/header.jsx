@@ -10,7 +10,6 @@ export default function Header({ isOpen }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const { logout } = useLogout();
-
   const handleClick = () => {
     logout();
   };
@@ -31,11 +30,9 @@ export default function Header({ isOpen }) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
     localStorage.removeItem("user");
-    navigate("/auth/login");
   };
 
   return (
@@ -44,28 +41,31 @@ export default function Header({ isOpen }) {
         isOpen ? "left-[230px]" : "left-[30px]"
       } top-0 h-[60px] bg-[#0A1A2F]  
     text-[#F7FAFC] flex items-center justify-between  
-    transition-all duration-300 ease-in-out w-full border-b-2 border-white rounded-b-[5px]`}
+    transition-all duration-300 ease-in-out w-full`}
     >
       <div>
         <Droplet />
       </div>
 
-      {/* username(logout)/ profile */}
+      {/* username(logout)/ profiel */}
       {user && (
         <div
-          className="mr-[60px] flex gap-3 font-semibold relative"
+          className="right-0  items-center justify-end flex  font-semibold relative"
           ref={dropdownRef}
         >
           <button
             onClick={toggleDropdown}
-            className="px-[10px] py-[10px] text-2xl text-[#F7FAFC] hover:text-blue-600 hover:cursor-pointer"
+            className="w-55 h-[60px] bg-[#26b1f1] text-[#F7FAFC] hover:text-[#01BAEF] hover:cursor-pointer"
+            style={{
+              clipPath: "polygon(50% 0%, 100% 0%, 100% 100%, 20% 100%)",
+            }}
           >
             {user.username}
           </button>
 
           {/* Dropdown menu */}
           {isDropdownOpen && (
-            <div className="z-[10] absolute top-12 right-[-10px] bg-[#1E2A3B] rounded-md shadow-lg">
+            <div className="absolute top-12 right-10 w-30 bg-[#1E2A3B] rounded-md shadow-lg">
               <button
                 onClick={() => navigate("/dashboard")}
                 className="w-full px-5 py-3 text-m text-[#F7FAFC] hover:bg-[#283D55] cursor-pointer"
@@ -73,7 +73,7 @@ export default function Header({ isOpen }) {
                 Profile
               </button>
               <button
-                onClick={handleClick}
+                onClick={handleLogout}
                 className="w-full px-5 py-3 text-m text-[#F7FAFC] hover:bg-[#283D55] cursor-pointer"
               >
                 Logout
