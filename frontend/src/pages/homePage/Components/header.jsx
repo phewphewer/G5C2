@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React, { useState, useRef, useEffect } from "react";
 import Droplet from "../../../components/text/Droplet.jsx";
 import { useLogout } from "../../../hooks/useLogout.jsx";
@@ -50,7 +50,7 @@ export default function Header({ isOpen }) {
       {/* username(logout)/ profiel */}
       {user && (
         <div
-          className="right-0  items-center justify-end flex  font-semibold relative"
+          className="right-0 items-center justify-end flex font-semibold relative"
           ref={dropdownRef}
         >
           <button
