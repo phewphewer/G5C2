@@ -112,11 +112,11 @@ export default function PostPage() {
 
     setSortedPosts(sorted);
   };
-  
+
   useEffect(() => {
     fetchPosts(); // Initial fetch of posts
     handleSort("Recent");
-    const intervalId = setInterval(fetchPosts, 20000);
+    const intervalId = setInterval(fetchPosts, 900000);
     // Cleanup the interval when the component is unmounted
     return () => clearInterval(intervalId);
   }, []); // Empty dependency array means it runs once when the component mounts

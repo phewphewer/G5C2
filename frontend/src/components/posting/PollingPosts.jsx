@@ -30,7 +30,7 @@ const PollingPosts = () => {
     fetchPosts();
 
     // Set up polling every 5 seconds (5000ms)
-    const intervalId = setInterval(fetchPosts, 5000);
+    const intervalId = setInterval(fetchPosts, 900000);
 
     // Cleanup the interval when the component is unmounted
     return () => clearInterval(intervalId);
