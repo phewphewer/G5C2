@@ -1,5 +1,5 @@
 import FeaturedCard from "./FeaturedCards.jsx";
-import PostForm from "./PostForm.jsx";
+import PostForm from "../../../components/posting/PostForm.jsx";
 import PostCard from "../../../components/posting/PostCard";
 import { useState, useEffect, useContext } from "react"; // removed React , after import
 import { AuthContext } from "../../../context/AuthContext.jsx";

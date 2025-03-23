@@ -8,7 +8,7 @@ export default function PostForm() {
 
   return (
     <>
-      <div className="w-full bg-[#0C172E] p-6 shadow-md rounded-lg">
+      <div className="w-full bg-[#2987C3] p-6 shadow-md rounded-lg">
         <div className="space-y-4">
           {/* User Profile Section */}
           <div className="flex items-center">
