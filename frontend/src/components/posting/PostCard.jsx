@@ -123,7 +123,7 @@ const PostCard = () => {
                 {/* Header with user info and options */}
                 <div className="flex justify-between">
                   <div className="flex flex-col">
-                    <h3 className="font-bold text-[120%] text-[#30bffc]">
+                    <h3 className="text-md font-bold text-[#F7FAFC]">
                       {post.user ? post.user.username : "Deleted user"}
                     </h3>
                     <p className="text-xs text-[#CBD5E1]">
@@ -169,7 +169,7 @@ const PostCard = () => {
                 </div>
 
                 {/* Post content */}
-                <p>{post.title}</p>
+                <h2 className="font-bold text-[120%] text-[#30bffc]">{post.title}</h2>
                 <p className="text-[#F7FAFC] text-[0.95rem]">{post.body}</p>
               </div>
 
