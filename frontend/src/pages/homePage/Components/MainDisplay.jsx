@@ -46,6 +46,24 @@ export default function PostPage() {
     },
   ]);
   const [sortedPosts, setSortedPosts] = useState(posts);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const fetchPosts = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch("/api/posts/poll");
+      if (!response.ok) {
+        throw new Error("Failed to fetch posts");
+      }
+      const data = await response.json();
+      setPosts(data); // Update posts state with the fetched data
+    } catch (error) {
+      setError(error.message); // Set error message if the fetch fails
+      console.log(setError);
+    } finally {
+      setLoading(false); // End loading
+    }
+  };
 
   const handleSort = (sortType) => {
     console.log(`Sort by ${sortType}`);
@@ -94,11 +112,16 @@ export default function PostPage() {
 
     setSortedPosts(sorted);
   };
-
-  // Set "Recent" as the default sorting option on component mount
   useEffect(() => {
+    fetchPosts(); // Initial fetch of posts
     handleSort("Recent");
-  }, []);
+    const intervalId = setInterval(fetchPosts, 20000);
+    // Cleanup the interval when the component is unmounted
+    return () => clearInterval(intervalId);
+  }, []); // Empty dependency array means it runs once when the component mounts
+
+  if (loading) return <p>Loading posts...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div className="min-h-screen bg-[#050E1A] text-white pt-17 flex">

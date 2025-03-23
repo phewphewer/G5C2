@@ -7,7 +7,7 @@ import Dashboard from "./pages/profilePage/ProfilePage.jsx";
 import PageNotFound from "./pages/PageNotFound.jsx";
 import Login from "./pages/LoginForm.jsx";
 import SignUp from "./pages/SignupForm.jsx";
-import Feedback from "./pages/Feedback.jsx"
+import Feedback from "./pages/Feedback.jsx";
 import { Link, createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext.jsx";
 
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
   {
     path: "/feedback",
     element: <Feedback />,
-    errorElement: <PageNotFound/>
+    errorElement: <PageNotFound />,
   },
 ]);
 
