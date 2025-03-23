@@ -13,7 +13,7 @@ export default function Header({ isOpen }) {
   const handleClick = () => {
     logout();
   };
-  const toggleDropdown = () => {
+  const toggleDropdown = () => { 
     setIsDropdownOpen(!isDropdownOpen);
   };
 
@@ -30,10 +30,6 @@ export default function Header({ isOpen }) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  const handleLogout = () => {
-    dispatch({ type: "LOGOUT" });
-    localStorage.removeItem("user");
-  };
 
   return (
     <header
@@ -81,7 +77,7 @@ export default function Header({ isOpen }) {
                 Profile
               </button>
               <button
-                onClick={handleLogout}
+                onClick={handleClick}
                 className="w-full px-5 py-3 text-m text-[#F7FAFC] hover:bg-[#283D55] cursor-pointer"
               >
                 Logout
