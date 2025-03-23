@@ -50,23 +50,28 @@ export default function Header({ isOpen }) {
           ref={dropdownRef}
         >
           <div
-            className="pl-5 bg-[#1f6c90]
+          className="pl-5 bg-[#26b1f1]/50"
+          style={{
+            clipPath: "polygon(41% 0%, 100% 0%, 100% 100%, 20% 100%)",
+          }}>
+          <div
+            className="pl-5 bg-[#26b1f1]/75
 "
             style={{
-              clipPath: "polygon(37% 0%, 100% 0%, 100% 100%, 20% 100%)",
+              clipPath: "polygon(43% 0%, 100% 0%, 100% 100%, 20% 100%)",
             }}
           >
             <button
               onClick={toggleDropdown}
-              className="pl-18 pr-9 px-5 py-5 h-[60px] bg-[#26b1f1] text-[#F7FAFC] hover:text-[#22373c] hover:cursor-pointer   whitespace-nowrap"
+              className="pl-18 pr-9 px-5 py-5 h-[60px] bg-[#26b1f1] text-[#F7FAFC] hover:text-[#22373c] hover:cursor-pointer whitespace-nowrap"
               style={{
-                clipPath: "polygon(37% 0%, 100% 0%, 100% 100%, 20% 100%)",
+                clipPath: "polygon(45% 0%, 100% 0%, 100% 100%, 20% 100%)"
               }}
             >
               {user.username}
             </button>
           </div>
-
+          </div>
           {/* Dropdown menu */}
           {isDropdownOpen && (
             <div className="absolute top-12 right-10 w-30 bg-[#1E2A3B] rounded-md shadow-lg z-50 ">
