@@ -50,7 +50,7 @@ export default function Header({ isOpen }) {
       {/* username(logout)/ profile*/}
       {user && (
         <div
-          className="flex justify-end items-center relative right-0 top-0 h-full font-semibold z-[200]"
+          className="flex justify-end items-center relative right-3 top-0 h-full font-semibold z-[200]"
           ref={accordionRef}
         >
           <div className="flex justify-end items-center h-full">
@@ -58,24 +58,24 @@ export default function Header({ isOpen }) {
             {/* ENCASES EVERYTHING */}
               <button 
               className={`absolute flex items-center pl-10 w-100 h-[59px] bg-[#006a88] hover:bg-red-600 hover:text-[#0c172e] transition duration-600 ease-in-out hover:cursor-pointer
-                  ${isAccordionOpen ? "translate-x-0" : "translate-x-[75%]"}`}
+                  ${isAccordionOpen ? "translate-x-" : "translate-x-[40%]"}`}
               style={{
-                clipPath: "polygon(7% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                clipPath: "polygon(6% 0%, 100% 0%, 100% 100%, 0% 100%)",
               }}
               onClick={handleClick}>Logout</button>
             {/* ENCASES PROFILE */}
             <button
               className={`absolute flex items-center pl-10 w-75 h-[59px] bg-[#0096bf] transition duration-600 ease-in-out hover:cursor-pointer
-              ${isAccordionOpen ? "translate-x-0" : "translate-x-[75%]"}`}
+              ${isAccordionOpen ? "translate-x-0" : "translate-x-[26%]"}`}
               style={{
-                clipPath: "polygon(9% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                clipPath: "polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%)",
               }}
               onClick={() => navigate("/dashboard")}
             >
               Profile
             </button>
             <button
-              className={`absolute flex items-center pl-10 pr-10 px-5 py-5 h-[59px] transition duration-600 ease-in-out overflow-hidden hover:cursor-pointer
+              className={`absolute flex justify-center items-center pl-10 pr-10 w-50 h-[59px] transition duration-600 ease-in-out overflow-hidden hover:cursor-pointer
               ${
                 isAccordionOpen ? "bg-[#F7FAFC] text-[#0c172e]" : "bg-[#00c8ff]"
               }`}
