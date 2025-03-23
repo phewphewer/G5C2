@@ -44,12 +44,12 @@ export default function PostForm() {
     };
 
     return (
-        <div className="w-full bg-[#2987C3] p-6 shadow-md rounded-lg">
+        <div className="w-full bg-[#3b3699] hover:bg-[#3d379c] p-6 shadow-md rounded-lg border-1 border-[#F7FAFC]">
             <div className="space-y-4">
                 <div className="flex items-center">
-                    <h3 className="font-bold text-[120%] text-[#30bffc]">
-                        You
-                    </h3>
+                    <h10 className="font-bold text-[120%] text-[#00c8ff]">
+                        you
+                    </h10>
                 </div>
                 <form onSubmit={handlePostSubmit}>
                     <input
@@ -57,20 +57,20 @@ export default function PostForm() {
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder="Enter post title"
-                        className="w-full my-2 p-2 border rounded-md"
+                        className="w-full my-2 p-2 border border-[#94A3B8] hover:border-[#F7FAFC] rounded-md text-[#F7FAFC] focus:outline-none"
                     />
                     <textarea
                         value={body}
                         onChange={(e) => setBody(e.target.value)}
                         placeholder="What's on your mind?"
-                        className="placeholder:italic w-full h-30 my-5 rounded-md border indent-2 pt-1 overflow-y-scroll"
+                        className="placeholder:italic w-full h-30 my-5 rounded-md border border-[#94A3B8] hover:border-[#F7FAFC] indent-2 pt-1 overflow-y-scroll text-[#F7FAFC] focus:outline-none"
                     />
                     <div className="flex justify-end">
                         <button
                             type="submit"
-                            className="rounded-md font-extrabold flex justify-center items-center bg-blue-800 w-20 hover:cursor-pointer"
+                            className="rounded-md px-12 py-1 font-bold border-2 bg-[#0081a4] hover:bg-[#00c8ff] flex justify-center items-center bg-[] w-20 hover:cursor-pointer focus:outline-none"
                         >
-                            Ripple
+                            RIPPLE
                         </button>
                     </div>
                 </form>
