@@ -16,6 +16,47 @@ const getCounts = async (postId) => {
 // Get Posts - Home page
 const getPosts = async (req, res) => {
     try {
+        const userId = req.user._id;
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const skip = (page - 1) * limit;
+
+        const posts = await Post.find({})
+            .skip(skip)
+            .limit(limit)
+            .sort({ createdAt: -1 })
+            .populate("user", "username")
+            .populate({
+                path: "comments",
+                populate: { path: "user", select: "username" },
+            });
+
+        const postsWithCounts = await Promise.all(
+            posts.map(async (post) => {
+                const likeCount = await Like.countDocuments({ post: post._id });
+                const commentCount = post.comments.length;
+                const isLiked = await Like.exists({
+                    post: post._id,
+                    user: userId,
+                }); // Checking if the user has liked the post
+                return {
+                    ...post.toObject(),
+                    likeCount,
+                    commentCount,
+                    isLiked: !!isLiked,
+                };
+            })
+        );
+
+        res.status(200).json({ getPosts: postsWithCounts });
+    } catch (error) {
+        console.error("Error in getPosts:", error.message);
+        res.status(500).json({ error: "Server error" });
+    }
+};
+
+const getPublicPosts = async (req, res) => {
+    try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const skip = (page - 1) * limit;
@@ -163,6 +204,47 @@ const updatePost = async (req, res) => {
     }
 };
 
+const addCommentToPost = async (req, res) => {
+    const { id } = req.params; // Post ID
+    const { text } = req.body; // Comment text
+    const userId = req.user._id; // Authenticated user ID
+
+    try {
+        const post = await Post.findById(id);
+
+        if (!post) {
+            return res.status(404).json({ error: "Post not found" });
+        }
+
+        const comment = await Comment.create({
+            text,
+            user: userId,
+            post: id,
+        });
+
+        post.comments.push(comment);
+        await post.save();
+
+        const updatedPost = await Post.findById(id)
+            .populate("user", "username")
+            .populate({
+                path: "comments",
+                populate: { path: "user", select: "username" },
+            });
+
+        const likeCount = await Like.countDocuments({ post: id });
+        const commentCount = post.comments.length;
+
+        res.status(201).json({
+            ...updatedPost.toObject(),
+            likeCount,
+            commentCount,
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 module.exports = {
     createPost,
     getPosts,
@@ -170,4 +252,6 @@ module.exports = {
     deletePost,
     updatePost,
     getPostsId,
+    getPublicPosts,
+    addCommentToPost,
 };

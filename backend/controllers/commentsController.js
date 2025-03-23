@@ -83,4 +83,22 @@ const editComment = async (req, res) => {
     }
 };
 
-module.exports = { addComment, deleteComment, editComment };
+const getComments = async (req, res) => {
+    const { postId } = req.params;
+
+    if (!isValidObjectId(postId)) {
+        return res.status(400).json({ error: "Invalid post ID" });
+    }
+
+    try {
+        const comments = await Comment.find({ post: postId })
+            .populate("user", "username")
+            .sort({ createdAt: -1 });
+
+        res.status(200).json({ comments });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+module.exports = { addComment, deleteComment, editComment, getComments };
