@@ -41,7 +41,7 @@ export default function Header({ isOpen }) {
         isOpen ? "left-[230px]" : "left-[30px]"
       } top-0 h-[60px] bg-[#0A1A2F]  
     text-[#F7FAFC] flex items-center justify-between  
-    transition-all duration-300 ease-in-out w-full border-b-1 z-15 border-[#172A42] shadow-[#001c34] shadow-md`}
+    transition-all duration-500 ease-in-out w-full border-b-1 z-15 border-[#172A42] shadow-[#001c34] shadow-md`}
     >
       <div>
         <Droplet />
@@ -78,7 +78,7 @@ export default function Header({ isOpen }) {
               Profile
             </button>
             <button
-              className={`absolute flex justify-center items-center pl-10 pr-10 w-50 h-[59px] transition duration-650 ease-in-out overflow-hidden hover:cursor-pointer focus:outline-none
+              className={`absolute flex justify-center items-center pl-10 pr-10 w-50 h-[59px] transition duration-600 ease-in-out overflow-hidden hover:cursor-pointer focus:outline-none
               ${
                 isAccordionOpen ? "bg-[#F7FAFC] text-[#0c172e]" : "bg-[#00c8ff]"
               }`}
