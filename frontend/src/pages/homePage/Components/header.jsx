@@ -7,21 +7,25 @@ import { useAuthContext } from "../../../hooks/useAuthContext.jsx";
 export default function Header({ isOpen }) {
   const navigate = useNavigate();
   const { user, dispatch } = useAuthContext();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
   const { logout } = useLogout();
+  const [isAccordionOpen, setIsAccordionOpen] = useState(false);
+  const accordionRef = useRef(null);
+
   const handleClick = () => {
     logout();
   };
-  const toggleDropdown = () => { 
-    setIsDropdownOpen(!isDropdownOpen);
+  const toggleAccordion = () => {
+    setIsAccordionOpen(!isAccordionOpen);
   };
 
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
+      if (
+        accordionRef.current &&
+        !accordionRef.current.contains(event.target)
+      ) {
+        setIsAccordionOpen(false);
       }
     };
 
@@ -43,52 +47,46 @@ export default function Header({ isOpen }) {
         <Droplet />
       </div>
 
-      {/* username(logout)/ profi*/}
+      {/* username(logout)/ profile*/}
       {user && (
         <div
-          className="right-4 items-center justify-center flex font-semibold relative z-[200] overflow-visible"
-          ref={dropdownRef}
+          className="flex justify-end items-center relative right-0 top-0 h-full font-semibold z-[200]"
+          ref={accordionRef}
         >
-          <div
-          className="pl-5 bg-[#26b1f1]/50"
-          style={{
-            clipPath: "polygon(41% 0%, 100% 0%, 100% 100%, 20% 100%)",
-          }}>
-          <div
-            className="pl-5 bg-[#26b1f1]/75
-"
-            style={{
-              clipPath: "polygon(43% 0%, 100% 0%, 100% 100%, 20% 100%)",
-            }}
-          >
-            <button
-              onClick={toggleDropdown}
-              className="pl-18 pr-9 px-5 py-5 h-[60px] bg-[#26b1f1] text-[#F7FAFC] hover:text-[#22373c] hover:cursor-pointer whitespace-nowrap"
+          <div className="flex justify-end items-center h-full">
+            {" "}
+            {/* ENCASES EVERYTHING */}
+              <button 
+              className={`absolute flex items-center pl-10 w-100 h-[59px] bg-[#006a88] hover:bg-red-600 hover:text-[#0c172e] transition duration-600 ease-in-out hover:cursor-pointer
+                  ${isAccordionOpen ? "translate-x-0" : "translate-x-[75%]"}`}
               style={{
-                clipPath: "polygon(45% 0%, 100% 0%, 100% 100%, 20% 100%)"
+                clipPath: "polygon(7% 0%, 100% 0%, 100% 100%, 0% 100%)",
               }}
+              onClick={handleClick}>Logout</button>
+            {/* ENCASES PROFILE */}
+            <button
+              className={`absolute flex items-center pl-10 w-75 h-[59px] bg-[#0096bf] transition duration-600 ease-in-out hover:cursor-pointer
+              ${isAccordionOpen ? "translate-x-0" : "translate-x-[75%]"}`}
+              style={{
+                clipPath: "polygon(9% 0%, 100% 0%, 100% 100%, 0% 100%)",
+              }}
+              onClick={() => navigate("/dashboard")}
+            >
+              Profile
+            </button>
+            <button
+              className={`absolute flex items-center pl-10 pr-10 px-5 py-5 h-[59px] transition duration-600 ease-in-out overflow-hidden hover:cursor-pointer
+              ${
+                isAccordionOpen ? "bg-[#F7FAFC] text-[#0c172e]" : "bg-[#00c8ff]"
+              }`}
+              style={{
+                clipPath: "polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%)",
+              }}
+              onClick={toggleAccordion}
             >
               {user.username}
             </button>
           </div>
-          </div>
-          {/* Dropdown menu */}
-          {isDropdownOpen && (
-            <div className="absolute top-12 right-10 w-30 bg-[#1E2A3B] rounded-md shadow-lg z-50 ">
-              <button
-                onClick={() => navigate("/dashboard")}
-                className="w-full px-5 py-3 text-m text-[#F7FAFC] hover:bg-[#283D55] cursor-pointer"
-              >
-                Profile
-              </button>
-              <button
-                onClick={handleClick}
-                className="w-full px-5 py-3 text-m text-[#F7FAFC] hover:bg-[#283D55] cursor-pointer"
-              >
-                Logout
-              </button>
-            </div>
-          )}
         </div>
       )}
       {!user && (
