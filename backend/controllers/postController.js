@@ -16,6 +16,7 @@ const getCounts = async (postId) => {
 // Get Posts - Home page
 const getPosts = async (req, res) => {
     try {
+        const userId = req.user._id;
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const skip = (page - 1) * limit;
@@ -27,10 +28,22 @@ const getPosts = async (req, res) => {
             .populate("user", "username");
 
         const postsWithCounts = await Promise.all(
-            posts.map(async (post) => ({
-                ...post.toObject(),
-                ...(await getCounts(post._id)),
-            }))
+            posts.map(async (post) => {
+                const likeCount = await Like.countDocuments({ post: post._id });
+                const commentCount = await Comment.countDocuments({
+                    post: post._id,
+                });
+                const isLiked = await Like.exists({
+                    post: post._id,
+                    user: userId,
+                }); // Checking if the user has liked the post
+                return {
+                    ...post.toObject(),
+                    likeCount,
+                    commentCount,
+                    isLiked: !!isLiked,
+                };
+            })
         );
 
         res.status(200).json({ getPosts: postsWithCounts });

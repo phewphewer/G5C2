@@ -6,6 +6,6 @@ const router = express.Router();
 router.post("/addlike/:postId", addLike);
 
 // Remove a like
-router.delete("/removelike/:postId", removeLike);
+router.post("/removelike/:postId", removeLike);
 
 module.exports = router;

@@ -1,19 +1,19 @@
 const express = require("express");
 const {
-  // createPostId,
-  getPosts,
-  getPostsId,
-  createPost,
-  getPost,
-  deletePost,
-  updatePost,
+    // createPostId,
+    getPosts,
+    getPostsId,
+    createPost,
+    getPost,
+    deletePost,
+    updatePost,
 } = require("../controllers/postController");
 
 const requireAuth = require("../middleware/requireAuth");
 const router = express.Router();
 
 // Get Posts - Home page
-router.get("/posts/", getPosts);
+router.get("/posts/", requireAuth, getPosts);
 
 router.use(requireAuth);
 
