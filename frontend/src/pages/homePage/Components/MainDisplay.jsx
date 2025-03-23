@@ -112,6 +112,7 @@ export default function PostPage() {
 
     setSortedPosts(sorted);
   };
+  
   useEffect(() => {
     fetchPosts(); // Initial fetch of posts
     handleSort("Recent");
@@ -189,11 +190,9 @@ export default function PostPage() {
 
           {/* Right - Featured Section (Sticky) */}
           <div className="w-1/4 p-4">
-            <div className="bg-[#0A1A2F]   p-4 rounded-lg hover:border-[#374151] border-[#1F2937] z-0 border-1 sticky top-36">
+            <div className="bg-[#0A1A2F] min-w-80 p-4 rounded-lg hover:border-[#374151] border-[#1F2937] z-0 border-1 sticky top-36">
               <h2 className="text-center font-bold text-2xl mb-4">Featured</h2>
               <div className="space-y-4 overflow-y-auto max-h-[70vh] custom-scrollbar">
-                <FeaturedCard />
-                <FeaturedCard />
                 <FeaturedCard />
               </div>
             </div>

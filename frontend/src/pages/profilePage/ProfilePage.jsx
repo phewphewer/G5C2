@@ -1,8 +1,8 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import PostCard from '../../components/posting/PostCard';
-import RightSidebar, { LeftSidebar } from './components/RightSidebar';
-import Sidebar from '../homePage/Components/sidebar';
+import RightSidebar from './components/RightSidebar';
+import DashboardNavBar from './components/DashboardNavBar';
 import Header from '../homePage/Components/header';
 
 const ProfileLayout = () => {
@@ -17,17 +17,14 @@ const ProfileLayout = () => {
   //   };
   //   fetchUser();
   // }, []);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
     <div className="app-container relative bg-[#050E1A]">
       {/* Pass state and setter to Sidebar */}
-          <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+          <DashboardNavBar/>
       {/* Pass sidebar state to Header */}
       <div
-        className={`main-content transition-all duration-100 ease-in-out ${
-          isSidebarOpen ? "ml-[250px]" : "ml-[50px]"
-        }`}
+        className="main-content ml-[250px] transition-all duration-100 ease-in-out"
       >
         {/* <Header isOpen={isSidebarOpen} /> */}
         {/* <div className="flex flex-col md:flex-row w-full h-screen p-4 gap-4 bg-[#283D55]"> */}
@@ -35,9 +32,6 @@ const ProfileLayout = () => {
               {/* Main Content */}
               {/* example 4 posts */}
               <main className="space-y-5 md:w-3/4 overflow-y-auto mr-2 custom-scrollbar">
-                <PostCard />
-                <PostCard />
-                <PostCard />
                 <PostCard />
               </main>
               

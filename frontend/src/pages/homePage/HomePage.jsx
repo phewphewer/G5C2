@@ -8,7 +8,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 export default function HomePage() {
   // Manage sidebar state at the parent level
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <div className="app-container relative bg-[#050E1A]  custom-scrollbar">
