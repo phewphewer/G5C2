@@ -118,6 +118,17 @@ const PostCard = () => {
                             ...prev,
                             [postId]: true,
                         }));
+
+                        setPosts((prevPosts) =>
+                            prevPosts.map((post) =>
+                                post._id === postId
+                                    ? {
+                                          ...post,
+                                          commentCount: post.commentCount + 1,
+                                      }
+                                    : post
+                            )
+                        );
                     } else {
                         console.error(
                             "Failed to fetch updated comments:",
