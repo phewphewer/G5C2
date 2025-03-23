@@ -53,6 +53,32 @@ const getPosts = async (req, res) => {
     }
 };
 
+const getPublicPosts = async (req, res) => {
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const skip = (page - 1) * limit;
+
+        const posts = await Post.find({})
+            .skip(skip)
+            .limit(limit)
+            .sort({ createdAt: -1 })
+            .populate("user", "username");
+
+        const postsWithCounts = await Promise.all(
+            posts.map(async (post) => ({
+                ...post.toObject(),
+                ...(await getCounts(post._id)),
+            }))
+        );
+
+        res.status(200).json({ getPosts: postsWithCounts });
+    } catch (error) {
+        console.error("Error in getPosts:", error.message);
+        res.status(500).json({ error: "Server error" });
+    }
+};
+
 // Get all posts of a user
 const getPostsId = async (req, res) => {
     try {
@@ -183,4 +209,5 @@ module.exports = {
     deletePost,
     updatePost,
     getPostsId,
+    getPublicPosts,
 };

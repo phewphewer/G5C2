@@ -16,15 +16,18 @@ const PostCard = () => {
 
     const fetchPosts = async () => {
         try {
-            const response = await fetch("/api/post/posts", {
-                headers: {
-                    Authorization: `Bearer ${user?.token}`,
-                },
-            });
+            const response = await fetch(
+                user?.token ? "/api/post/posts" : "/api/post/public",
+                {
+                    headers: user?.token
+                        ? { Authorization: `Bearer ${user.token}` }
+                        : {},
+                }
+            );
             const json = await response.json();
 
             if (response.ok && json.getPosts && Array.isArray(json.getPosts)) {
-                setPosts(json.getPosts); // Use the isLiked property from the backend
+                setPosts(json.getPosts);
             } else {
                 console.error(
                     "Error: Expected an array of posts, received:",

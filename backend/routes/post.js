@@ -7,6 +7,7 @@ const {
     getPost,
     deletePost,
     updatePost,
+    getPublicPosts,
 } = require("../controllers/postController");
 
 const requireAuth = require("../middleware/requireAuth");
@@ -14,6 +15,8 @@ const router = express.Router();
 
 // Get Posts - Home page
 router.get("/posts/", requireAuth, getPosts);
+
+router.get("/public", getPublicPosts);
 
 router.use(requireAuth);
 
