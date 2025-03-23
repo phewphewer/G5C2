@@ -37,7 +37,7 @@ export default function Header({ isOpen }) {
         isOpen ? "left-[230px]" : "left-[30px]"
       } top-0 h-[60px] bg-[#0A1A2F]  
     text-[#F7FAFC] flex items-center justify-between  
-    transition-all duration-300 ease-in-out w-full border-b-1 z-15 border-[#172A42]`}
+    transition-all duration-300 ease-in-out w-full border-b-1 z-15 border-[#172A42] shadow-[#001c34] shadow-md`}
     >
       <div>
         <Droplet />

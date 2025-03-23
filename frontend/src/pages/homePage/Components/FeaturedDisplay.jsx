@@ -22,10 +22,10 @@ export default function FeaturedPost({
   return (
     <>
       <div className="w-1/4 p-4">
-        <div className="bg-[#0A1A2F] min-w-80 p-4 rounded-lg hover:border-[#374151] border-[#1F2937] z-0 border-1 sticky top-36">
-          <h2 className="text-center font-bold text-2xl mb-4">Featured</h2>
+        <div className="bg-[#37c7bb] min-w-80 p-4 rounded-lg hover:border-[#ffffff] border-[#bdbdbd] z-0 border-2 sticky top-36">
+          <h4 className="text-center font-bold text-2xl mb-4">FEATURED</h4>
           <div className="space-y-4 overflow-y-auto max-h-[70vh] custom-scrollbar">
-            <div className="bg-[#0A1A2F] text-white z-[0] rounded-lg p-5 shadow-lg mb-5 hover:border-[#374151] border-[#1F2937] border-1 ">
+            <div className="bg-[#0A1A2F] text-white  z-[0] rounded-lg p-5 shadow-lg mb-5 hover:border-[#374151] border-[#1F2937] border-1 ">
               {/* FEATURE HEADER PO */}
               <div className="flex items-center space-x-3">
                 <div>
