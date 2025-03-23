@@ -25,14 +25,16 @@ const getPosts = async (req, res) => {
             .skip(skip)
             .limit(limit)
             .sort({ createdAt: -1 })
-            .populate("user", "username");
+            .populate("user", "username")
+            .populate({
+                path: "comments",
+                populate: { path: "user", select: "username" },
+            });
 
         const postsWithCounts = await Promise.all(
             posts.map(async (post) => {
                 const likeCount = await Like.countDocuments({ post: post._id });
-                const commentCount = await Comment.countDocuments({
-                    post: post._id,
-                });
+                const commentCount = post.comments.length;
                 const isLiked = await Like.exists({
                     post: post._id,
                     user: userId,
@@ -202,6 +204,47 @@ const updatePost = async (req, res) => {
     }
 };
 
+const addCommentToPost = async (req, res) => {
+    const { id } = req.params; // Post ID
+    const { text } = req.body; // Comment text
+    const userId = req.user._id; // Authenticated user ID
+
+    try {
+        const post = await Post.findById(id);
+
+        if (!post) {
+            return res.status(404).json({ error: "Post not found" });
+        }
+
+        const comment = await Comment.create({
+            text,
+            user: userId,
+            post: id,
+        });
+
+        post.comments.push(comment);
+        await post.save();
+
+        const updatedPost = await Post.findById(id)
+            .populate("user", "username")
+            .populate({
+                path: "comments",
+                populate: { path: "user", select: "username" },
+            });
+
+        const likeCount = await Like.countDocuments({ post: id });
+        const commentCount = post.comments.length;
+
+        res.status(201).json({
+            ...updatedPost.toObject(),
+            likeCount,
+            commentCount,
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 module.exports = {
     createPost,
     getPosts,
@@ -210,4 +253,5 @@ module.exports = {
     updatePost,
     getPostsId,
     getPublicPosts,
+    addCommentToPost,
 };

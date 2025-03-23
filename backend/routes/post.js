@@ -8,6 +8,7 @@ const {
     deletePost,
     updatePost,
     getPublicPosts,
+    addCommentToPost,
 } = require("../controllers/postController");
 
 const requireAuth = require("../middleware/requireAuth");
@@ -37,5 +38,7 @@ router.delete("/delete_post/:id", deletePost);
 
 // Update a post
 router.patch("/update_post/:id", updatePost);
+
+router.post("/post/:id/comment", requireAuth, addCommentToPost);
 
 module.exports = router;

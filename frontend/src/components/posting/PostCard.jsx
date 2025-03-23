@@ -76,18 +76,63 @@ const PostCard = () => {
         }
     };
 
-    const handleComment = (e, postId) => {
+    const handleComment = async (e, postId) => {
         e.preventDefault();
+
         if (commentText[postId]?.trim()) {
-            const newComment = {
-                postId,
-                user: "You",
-                text: commentText[postId],
-                create_date: "Just now",
-            };
-            setComments([newComment, ...comments]);
-            setCommentText((prev) => ({ ...prev, [postId]: "" }));
-            setShowComments((prev) => ({ ...prev, [postId]: true }));
+            try {
+                const response = await fetch(
+                    `/api/post/post/${postId}/comment`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${user?.token}`,
+                        },
+                        body: JSON.stringify({ text: commentText[postId] }),
+                    }
+                );
+
+                if (response.ok) {
+                    // Clear the input field for this post
+                    setCommentText((prev) => ({ ...prev, [postId]: "" }));
+
+                    // Fetch the updated comments for the post
+                    const commentsResponse = await fetch(
+                        `/api/comments/post/${postId}/comments`,
+                        {
+                            method: "GET",
+                            headers: {
+                                Authorization: `Bearer ${user?.token}`,
+                            },
+                        }
+                    );
+
+                    if (commentsResponse.ok) {
+                        const data = await commentsResponse.json();
+                        setComments((prev) => ({
+                            ...prev,
+                            [postId]: data.comments,
+                        }));
+                        setShowComments((prev) => ({
+                            ...prev,
+                            [postId]: true,
+                        }));
+                    } else {
+                        console.error(
+                            "Failed to fetch updated comments:",
+                            await commentsResponse.text()
+                        );
+                    }
+                } else {
+                    console.error(
+                        "Failed to add comment:",
+                        await response.text()
+                    );
+                }
+            } catch (error) {
+                console.error("Error adding comment:", error);
+            }
         }
     };
 
@@ -116,7 +161,33 @@ const PostCard = () => {
         setShowDropdown(showDropdown === postId ? null : postId);
     };
 
-    const toggleComments = (postId) => {
+    const toggleComments = async (postId) => {
+        if (!showComments[postId]) {
+            try {
+                const response = await fetch(
+                    `/api/comments/post/${postId}/comments`,
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${user?.token}`,
+                        },
+                    }
+                );
+                const data = await response.json();
+
+                if (response.ok) {
+                    setComments((prev) => ({
+                        ...prev,
+                        [postId]: data.comments,
+                    }));
+                } else {
+                    console.error("Failed to fetch comments:", data.message);
+                }
+            } catch (error) {
+                console.error("Error fetching comments:", error);
+            }
+        }
+
         setShowComments((prev) => ({ ...prev, [postId]: !prev[postId] }));
     };
 
@@ -273,14 +344,10 @@ const PostCard = () => {
                             )}
 
                             {/* Comment Accordion */}
-                            {showComments[post._id] && (
+                            {showComments[post._id] && comments[post._id] && (
                                 <div className="space-y-3 mt-2 border-t border-[#283D55] pt-2 max-h-64 overflow-y-auto">
-                                    {comments
-                                        .filter(
-                                            (comment) =>
-                                                comment.postId === post._id
-                                        )
-                                        .map((comment, index) => (
+                                    {comments[post._id].map(
+                                        (comment, index) => (
                                             <div
                                                 key={index}
                                                 className="flex space-x-2"
@@ -288,12 +355,14 @@ const PostCard = () => {
                                                 <div className="bg-[#283D55] rounded-lg px-3 py-2 flex-1">
                                                     <div className="flex justify-between items-center">
                                                         <h4 className="font-medium text-sm text-[#F7FAFC]">
-                                                            {comment.user}
+                                                            {comment.user
+                                                                ?.username ||
+                                                                "Anonymous"}
                                                         </h4>
                                                         <span className="text-xs text-[#CBD5E1]">
-                                                            {
-                                                                comment.create_date
-                                                            }
+                                                            {new Date(
+                                                                comment.createdAt
+                                                            ).toLocaleString()}
                                                         </span>
                                                     </div>
                                                     <p className="text-sm text-[#F7FAFC]">
@@ -301,7 +370,8 @@ const PostCard = () => {
                                                     </p>
                                                 </div>
                                             </div>
-                                        ))}
+                                        )
+                                    )}
                                 </div>
                             )}
                         </div>
