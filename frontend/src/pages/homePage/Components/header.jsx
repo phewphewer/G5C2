@@ -56,13 +56,16 @@ export default function Header({ isOpen }) {
           <div className="flex justify-end items-center h-full">
             {" "}
             {/* ENCASES EVERYTHING */}
-              <button 
+            <button
               className={`absolute flex items-center pl-10 w-100 h-[59px] bg-[#006a88] hover:bg-red-600 hover:text-[#0c172e] transition duration-600 ease-in-out hover:cursor-pointer focus:outline-none
                   ${isAccordionOpen ? "translate-x-" : "translate-x-[40%]"}`}
               style={{
                 clipPath: "polygon(6% 0%, 100% 0%, 100% 100%, 0% 100%)",
               }}
-              onClick={handleClick}>Logout</button>
+              onClick={handleClick}
+            >
+              Logout
+            </button>
             {/* ENCASES PROFILE */}
             <button
               className={`absolute flex items-center pl-10 w-75 h-[59px] bg-[#0096bf] hover:bg-[#0c172e] transition duration-600 ease-in-out hover:cursor-pointer focus:outline-none
@@ -75,7 +78,7 @@ export default function Header({ isOpen }) {
               Profile
             </button>
             <button
-              className={`absolute flex justify-center items-center pl-10 pr-10 w-50 h-[59px] transition duration-600 ease-in-out overflow-hidden hover:cursor-pointer focus:outline-none
+              className={`absolute flex justify-center items-center pl-10 pr-10 w-50 h-[59px] transition duration-650 ease-in-out overflow-hidden hover:cursor-pointer focus:outline-none
               ${
                 isAccordionOpen ? "bg-[#F7FAFC] text-[#0c172e]" : "bg-[#00c8ff]"
               }`}
