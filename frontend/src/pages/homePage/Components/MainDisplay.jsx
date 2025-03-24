@@ -10,39 +10,12 @@ export default function PostPage() {
     const [isFeatured, setIsFeatured] = useState(false);
     const [posts, setPosts] = useState([
         {
-            id: 1,
-            content: "Post 1",
-            timestamp: "2025-03-12",
-            likes: 10,
+            id: "",
+            title: "",
+            body: "",
+            timestamp: "",
+            likes: 0,
             isFeatured: true,
-        },
-        {
-            id: 2,
-            content: "Post 2",
-            timestamp: "2025-02-21",
-            likes: 20,
-            isFeatured: false,
-        },
-        {
-            id: 3,
-            content: "Post 3",
-            timestamp: "2025-10-03",
-            likes: 15,
-            isFeatured: false,
-        },
-        {
-            id: 4,
-            content: "Post 4",
-            timestamp: "2023-10-04",
-            likes: 25,
-            isFeatured: false,
-        },
-        {
-            id: 5,
-            content: "Post 5",
-            timestamp: "2023-10-05",
-            likes: 30,
-            isFeatured: false,
         },
     ]);
     const [sortedPosts, setSortedPosts] = useState(posts);

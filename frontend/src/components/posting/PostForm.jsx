@@ -47,9 +47,9 @@ export default function PostForm() {
         <div className="w-full bg-[#3b3699] hover:bg-[#3d379c] p-6 shadow-md rounded-lg border-1 border-[#F7FAFC]">
             <div className="space-y-4">
                 <div className="flex items-center">
-                    <h10 className="font-bold text-[120%] text-[#00c8ff]">
+                    <h3 className="font-bold text-[120%] text-[#00c8ff]">
                         you
-                    </h10>
+                    </h3>
                 </div>
                 <form onSubmit={handlePostSubmit}>
                     <input
