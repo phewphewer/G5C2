@@ -47,19 +47,19 @@ export default function Sidebar({ isOpen, setIsOpen }) {
         ref={dropdownRef}
       >
         <ul className="list-none p-0 mt-[50px]">
-          <li className="py-[15px] px-[20px] text-[18px] cursor-pointer text-[#CBD5E1] hover:bg-white/10 hover:rounded-md hover:text-[#F7FAFC]">
+          <li className="cursor-pointer text-[#CBD5E1] hover:bg-white/10 hover:rounded-md hover:text-[#F7FAFC]">
             <Link to="/home">
               <button
-                className="w-full h-full hover:cursor-pointer"
+                className="py-[15px] px-[20px] text-[18px] w-full h-full hover:cursor-pointer"
                 onClick={fetchPosts}
               >
                 Home
               </button>
             </Link>
           </li>
-          <li className=" py-[15px] px-[20px] text-[18px] cursor-pointer text-[#CBD5E1] hover:bg-white/10 hover:rounded-md hover:text-[#F7FAFC]">
+          <li className="  cursor-pointer text-[#CBD5E1] hover:bg-white/10 hover:rounded-md hover:text-[#F7FAFC]">
             <button
-              className="w-full h-full hover:cursor-pointer "
+              className="py-[15px] px-[20px] text-[18px] w-full h-full hover:cursor-pointer "
               onClick={toggleAbout}
             >
               About
@@ -74,9 +74,9 @@ export default function Sidebar({ isOpen, setIsOpen }) {
               </div>
             )}
           </li>
-          <li className="py-[15px] px-[20px] text-[18px] cursor-pointer text-[#CBD5E1] hover:bg-white/10 hover:rounded-md hover:text-[#F7FAFC]">
+          <li className=" cursor-pointer text-[#CBD5E1] hover:bg-white/10 hover:rounded-md hover:text-[#F7FAFC]">
             <button
-              className="w-full h-full hover:cursor-pointer"
+              className="py-[15px] px-[20px] text-[18px] w-full h-full hover:cursor-pointer"
               onClick={toggleContact}
             >
               Contact Us
@@ -87,9 +87,9 @@ export default function Sidebar({ isOpen, setIsOpen }) {
               </div>
             )}
           </li>
-          <li className="py-[15px] px-[20px] text-[18px] cursor-pointer text-[#CBD5E1] hover:bg-white/10 hover:rounded-md hover:text-[#F7FAFC]">
+          <li className="cursor-pointer text-[#CBD5E1] hover:bg-white/10 hover:rounded-md hover:text-[#F7FAFC]">
             <button
-              className="w-full h-full hover:cursor-pointer"
+              className="py-[15px] px-[20px] text-[18px] w-full h-full hover:cursor-pointer"
               onClick={toggleSupport}
             >
               Support Us
