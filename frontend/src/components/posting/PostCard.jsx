@@ -2,17 +2,21 @@
 import { useState, useEffect } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
-const PostCard = () => {
+const PostCard = ({ posts: propPosts, onPostsChange }) => {
     const [posts, setPosts] = useState([]);
     const { user } = useAuthContext();
-    const [commentText, setCommentText] = useState("");
+    const [commentText, setCommentText] = useState({});
     const [comments, setComments] = useState([]);
     const [showComments, setShowComments] = useState({});
     const [showDropdown, setShowDropdown] = useState(null);
 
     useEffect(() => {
-        fetchPosts();
-    }, []);
+        if (propPosts && propPosts.length > 0) {
+            setPosts(propPosts);
+        } else {
+            fetchPosts();
+        }
+    }, [propPosts]);
 
     const fetchPosts = async () => {
         try {
@@ -28,6 +32,9 @@ const PostCard = () => {
 
             if (response.ok && json.getPosts && Array.isArray(json.getPosts)) {
                 setPosts(json.getPosts);
+                if (onPostsChange) {
+                    onPostsChange(json.getPosts);
+                }
             } else {
                 console.error(
                     "Error: Expected an array of posts, received:",
@@ -58,19 +65,22 @@ const PostCard = () => {
             }
 
             // Toggle like state based on response
-            setPosts((prevPosts) =>
-                prevPosts.map((post) =>
-                    post._id === postId
-                        ? {
-                              ...post,
-                              likeCount: isLiked
-                                  ? post.likeCount - 1
-                                  : post.likeCount + 1,
-                              isLiked: !isLiked,
-                          }
-                        : post
-                )
+            const updatedPosts = posts.map((post) =>
+                post._id === postId
+                    ? {
+                          ...post,
+                          likeCount: isLiked
+                              ? post.likeCount - 1
+                              : post.likeCount + 1,
+                          isLiked: !isLiked,
+                      }
+                    : post
             );
+
+            setPosts(updatedPosts);
+            if (onPostsChange) {
+                onPostsChange(updatedPosts);
+            }
         } catch (error) {
             console.error("Failed to toggle like:", error.message);
         }
@@ -94,10 +104,8 @@ const PostCard = () => {
                 );
 
                 if (response.ok) {
-                    // Clear the input field for this post
                     setCommentText((prev) => ({ ...prev, [postId]: "" }));
 
-                    // Fetch the updated comments for the post
                     const commentsResponse = await fetch(
                         `/api/comments/post/${postId}/comments`,
                         {
@@ -119,16 +127,20 @@ const PostCard = () => {
                             [postId]: true,
                         }));
 
-                        setPosts((prevPosts) =>
-                            prevPosts.map((post) =>
-                                post._id === postId
-                                    ? {
-                                          ...post,
-                                          commentCount: post.commentCount + 1,
-                                      }
-                                    : post
-                            )
+                        const updatedPosts = posts.map((post) =>
+                            post._id === postId
+                                ? {
+                                      ...post,
+                                      commentCount: post.commentCount + 1,
+                                  }
+                                : post
                         );
+
+                        setPosts(updatedPosts);
+
+                        if (onPostsChange) {
+                            onPostsChange(updatedPosts);
+                        }
                     } else {
                         console.error(
                             "Failed to fetch updated comments:",
@@ -157,9 +169,14 @@ const PostCard = () => {
             });
 
             if (response.ok) {
-                setPosts((prevPosts) =>
-                    prevPosts.filter((post) => post._id !== postId)
+                const updatedPosts = posts.filter(
+                    (post) => post._id !== postId
                 );
+                setPosts(updatedPosts);
+
+                if (onPostsChange) {
+                    onPostsChange(updatedPosts);
+                }
             } else {
                 console.error("Failed to delete post");
             }
@@ -278,8 +295,8 @@ const PostCard = () => {
 
                             {/* Engagement stats */}
                             <div className="flex justify-between text-sm text-[#CBD5E1] pt-2 border-t border-[#283D55]">
-                                <span>{post.likeCount} likes</span>
-                                <span>{post.commentCount} comments</span>
+                                <span>{post.likeCount || 0} likes</span>
+                                <span>{post.commentCount || 0} comments</span>
                             </div>
 
                             {/* Action buttons */}

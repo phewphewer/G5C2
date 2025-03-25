@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+"use client";
+
+import { useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext"; // Import authentication context
 
-export default function PostForm() {
+export default function PostForm({ onPostCreated }) {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const { user } = useAuthContext();
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handlePostSubmit = async (e) => {
         e.preventDefault();
@@ -18,6 +21,8 @@ export default function PostForm() {
             alert("You must be logged in to post.");
             return;
         }
+
+        setIsSubmitting(true);
 
         try {
             const response = await fetch("/api/post/create_post", {
@@ -36,10 +41,18 @@ export default function PostForm() {
             const newPost = await response.json();
             console.log("Post created:", newPost);
 
+            // Call the callback function to update the parent component's state
+            if (onPostCreated) {
+                onPostCreated(newPost);
+            }
+
+            // Clear the form
             setTitle("");
             setBody("");
         } catch (error) {
             console.error("Error creating post:", error);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -58,19 +71,26 @@ export default function PostForm() {
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder="Enter post title"
                         className="w-full my-2 p-2 border border-[#94A3B8] hover:border-[#F7FAFC] rounded-md text-[#F7FAFC] focus:outline-none"
+                        disabled={isSubmitting}
                     />
                     <textarea
                         value={body}
                         onChange={(e) => setBody(e.target.value)}
                         placeholder="What's on your mind?"
                         className="placeholder:italic w-full h-30 my-5 rounded-md border border-[#94A3B8] hover:border-[#F7FAFC] indent-2 pt-1 overflow-y-scroll text-[#F7FAFC] focus:outline-none"
+                        disabled={isSubmitting}
                     />
                     <div className="flex justify-end">
                         <button
                             type="submit"
-                            className="rounded-md px-12 py-1 font-bold border-2 bg-[#0081a4] hover:bg-[#00c8ff] flex justify-center items-center bg-[] w-20 hover:cursor-pointer focus:outline-none"
+                            className={`rounded-md px-12 py-1 font-bold border-2 bg-[#0081a4] hover:bg-[#00c8ff] flex justify-center items-center w-20 hover:cursor-pointer focus:outline-none ${
+                                isSubmitting
+                                    ? "opacity-50 cursor-not-allowed"
+                                    : ""
+                            }`}
+                            disabled={isSubmitting}
                         >
-                            RIPPLE
+                            {isSubmitting ? "..." : "RIPPLE"}
                         </button>
                     </div>
                 </form>

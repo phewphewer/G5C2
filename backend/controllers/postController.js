@@ -148,7 +148,20 @@ const createPost = async (req, res) => {
         const userId = req.user._id;
 
         const post = await Post.create({ title, body, user: userId });
-        res.status(201).json(post);
+
+        const populatedPost = await Post.findById(post._id).populate(
+            "user",
+            "username email"
+        );
+
+        const postWithCounts = {
+            ...populatedPost.toObject(),
+            likeCount: 0,
+            commentCount: 0,
+            isLiked: false,
+        };
+
+        res.status(201).json(postWithCounts);
     } catch (error) {
         console.error("Error creating post:", error);
         res.status(400).json({ error: error.message });
@@ -159,17 +172,25 @@ const createPost = async (req, res) => {
 const deletePost = async (req, res) => {
     try {
         const { id } = req.params;
+        const userId = req.user._id;
 
         if (!isValidObjectId(id)) {
             return res.status(404).json({ error: "Invalid post ID" });
         }
 
-        const post = await Post.findByIdAndDelete(id);
+        const post = await Post.findById(id);
 
         if (!post) {
             return res.status(404).json({ error: "Post not found" });
         }
 
+        if (post.user.toString() !== userId.toString()) {
+            return res
+                .status(403)
+                .json({ error: "Not authorized to delete this post" });
+        }
+
+        await Post.findByIdAndDelete(id);
         await Comment.deleteMany({ post: id });
         await Like.deleteMany({ post: id });
 

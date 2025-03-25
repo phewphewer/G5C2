@@ -8,57 +8,62 @@ export default function PostPage() {
     const { user } = useContext(AuthContext);
     const [sortBy, setSortBy] = useState("Sort by");
     const [isFeatured, setIsFeatured] = useState(false);
-    const [posts, setPosts] = useState([
-        {
-            id: "",
-            title: "",
-            body: "",
-            timestamp: "",
-            likes: 0,
-            isFeatured: true,
-        },
-    ]);
-    const [sortedPosts, setSortedPosts] = useState(posts);
+    const [posts, setPosts] = useState([]);
+    const [sortedPosts, setSortedPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
     const fetchPosts = async () => {
         try {
             setLoading(true);
-            const response = await fetch("/api/posts/poll");
+            const endpoint =
+                user && user.token ? "/api/post/posts" : "/api/post/public";
+            const response = await fetch(endpoint, {
+                headers: user?.token
+                    ? { Authorization: `Bearer ${user.token}` }
+                    : {},
+            });
+
             if (!response.ok) {
                 throw new Error("Failed to fetch posts");
             }
+
             const data = await response.json();
-            setPosts(data); // Update posts state with the fetched data
+            const postsArray = data.getPosts || [];
+
+            setPosts(postsArray); // Update posts state with the fetched data
+            handleSort("Recent", postsArray); // Sort the newly fetched posts
         } catch (error) {
             setError(error.message); // Set error message if the fetch fails
-            console.log(setError);
+            console.error("Error fetching posts:", error);
         } finally {
             setLoading(false); // End loading
         }
     };
 
-    const handleSort = (sortType) => {
+    const handleSort = (sortType, postsToSort = posts) => {
         console.log(`Sort by ${sortType}`);
-        // setSortBy(sortType);
-        let sorted = [...posts];
+        setSortBy(sortType);
+        let sorted = [...postsToSort];
         const now = new Date();
 
         switch (sortType) {
             case "Recent":
                 sorted.sort(
-                    (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
+                    (a, b) =>
+                        new Date(b.createdAt || b.timestamp) -
+                        new Date(a.createdAt || a.timestamp)
                 );
                 break;
             case "Featured":
                 sorted = sorted.filter((post) => post.isFeatured);
                 break;
             case "Popular":
-                sorted.sort((a, b) => b.likes - a.likes);
+                sorted.sort((a, b) => (b.likeCount || 0) - (a.likeCount || 0));
                 break;
             case "Week":
                 sorted = sorted.filter((post) => {
-                    const postDate = new Date(post.timestamp);
+                    const postDate = new Date(post.createdAt || post.timestamp);
                     const diffTime = Math.abs(now - postDate);
                     const diffDays = Math.ceil(
                         diffTime / (1000 * 60 * 60 * 24)
@@ -68,7 +73,7 @@ export default function PostPage() {
                 break;
             case "Month":
                 sorted = sorted.filter((post) => {
-                    const postDate = new Date(post.timestamp);
+                    const postDate = new Date(post.createdAt || post.timestamp);
                     const diffTime = Math.abs(now - postDate);
                     const diffDays = Math.ceil(
                         diffTime / (1000 * 60 * 60 * 24)
@@ -78,7 +83,7 @@ export default function PostPage() {
                 break;
             case "Year":
                 sorted = sorted.filter((post) => {
-                    const postDate = new Date(post.timestamp);
+                    const postDate = new Date(post.createdAt || post.timestamp);
                     const diffTime = Math.abs(now - postDate);
                     const diffDays = Math.ceil(
                         diffTime / (1000 * 60 * 60 * 24)
@@ -88,24 +93,52 @@ export default function PostPage() {
                 break;
             default:
                 sorted.sort(
-                    (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
+                    (a, b) =>
+                        new Date(b.createdAt || b.timestamp) -
+                        new Date(a.createdAt || a.timestamp)
                 );
                 break;
         }
 
         setSortedPosts(sorted);
     };
+    const handlePostCreated = (newPost) => {
+        console.log("New post created:", newPost);
+
+        const processedPost = {
+            ...newPost,
+            likeCount: newPost.likeCount || 0,
+            commentCount: newPost.commentCount || 0,
+            isLiked: newPost.isLiked || false,
+            user: newPost.user || {
+                _id: user._id,
+                username: user.username || user.email,
+            },
+        };
+
+        const updatedPosts = [processedPost, ...posts];
+        setPosts(updatedPosts);
+
+        handleSort(sortBy, updatedPosts);
+    };
+
+    const handlePostsChange = (updatedPosts) => {
+        setPosts(updatedPosts);
+        handleSort(sortBy, updatedPosts);
+    };
 
     useEffect(() => {
         fetchPosts(); // Initial fetch of posts
-        handleSort("Recent");
+
         const intervalId = setInterval(fetchPosts, 900000);
         // Cleanup the interval when the component is unmounted
         return () => clearInterval(intervalId);
     }, []); // Empty dependency array means it runs once when the component mounts
 
-    if (loading) return <p>Loading posts...</p>;
-    if (error) return <p>Error: {error}</p>;
+    if (loading)
+        return <p className="text-center py-8 text-white">Loading posts...</p>;
+    if (error)
+        return <p className="text-center py-8 text-red-500">Error: {error}</p>;
 
     return (
         <div className="min-h-screen bg-[#050E1A] text-white pt-17 flex">
@@ -151,26 +184,27 @@ export default function PostPage() {
                 <div className="flex">
                     {user && (
                         <>
-                            <div className="flex-1 p-4  ">
+                            <div className="flex-1 p-4">
                                 <div className="flex-1 p-4">
-                                    <PostForm />
+                                    <PostForm
+                                        onPostCreated={handlePostCreated}
+                                    />
                                 </div>
                                 <div className="flex-1 p-4">
-                                    {sortedPosts.map((post) => (
-                                        <PostCard key={post.id} />
-                                    ))}
+                                    <PostCard
+                                        posts={sortedPosts}
+                                        onPostsChange={handlePostsChange}
+                                    />
                                 </div>
                             </div>
                         </>
                     )}
                     {!user && (
                         <div className="flex-1 p-4">
-                            {sortedPosts.map((post) => (
-                                <PostCard
-                                    key={post.id}
-                                    content={post.content}
-                                />
-                            ))}
+                            <PostCard
+                                posts={sortedPosts}
+                                onPostsChange={handlePostsChange}
+                            />
                         </div>
                     )}
 
