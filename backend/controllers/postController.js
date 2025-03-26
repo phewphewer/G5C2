@@ -18,12 +18,12 @@ const getPosts = async (req, res) => {
     try {
         const userId = req.user._id;
         const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 10;
-        const skip = (page - 1) * limit;
+        // const limit = parseInt(req.query.limit) || 10;
+        const skip = page - 1;
 
         const posts = await Post.find({})
             .skip(skip)
-            .limit(limit)
+            // .limit(limit)
             .sort({ createdAt: -1 })
             .populate("user", "username")
             .populate({
@@ -58,12 +58,12 @@ const getPosts = async (req, res) => {
 const getPublicPosts = async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 10;
-        const skip = (page - 1) * limit;
+        // const limit = parseInt(req.query.limit) || 10;
+        const skip = page - 1;
 
         const posts = await Post.find({})
             .skip(skip)
-            .limit(limit)
+            // .limit(limit)
             .sort({ createdAt: -1 })
             .populate("user", "username");
 
