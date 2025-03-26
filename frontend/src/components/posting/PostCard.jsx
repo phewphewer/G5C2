@@ -3,12 +3,15 @@ import { useState, useEffect } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 const PostCard = ({ posts: propPosts, onPostsChange }) => {
-  const [posts, setPosts] = useState([]);
   const { user } = useAuthContext();
+  const [posts, setPosts] = useState([]);
   const [commentText, setCommentText] = useState({});
   const [comments, setComments] = useState([]);
   const [showComments, setShowComments] = useState({});
   const [showDropdown, setShowDropdown] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
 
   useEffect(() => {
     if (propPosts && propPosts.length > 0) {
@@ -146,10 +149,6 @@ const PostCard = ({ posts: propPosts, onPostsChange }) => {
     }
   };
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-
   const handleEdit = async (postId) => {
     try {
       const response = await fetch(`/api/post/post/${postId}`, {
@@ -172,7 +171,6 @@ const PostCard = ({ posts: propPosts, onPostsChange }) => {
   };
 
   const handleSubmitEdit = async (e, postId) => {
-   
     if (!title.trim() || !body.trim()) {
       alert("Both title and body are required!");
       return;
@@ -204,8 +202,11 @@ const PostCard = ({ posts: propPosts, onPostsChange }) => {
       setIsEditing(false);
 
       const updatedPosts = posts.map((p) =>
-        post._id.toString() === postId.toString() ? { ...p, title: post.title, body: post.body } : p
+        p._id.toString() === postId.toString()
+          ? { ...p, title: title, body: body }
+          : p
       );
+
       setPosts(updatedPosts);
 
       if (onPostsChange) onPostsChange(updatedPosts);
@@ -215,7 +216,6 @@ const PostCard = ({ posts: propPosts, onPostsChange }) => {
   };
 
   const handleDelete = async (postId) => {
-
     try {
       const response = await fetch(`/api/post/delete_post/${postId}`, {
         method: "DELETE",
@@ -352,7 +352,10 @@ const PostCard = ({ posts: propPosts, onPostsChange }) => {
                 {/* EDITING FORM */}
                 {isEditing === post._id ? (
                   <>
-                    <form onSubmit={((e) => handleSubmitEdit(e, post._id))} className="space-y-5">
+                    <form
+                      onSubmit={(e) => handleSubmitEdit(e, post._id)}
+                      className="space-y-5"
+                    >
                       <div className="w-full">
                         <input
                           type="text"
