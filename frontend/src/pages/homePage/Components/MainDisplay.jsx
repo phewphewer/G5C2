@@ -49,7 +49,11 @@ export default function PostPage() {
         console.group(`[Sorting] ${sortType}`);
         console.log("Original posts:", postsToSort);
 
-        setSortBy(sortType);
+        if (["Recent", "Popular", "Featured"].includes(sortType)) {
+            setSortBy("Sort by");
+        } else {
+            setSortBy(sortType);
+        }
 
         // Create a new array reference for immutability
         let sorted = [...postsToSort];
