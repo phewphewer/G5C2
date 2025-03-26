@@ -183,7 +183,7 @@ const PostCard = ({ posts: propPosts, onPostsChange }) => {
     try {
       console.log("Submitting edit for postId:", postId);
       const response = await fetch(`/api/post/update_post/${postId}`, {
-        method: "PUT",
+        method: "PATCH",
         headers: {
           Authorization: `Bearer ${user?.token}`,
           "Content-Type": "application/json",
