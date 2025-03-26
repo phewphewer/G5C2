@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 const PostCard = ({ posts: propPosts, onPostsChange }) => {
@@ -240,7 +240,8 @@ const PostCard = ({ posts: propPosts, onPostsChange }) => {
                                             ).toLocaleString()}
                                         </p>
                                     </div>
-                                    <div className="relative">
+                                    {(user.username == post.user.username) && 
+                                    (<div className="relative">
                                         <button
                                             className="text-[#CBD5E1] p-1 rounded-full hover:bg-[#1E2A3B] hover:text-white ='bg-blue-500'"
                                             onClick={() =>
@@ -281,7 +282,8 @@ const PostCard = ({ posts: propPosts, onPostsChange }) => {
                                                 </ul>
                                             </div>
                                         )}
-                                    </div>
+                                    </div>)}
+                                    
                                 </div>
 
                                 {/* Post content */}
