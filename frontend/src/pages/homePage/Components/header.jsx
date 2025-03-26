@@ -60,7 +60,7 @@ export default function Header({ isOpen }) {
               className={`absolute flex items-center pl-10 w-100 h-[59px] bg-[#006a88] hover:bg-red-600 hover:text-[#0c172e] transition duration-600 ease-in-out hover:cursor-pointer focus:outline-none
                   ${isAccordionOpen ? "translate-x-" : "translate-x-[40%]"}`}
               style={{
-                clipPath: "polygon(6% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                clipPath: "polygon(6% 0%, 100% 0%, 100% 100%, 0.5% 100%)",
               }}
               onClick={handleClick}
             >
@@ -69,9 +69,9 @@ export default function Header({ isOpen }) {
             {/* ENCASES PROFILE */}
             <button
               className={`absolute flex items-center pl-10 w-75 h-[59px] bg-[#0096bf] hover:bg-[#0c172e] transition duration-600 ease-in-out hover:cursor-pointer focus:outline-none
-              ${isAccordionOpen ? "translate-x-0" : "translate-x-[26%]"}`}
+              ${isAccordionOpen ? "translate-x-0" : "translate-x-[25.5%]"}`}
               style={{
-                clipPath: "polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                clipPath: "polygon(8% 0%, 100% 0%, 100% 100%, 1% 100%)",
               }}
               onClick={() => navigate("/dashboard")}
             >

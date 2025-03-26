@@ -22,7 +22,7 @@ export default function HomePage() {
                 }`}
             >
                 <Header isOpen={isSidebarOpen} />
-                <div className="min-w-screen min h-screen bg-[#050E1A]">
+                <div className="min-w-full min-h-full bg-[#050E1A]">
                     <MainDisplay />
                 </div>
             </div>
