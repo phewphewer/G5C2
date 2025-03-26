@@ -16,92 +16,142 @@ export default function PostPage() {
     const fetchPosts = async () => {
         try {
             setLoading(true);
-            const endpoint =
-                user && user.token ? "/api/post/posts" : "/api/post/public";
+            setError(null);
+
+            // Use real API data
+            const endpoint = user?.token
+                ? "/api/post/posts" // Authenticated endpoint
+                : "/api/post/public"; // Public endpoint
             const response = await fetch(endpoint, {
                 headers: user?.token
                     ? { Authorization: `Bearer ${user.token}` }
                     : {},
             });
 
-            if (!response.ok) {
+            if (response.ok) {
+                const data = await response.json();
+                const postsArray = data.getPosts || []; // Ensure posts are in an array format
+                setPosts(postsArray);
+                setSortedPosts(postsArray); // Initialize sorted posts
+                console.log("Fetched live posts:", postsArray);
+            } else {
                 throw new Error("Failed to fetch posts");
             }
-
-            const data = await response.json();
-            const postsArray = data.getPosts || [];
-
-            setPosts(postsArray); // Update posts state with the fetched data
-            handleSort("Recent", postsArray); // Sort the newly fetched posts
         } catch (error) {
-            setError(error.message); // Set error message if the fetch fails
             console.error("Error fetching posts:", error);
+            setError(error.message);
         } finally {
-            setLoading(false); // End loading
+            setLoading(false);
         }
     };
 
     const handleSort = (sortType, postsToSort = posts) => {
-        console.log(`Sort by ${sortType}`);
+        console.group(`[Sorting] ${sortType}`);
+        console.log("Original posts:", postsToSort);
+
         setSortBy(sortType);
+
+        // Create a new array reference for immutability
         let sorted = [...postsToSort];
         const now = new Date();
+        console.log("Current time:", now.toISOString());
 
         switch (sortType) {
             case "Recent":
+                console.log("Applying recent sort (newest first)");
                 sorted.sort(
-                    (a, b) =>
-                        new Date(b.createdAt || b.timestamp) -
-                        new Date(a.createdAt || a.timestamp)
+                    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
                 );
                 break;
+
             case "Featured":
-                sorted = sorted.filter((post) => post.isFeatured);
+                console.log("Filtering featured posts");
+                sorted = sorted.filter((post) => {
+                    const isFeatured = post.isFeatured === true;
+                    if (!isFeatured)
+                        console.log(`Post ${post._id} not featured`);
+                    return isFeatured;
+                });
                 break;
+
             case "Popular":
+                console.log("Sorting by popularity");
                 sorted.sort((a, b) => (b.likeCount || 0) - (a.likeCount || 0));
                 break;
+
             case "Week":
-                sorted = sorted.filter((post) => {
-                    const postDate = new Date(post.createdAt || post.timestamp);
-                    const diffTime = Math.abs(now - postDate);
-                    const diffDays = Math.ceil(
-                        diffTime / (1000 * 60 * 60 * 24)
+                console.log("Filtering posts from last 7 days");
+                sorted = sorted
+                    .filter((post) => {
+                        const postDate = new Date(post.createdAt);
+                        if (isNaN(postDate)) {
+                            console.warn(
+                                "Invalid date in post:",
+                                post._id,
+                                post.createdAt
+                            );
+                            return false;
+                        }
+
+                        const diffMs = now - postDate;
+                        const diffDays = diffMs / (1000 * 60 * 60 * 24);
+                        console.log(
+                            `Post ${post._id} is ${diffDays.toFixed(
+                                1
+                            )} days old`
+                        );
+
+                        return diffMs <= 7 * 24 * 60 * 60 * 1000 && diffMs >= 0; // Past 7 days only
+                    })
+                    .sort(
+                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
                     );
-                    return diffDays <= 7;
-                });
                 break;
+
             case "Month":
-                sorted = sorted.filter((post) => {
-                    const postDate = new Date(post.createdAt || post.timestamp);
-                    const diffTime = Math.abs(now - postDate);
-                    const diffDays = Math.ceil(
-                        diffTime / (1000 * 60 * 60 * 24)
+                console.log("Filtering posts from last 30 days");
+                sorted = sorted
+                    .filter((post) => {
+                        const postDate = new Date(post.createdAt);
+                        const diffMs = now - postDate;
+                        return (
+                            diffMs <= 30 * 24 * 60 * 60 * 1000 && diffMs >= 0
+                        );
+                    })
+                    .sort(
+                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
                     );
-                    return diffDays <= 30;
-                });
                 break;
+
             case "Year":
-                sorted = sorted.filter((post) => {
-                    const postDate = new Date(post.createdAt || post.timestamp);
-                    const diffTime = Math.abs(now - postDate);
-                    const diffDays = Math.ceil(
-                        diffTime / (1000 * 60 * 60 * 24)
+                console.log("Filtering posts from last 365 days");
+                sorted = sorted
+                    .filter((post) => {
+                        const postDate = new Date(post.createdAt);
+                        const diffMs = now - postDate;
+                        return (
+                            diffMs <= 365 * 24 * 60 * 60 * 1000 && diffMs >= 0
+                        );
+                    })
+                    .sort(
+                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
                     );
-                    return diffDays <= 365;
-                });
                 break;
+
             default:
+                console.log("Default sorting (newest first)");
                 sorted.sort(
-                    (a, b) =>
-                        new Date(b.createdAt || b.timestamp) -
-                        new Date(a.createdAt || a.timestamp)
+                    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
                 );
-                break;
         }
 
-        setSortedPosts(sorted);
+        console.log("Sorted results:", sorted);
+        console.groupEnd();
+
+        // Update state with the new sorted array
+        setSortedPosts(sorted.length > 0 ? sorted : postsToSort);
     };
+
     const handlePostCreated = (newPost) => {
         console.log("New post created:", newPost);
 
@@ -142,6 +192,14 @@ export default function PostPage() {
 
     return (
         <div className="min-h-screen bg-[#050E1A] text-white pt-17 flex">
+            {error && (
+                <div className="fixed top-20 right-4 bg-red-600 text-white p-4 rounded">
+                    {error}
+                    <button onClick={() => setError(null)} className="ml-4">
+                        ×
+                    </button>
+                </div>
+            )}
             {/* Sorting and filter options */}
             <div className="flex-1">
                 <div className="flex justify-between items-center p-3 rounded-t-md space-x-4">
@@ -192,7 +250,11 @@ export default function PostPage() {
                                 </div>
                                 <div className="flex-1 p-4">
                                     <PostCard
-                                        posts={sortedPosts}
+                                        posts={
+                                            sortedPosts.length > 0
+                                                ? sortedPosts
+                                                : posts
+                                        }
                                         onPostsChange={handlePostsChange}
                                     />
                                 </div>
