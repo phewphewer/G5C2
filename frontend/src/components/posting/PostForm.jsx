@@ -9,15 +9,13 @@ export default function PostForm({ onPostCreated }) {
   const { user } = useAuthContext();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-
-
   const handlePostSubmit = async (e) => {
     e.preventDefault();
 
-    // if (!title.trim() || !body.trim()) {
-    //   alert("Both title and body are required!");
-    //   return;
-    // }
+    if (!title.trim() || !body.trim()) {
+      alert("Both title and body are required!");
+      return;
+    }
 
     if (!user || !user.token) {
       alert("Re-log in to post.");
@@ -51,7 +49,7 @@ export default function PostForm({ onPostCreated }) {
       // Clear the form
       setTitle("");
       setBody("");
-    } catch (error) { 
+    } catch (error) {
       console.error("Error creating post:", error);
     } finally {
       setIsSubmitting(false);
@@ -62,7 +60,9 @@ export default function PostForm({ onPostCreated }) {
     <div className="w-full bg-[#602590] hover:bg-[#642796] p-6 shadow-md rounded-lg border-1 border-[#F7FAFC]">
       <div className="space-y-2">
         <div className="flex items-center border-b-5 border-[#ac47fe] pb-2 mb-2 ">
-          <h3 className="font-extrabold text-[120%] text-[#d4a0ff] indent-3">you</h3>
+          <h3 className="font-extrabold text-[120%] text-[#d4a0ff] indent-3">
+            you
+          </h3>
         </div>
         <div className={`flex justify-center items-center h-5 pt-5 pb-2 `}>
           {(!title.trim() || !body.trim()) && (
@@ -72,9 +72,9 @@ export default function PostForm({ onPostCreated }) {
           )}
         </div>
         <form onSubmit={handlePostSubmit}>
-        <p className="font-bold text-sm md:text-base text-[#F7FAFC]/90">
-              Enter title here: 
-            </p>
+          <p className="font-bold text-sm md:text-base text-[#F7FAFC]/90">
+            Enter title here:
+          </p>
           <input
             type="text"
             value={title}
@@ -85,8 +85,8 @@ export default function PostForm({ onPostCreated }) {
             disabled={isSubmitting}
           />
           <p className="font-bold text-sm md:text-base mt-5 text-[#F7FAFC]/90">
-              Enter post content here: 
-            </p>
+            Enter post content here:
+          </p>
           <textarea
             value={body}
             onChange={(e) => setBody(e.target.value)}

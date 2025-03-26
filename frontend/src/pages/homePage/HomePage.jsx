@@ -11,7 +11,7 @@ export default function HomePage() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     return (
-        <div className="app-container relative bg-[#050E1A]  custom-scrollbar">
+        <div className="app-container relative bg-[#050E1A] custom-scrollbar">
             {/* Pass state and setter to Sidebar */}
             <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
 
