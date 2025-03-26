@@ -240,7 +240,7 @@ const PostCard = ({ posts: propPosts, onPostsChange }) => {
                                             ).toLocaleString()}
                                         </p>
                                     </div>
-                                    {(user.username == post.user.username) && 
+                                    {user && (user.username == post.user.username) && 
                                     (<div className="relative">
                                         <button
                                             className="text-[#CBD5E1] p-1 rounded-full hover:bg-[#1E2A3B] hover:text-white ='bg-blue-500'"
@@ -283,6 +283,7 @@ const PostCard = ({ posts: propPosts, onPostsChange }) => {
                                             </div>
                                         )}
                                     </div>)}
+                                    
                                     
                                 </div>
 
