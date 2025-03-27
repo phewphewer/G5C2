@@ -346,7 +346,7 @@ const PostCard = ({ posts: propPosts, onPostsChange }) => {
                                                 </button>
 
                                                 {showDropdown === post._id && (
-                                                    <div className="absolute right -0 mt-2 w-32 bg-[#1E2A3B] rounded-md shadow-lg border border-[#283D55]">
+                                                    <div className="absolute right-0 mt-2 w-32 bg-[#1E2A3B] rounded-md shadow-lg border border-[#283D55]">
                                                         <ul className="py-1">
                                                             {isEditing ? (
                                                                 <li

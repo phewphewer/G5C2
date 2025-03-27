@@ -46,6 +46,7 @@ const ProfileLayout = () => {
                                 {/* Personal details placeholder */}
                                 <div style={{ lineHeight: "1rem" }}>
                                     <strong className="text-2xl block text-[#D09966]">
+                                        {/* {user && `${user.username}`} */}
                                         *USERNAME*
                                     </strong>
                                 </div>
