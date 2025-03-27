@@ -215,10 +215,10 @@ const PostCard = ({ posts: propPosts, onPostsChange }) => {
             setBody("");
             setIsEditing(false);
 
-            const updatedPosts = posts.map((p) =>
-                p._id.toString() === postId.toString()
-                    ? { ...p, title: title, body: body }
-                    : p
+            const updatedPosts = posts.map((databasePost) =>
+                databasePost._id.toString() === postId.toString()
+                    ? { ...databasePost, title: title, body: body }
+                    : databasePost
             );
 
             setPosts(updatedPosts);
@@ -294,7 +294,14 @@ const PostCard = ({ posts: propPosts, onPostsChange }) => {
             {posts &&
                 posts.map((post) => (
                     <div key={post._id}>
-                        <div className="w-full bg-[#0A1A2F] p-6 shadow-md rounded-lg mb-5 hover:border-[#2D5F8A] border-[#1F2937] border-1">
+                        <div
+                            className={`w-full bg-[#0A1A2F] p-6 shadow-md rounded-lg mb-5 hover:border-[#2D5F8A] border-[#1F2937] border-1
+                            ${
+                                isEditing === post._id
+                                    ? "bg-blue-950 border-blue-400 border-2 hover:border-blue-400"
+                                    : ""
+                            }`}
+                        >
                             <div className="space-y-4">
                                 {/* Header with user info and options */}
                                 <div className="flex justify-between">

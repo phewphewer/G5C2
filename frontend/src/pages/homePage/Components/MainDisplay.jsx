@@ -8,8 +8,8 @@ export default function PostPage() {
     const { user } = useContext(AuthContext);
     const [sortBy, setSortBy] = useState("Sort by");
     const [isFeatured, setIsFeatured] = useState(false);
-    const [posts, setPosts] = useState([]);
     const [sortedPosts, setSortedPosts] = useState([]);
+    const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
